@@ -1,0 +1,8 @@
+# Let's ignore the virtual environment
+# as well as compiled python files and swap files.
+venv
+*.swp
+*.pyc
+
+# Let's ignore ctag files.
+tags

@@ -1,0 +1,7 @@
+Device Config,,,,,,,Linux
+API*,TAG*,ABI*,DEVICE,RAM,GPU,ORI,androidstudio-swarming-1,androidstudio-swarming-2,androidstudio-swarming-3,androidstudio-swarming-4
+API 26,google_apis,x86,Nexus 5,2048,yes,public,P,P,P,P
+API 25,google_apis,x86,Nexus 5,2048,yes,public,P,P,P,P
+API 24,google_apis,x86,Nexus 5,2048,yes,public,P,P,P,P
+API 23,google_apis,x86,Nexus 5,2048,yes,public,P,P,P,P
+API 22,google_apis,x86,Nexus 5,2048,yes,public,P,P,P,P

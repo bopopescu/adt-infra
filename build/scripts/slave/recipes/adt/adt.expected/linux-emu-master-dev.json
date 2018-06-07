@@ -1,0 +1,122 @@
+[
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[BUILD]/../emu_test/utils/emu_bot_init.py",
+      "--build-dir",
+      "[SLAVE_BUILD]",
+      "--props",
+      "{\"TESTING\": true, \"blamelist\": [\"emulator_linux_poller\"], \"branch\": \"Ubuntu\", \"buildbotURL\": \"http://chromeos1-row3-rack2-host1.cros.corp.google.com:8200/\", \"buildername\": \"Linux emu-master-dev\", \"buildnumber\": \"1090\", \"emu-master-dev\": \"4696395\", \"file_list\": \"gs://android-build-emu/builds/aosp-emu-master-dev-linux-sdk_tools_linux/4696395/7e4b04c674e12fb492b0834b0b6b1f769629d234103b3703c3e74aa17ffe8e19/sdk-repo-linux-emulator-4696395.zip\", \"got_revision\": \"4696395\", \"logs_dir\": \"/home/user/buildbot/external/adt-infra/build/masters/master.client.adt/slave_logs/\", \"mastername\": \"client.adt\", \"prev_build\": \"4696278\", \"project\": \"emu-master-dev\", \"recipe\": \"adt/adt\", \"repository\": \"\", \"requestedAt\": 1522746361, \"revision\": \"4696395\", \"scheduler\": \"emu_master_dev_scheduler\", \"slavename\": \"chromeos1-row3-rack3-host1\", \"workdir\": \"/home/adt_build/Buildbot/adt-infra/build/slave/emu-master-dev\"}",
+      "--log-dir",
+      "logs-build_1090-rev_4696395"
+    ],
+    "cwd": "[SLAVE_BUILD]",
+    "env": {
+      "ANDROID_HOME": "/usr/local/google/home/cpilch/Android/android-sdk-linux_public",
+      "ANDROID_SDK_ROOT": "/usr/local/google/home/cpilch/Android/android-sdk-linux_public",
+      "PATH": "%(PATH)s:/usr/local/google/home/cpilch/Android/android-sdk-linux_public/tools:/usr/local/google/home/cpilch/Android/android-sdk-linux_public/tools/bin:/usr/local/google/home/cpilch/Android/android-sdk-linux_public/platform-tools:/usr/local/google/home/cpilch/Android/android-sdk-linux_public/build-tools/23.0.2:/usr/local/google/home/cpilch/bin/jdk1.8.0_121/bin"
+    },
+    "name": "Initialize Bot"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[BUILD]/../emu_test/utils/create_cl_list.py",
+      "--poller",
+      "('emulator_linux_poller',)",
+      "--prevRevision",
+      "4696278",
+      "--curRevision",
+      "4696395"
+    ],
+    "cwd": "[SLAVE_BUILD]",
+    "env": {
+      "ANDROID_HOME": "/usr/local/google/home/cpilch/Android/android-sdk-linux_public",
+      "ANDROID_SDK_ROOT": "/usr/local/google/home/cpilch/Android/android-sdk-linux_public",
+      "PATH": "%(PATH)s:/usr/local/google/home/cpilch/Android/android-sdk-linux_public/tools:/usr/local/google/home/cpilch/Android/android-sdk-linux_public/tools/bin:/usr/local/google/home/cpilch/Android/android-sdk-linux_public/platform-tools:/usr/local/google/home/cpilch/Android/android-sdk-linux_public/build-tools/23.0.2:/usr/local/google/home/cpilch/bin/jdk1.8.0_121/bin"
+    },
+    "name": "Create CL List"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[BUILD]/../emu_test/utils/download_unzip_image.py",
+      "--file",
+      "gs://android-build-emu/builds/aosp-emu-master-dev-linux-sdk_tools_linux/4696395/7e4b04c674e12fb492b0834b0b6b1f769629d234103b3703c3e74aa17ffe8e19/sdk-repo-linux-emulator-4696395.zip",
+      "--build-dir",
+      "[BUILD]"
+    ],
+    "cwd": "[SLAVE_BUILD]",
+    "env": {
+      "ANDROID_HOME": "/usr/local/google/home/cpilch/Android/android-sdk-linux_public",
+      "ANDROID_SDK_ROOT": "/usr/local/google/home/cpilch/Android/android-sdk-linux_public",
+      "PATH": "%(PATH)s:/usr/local/google/home/cpilch/Android/android-sdk-linux_public/tools:/usr/local/google/home/cpilch/Android/android-sdk-linux_public/tools/bin:/usr/local/google/home/cpilch/Android/android-sdk-linux_public/platform-tools:/usr/local/google/home/cpilch/Android/android-sdk-linux_public/build-tools/23.0.2:/usr/local/google/home/cpilch/bin/jdk1.8.0_121/bin"
+    },
+    "name": "Download and Unzip Images"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[BUILD]/../emu_test/dotest.py",
+      "--loglevel",
+      "INFO",
+      "--emulator",
+      "emu-master-dev/emulator/emulator",
+      "--session_dir",
+      "logs-build_1090-rev_4696395",
+      "--test_dir",
+      "boot_test_public_sysimage-emu-master-dev",
+      "--file_pattern",
+      "test_boot.*",
+      "--config_file",
+      "[BUILD]/../emu_test/config/boot_cfg.csv",
+      "--buildername",
+      "Linux emu-master-dev",
+      "--filter",
+      "{\"ori\": \"public\"}"
+    ],
+    "cwd": "[SLAVE_BUILD]",
+    "env": {
+      "ANDROID_HOME": "/usr/local/google/home/cpilch/Android/android-sdk-linux_public",
+      "ANDROID_SDK_ROOT": "/usr/local/google/home/cpilch/Android/android-sdk-linux_public",
+      "PATH": "%(PATH)s:/usr/local/google/home/cpilch/Android/android-sdk-linux_public/tools:/usr/local/google/home/cpilch/Android/android-sdk-linux_public/tools/bin:/usr/local/google/home/cpilch/Android/android-sdk-linux_public/platform-tools:/usr/local/google/home/cpilch/Android/android-sdk-linux_public/build-tools/23.0.2:/usr/local/google/home/cpilch/bin/jdk1.8.0_121/bin"
+    },
+    "name": "Boot Test - public System Image - emu-master-dev",
+    "stderr": "38194b14154246c68aa3eea8cfa640b5"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[BUILD]/../emu_test/utils/zip_upload_logs.py",
+      "--dir",
+      "logs-build_1090-rev_4696395",
+      "--name",
+      "build_1090-rev_4696395.zip",
+      "--ip",
+      "172.27.213.40",
+      "--user",
+      "user",
+      "--dst",
+      "/home/user/buildbot/external/adt-infra/build/masters/master.client.adt/slave_logs/Linux emu-master-dev/",
+      "--build-dir",
+      "[BUILD]"
+    ],
+    "cwd": "[SLAVE_BUILD]",
+    "env": {
+      "ANDROID_HOME": "/usr/local/google/home/cpilch/Android/android-sdk-linux_public",
+      "ANDROID_SDK_ROOT": "/usr/local/google/home/cpilch/Android/android-sdk-linux_public",
+      "PATH": "%(PATH)s:/usr/local/google/home/cpilch/Android/android-sdk-linux_public/tools:/usr/local/google/home/cpilch/Android/android-sdk-linux_public/tools/bin:/usr/local/google/home/cpilch/Android/android-sdk-linux_public/platform-tools:/usr/local/google/home/cpilch/Android/android-sdk-linux_public/build-tools/23.0.2:/usr/local/google/home/cpilch/bin/jdk1.8.0_121/bin"
+    },
+    "name": "Zip and Upload Logs"
+  },
+  {
+    "name": "$result",
+    "recipe_result": null,
+    "status_code": 0
+  }
+]

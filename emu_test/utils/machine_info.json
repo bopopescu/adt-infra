@@ -1,0 +1,115 @@
+{
+    "Win": {
+        "system-image-builds": [
+            "Win 10 64-bit Quadro 600", 
+            "Win 8 64-bit Quadro 600", 
+            "Win 7 32-bit HD 4400", 
+            "Win 8.1 64-bit Quadro 600", 
+            "Win 7 64-bit HD 4400"
+        ], 
+        "cross-builds": [
+            "Win 10 64-bit Quadro 600", 
+            "Win 8 64-bit Quadro 600", 
+            "Win 7 32-bit HD 4400", 
+            "Win 8.1 64-bit Quadro 600", 
+            "Win 7 64-bit HD 4400"
+        ], 
+        "UI": [
+            "Win 10 64-bit Quadro 600 1"
+        ], 
+        "emu-2.2-release": [
+            "Win 10 64-bit Quadro 600", 
+            "Win 8 64-bit Quadro 600", 
+            "Win 7 32-bit HD 4400", 
+            "Win 8.1 64-bit Quadro 600", 
+            "Win 7 64-bit HD 4400"
+        ], 
+        "ADB": [
+            "Win 10 Intel HD 4400"
+        ], 
+        "emu-master-dev": [
+            "Win 10 64-bit Quadro 600", 
+            "Win 8 64-bit Quadro 600", 
+            "Win 7 32-bit HD 4400", 
+            "Win 8.1 64-bit Quadro 600", 
+            "Win 7 64-bit HD 4400"
+        ]
+    }, 
+    "3": {
+        "CTS": [
+            "Ubuntu 14.04 Quadro 600 3"
+        ]
+    }, 
+    "1": {
+        "CTS": [
+            "Ubuntu 14.04 Quadro 600"
+        ]
+    }, 
+    "Mac": {
+        "system-image-builds": [
+            "Mac 10.11.1 Iris Pro", 
+            "Mac 10.10.5 Intel HD 5000", 
+            "Mac 10.10.5 Iris Pro", 
+            "Mac 10.8.5 Intel HD 5000"
+        ], 
+        "cross-builds": [
+            "Mac 10.11.1 Iris Pro", 
+            "Mac 10.10.5 Intel HD 5000", 
+            "Mac 10.10.5 Iris Pro", 
+            "Mac 10.8.5 Intel HD 5000"
+        ], 
+        "UI": [
+            "Mac 10.11.6 Iris Pro UI"
+        ], 
+        "emu-2.2-release": [
+            "Mac 10.11.1 Iris Pro", 
+            "Mac 10.10.5 Intel HD 5000", 
+            "Mac 10.10.5 Iris Pro", 
+            "Mac 10.8.5 Intel HD 5000"
+        ], 
+        "ADB": [
+            "Mac 10.12.1 Intel HD 5000"
+        ], 
+        "emu-master-dev": [
+            "Mac 10.11.1 Iris Pro", 
+            "Mac 10.10.5 Intel HD 5000", 
+            "Mac 10.10.5 Iris Pro", 
+            "Mac 10.8.5 Intel HD 5000"
+        ]
+    }, 
+    "2": {
+        "CTS": [
+            "Ubuntu 14.04 Quadro 600 2"
+        ]
+    }, 
+    "Linux": {
+        "System Image Release": [
+            "Ubuntu 14.04 HD 4400 2"
+        ], 
+        "system-image-builds": [
+            "Ubuntu 14.04 HD 4400", 
+            "Ubuntu 12.04 HD Graphics 4000"
+        ], 
+        "cross-builds": [
+            "Ubuntu 14.04 HD 4400", 
+            "Ubuntu 12.04 HD Graphics 4000"
+        ], 
+        "UI": [
+            "Ubuntu 14.04 HD 4400"
+        ], 
+        "emu-2.2-release": [
+            "Ubuntu 14.04 HD 4400", 
+            "Ubuntu 12.04 HD Graphics 4000"
+        ], 
+        "ADB": [
+            "Ubuntu 14.04 Intel HD 520"
+        ], 
+        "Console": [
+            "Ubuntu 12.04 HD Graphics 4000"
+        ], 
+        "emu-master-dev": [
+            "Ubuntu 14.04 HD 4400", 
+            "Ubuntu 12.04 HD Graphics 4000"
+        ]
+    }
+}

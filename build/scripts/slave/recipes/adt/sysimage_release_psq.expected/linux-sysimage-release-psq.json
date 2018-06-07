@@ -1,0 +1,135 @@
+[
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[BUILD]/../emu_test/utils/emu_bot_init.py",
+      "--build-dir",
+      "[SLAVE_BUILD]",
+      "--props",
+      "{\"CHANGE_FILES\": \"gs://android-build-emu-sysimage/builds/git_klp-emu-release-linux-sdk_x86-sdk/2872501/c9298a8eafceed3b8fa11071ba63a3d18e17fd8e/sdk-repo-linux-system-images-2872501.zip,gs://android-build-emu-sysimage/builds/git_lmp-emu-release-linux-sdk_phone_x86-sdk/2781484/3b78ad294aa1cdefa4be663d4af6c80d920ec49e/sdk-repo-linux-system-images-2781484.zip\", \"CHANGE_ID\": \"platform%2Ftools%2Fvendor%2Fgoogle~studio-master-dev~Ic16536ac454fba1a3a31277010ba38a48b16ab0f\", \"CHANGE_REVISION\": \"d2d143b1b04f39eb9b3154f3ad6f076c6b2add01\", \"TESTING\": true, \"blamelist\": [], \"branch\": \"all\", \"buildbotURL\": \"http://chromeos1-row3-rack2-host1.cros.corp.google.com:8200/\", \"buildername\": \"Ubuntu System Image Release\", \"buildnumber\": \"516\", \"got_revision\": \"4696395\", \"logs_dir\": \"/home/user/buildbot/external/adt-infra/build/masters/master.client.adt/slave_logs/\", \"mastername\": \"client.adt\", \"project\": \"sysimage-release-psq\", \"recipe\": \"adt/sysimage_release_psq\", \"repository\": \"\", \"requestedAt\": 1522746361, \"revision\": \"4696395\", \"scheduler\": \"sysimage_release_psq_scheduler\", \"slavename\": \"chromeos1-row3-rack3-host1\", \"sysimage-release-psq\": \"4696395\", \"workdir\": \"/home/adt_build/Buildbot/adt-infra/build/slave/Console_emu-master-dev\"}",
+      "--log-dir",
+      "logs-build_516-rev_4696395"
+    ],
+    "cwd": "[SLAVE_BUILD]",
+    "env": {
+      "ANDROID_HOME": "/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds",
+      "ANDROID_SDK_ROOT": "/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds",
+      "PATH": "%(PATH)s:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/tools:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/platform-tools:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/build-tools/23.0.2"
+    },
+    "name": "Initialize Bot"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[BUILD]/../emu_test/utils/download_unzip_image.py",
+      "--file",
+      "gs://android-build-emu-sysimage/builds/git_klp-emu-release-linux-sdk_x86-sdk/2872501/c9298a8eafceed3b8fa11071ba63a3d18e17fd8e/sdk-repo-linux-system-images-2872501.zip,gs://android-build-emu-sysimage/builds/git_lmp-emu-release-linux-sdk_phone_x86-sdk/2781484/3b78ad294aa1cdefa4be663d4af6c80d920ec49e/sdk-repo-linux-system-images-2781484.zip",
+      "--build-dir",
+      "[BUILD]"
+    ],
+    "cwd": "[SLAVE_BUILD]",
+    "env": {
+      "ANDROID_HOME": "/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds",
+      "ANDROID_SDK_ROOT": "/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds",
+      "PATH": "%(PATH)s:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/tools:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/platform-tools:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/build-tools/23.0.2"
+    },
+    "name": "Download and Unzip Images"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "\nimport shutil\nimport sys\nshutil.copy(sys.argv[1], sys.argv[2])\n",
+      "Device Config\nAPI*,TAG*,ABI*,DEVICE,RAM,GPU,ORI,Ubuntu System Image Release\nAPI 19,default,x86,Nexus 5,2048,yes,git_klp-emu-release,P\nAPI 21,default,x86,Nexus 5,2048,yes,git_lmp-emu-release,P\n",
+      "[BUILD]/../emu_test/config/config.csv"
+    ],
+    "cwd": "[SLAVE_BUILD]",
+    "name": "Generate Test Configuration"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[BUILD]/../emu_test/dotest.py",
+      "--loglevel",
+      "INFO",
+      "--emulator",
+      "/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/tools/emulator",
+      "--session_dir",
+      "logs-build_516-rev_4696395",
+      "--test_dir",
+      "UI_test",
+      "--file_pattern",
+      "test_ui.*",
+      "--config_file",
+      "[BUILD]/../emu_test/config/config.csv",
+      "--buildername",
+      "Ubuntu System Image Release",
+      "--filter",
+      "{\"abi\": \"x86\", \"api\": \">=18\"}",
+      "--skip-adb-perf"
+    ],
+    "cwd": "[SLAVE_BUILD]",
+    "env": {
+      "ANDROID_HOME": "/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds",
+      "ANDROID_SDK_ROOT": "/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds",
+      "PATH": "%(PATH)s:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/tools:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/platform-tools:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/build-tools/23.0.2"
+    },
+    "name": "Run System Image UI Test",
+    "stderr": "80638778d4c04efaaf3a30f913289d33",
+    "~followup_annotations": [
+      "@@@STEP_LINK@[Report] PASS: UI_TestCase@../../../UI_Result/Ubuntu_System_Image_Release/build_516-rev_4696395/UI_TestCase_report/index.html@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "\nimport os\nimport sys\nos.remove(sys.argv[1])\n",
+      "[BUILD]/../emu_test/config/config.csv"
+    ],
+    "cwd": "[SLAVE_BUILD]",
+    "name": "Remove Test Configuration",
+    "~followup_annotations": [
+      "@@@STEP_LOG_LINE@python.inline@@@@",
+      "@@@STEP_LOG_LINE@python.inline@import os@@@",
+      "@@@STEP_LOG_LINE@python.inline@import sys@@@",
+      "@@@STEP_LOG_LINE@python.inline@os.remove(sys.argv[1])@@@",
+      "@@@STEP_LOG_END@python.inline@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[BUILD]/../emu_test/utils/zip_upload_logs.py",
+      "--dir",
+      "logs-build_516-rev_4696395",
+      "--name",
+      "build_516-rev_4696395.zip",
+      "--ip",
+      "172.27.213.40",
+      "--user",
+      "user",
+      "--dst",
+      "/home/user/buildbot/external/adt-infra/build/masters/master.client.adt/slave_logs/Ubuntu System Image Release/",
+      "--build-dir",
+      "[BUILD]",
+      "--skiplog"
+    ],
+    "cwd": "[SLAVE_BUILD]",
+    "env": {
+      "ANDROID_HOME": "/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds",
+      "ANDROID_SDK_ROOT": "/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds",
+      "PATH": "%(PATH)s:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/tools:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/platform-tools:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/build-tools/23.0.2"
+    },
+    "name": "Zip and Upload Logs"
+  },
+  {
+    "name": "$result",
+    "recipe_result": null,
+    "status_code": 0
+  }
+]

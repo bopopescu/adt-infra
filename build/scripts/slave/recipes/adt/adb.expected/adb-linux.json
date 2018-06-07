@@ -1,0 +1,186 @@
+[
+  {
+    "cmd": [
+      "[DEPOT_TOOLS]/repo",
+      "init",
+      "-u",
+      "https://android.googlesource.com/platform/manifest",
+      "--depth=1"
+    ],
+    "cwd": "[SLAVE_BUILD]",
+    "name": "repo init"
+  },
+  {
+    "cmd": [
+      "[DEPOT_TOOLS]/repo",
+      "forall",
+      "-c",
+      "git",
+      "reset",
+      "--hard",
+      "HEAD"
+    ],
+    "cwd": "[SLAVE_BUILD]",
+    "name": "repo forall git reset"
+  },
+  {
+    "cmd": [
+      "[DEPOT_TOOLS]/repo",
+      "forall",
+      "-c",
+      "git",
+      "clean",
+      "-f",
+      "-d",
+      "-x"
+    ],
+    "cwd": "[SLAVE_BUILD]",
+    "name": "repo forall git clean"
+  },
+  {
+    "cmd": [
+      "[DEPOT_TOOLS]/repo",
+      "sync",
+      "-c",
+      "system/core"
+    ],
+    "cwd": "[SLAVE_BUILD]",
+    "name": "repo sync"
+  },
+  {
+    "cmd": [
+      "[DEPOT_TOOLS]/repo",
+      "sync",
+      "-c",
+      "development"
+    ],
+    "cwd": "[SLAVE_BUILD]",
+    "name": "repo sync (2)"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[BUILD]/../emu_test/utils/emu_bot_init.py",
+      "--build-dir",
+      "[SLAVE_BUILD]",
+      "--props",
+      "{\"buildername\": \"Ubuntu 14.04 Intel HD 520\", \"buildnumber\": \"12\", \"mastername\": \"client.adt\", \"project\": \"master\", \"recipe\": \"adt/adb\"}",
+      "--log-dir",
+      "adb_stress_logs-build_12"
+    ],
+    "cwd": "[SLAVE_BUILD]",
+    "env": {
+      "PATH": "%(PATH)s:/usr/local/google/home/cpilch/Android/android-sdk-linux_public/platform-tools",
+      "PYTHONPATH": "[SLAVE_BUILD]/development/python-packages"
+    },
+    "name": "Initialize Bot"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[BUILD]/../adb_stress_tests/adb_push_pull_stress.py",
+      "--duration",
+      "1",
+      "--count",
+      "1",
+      "--progress",
+      "--log-dir",
+      "adb_stress_logs-build_12"
+    ],
+    "cwd": "[SLAVE_BUILD]",
+    "env": {
+      "PATH": "%(PATH)s:/usr/local/google/home/cpilch/Android/android-sdk-linux_public/platform-tools",
+      "PYTHONPATH": "[SLAVE_BUILD]/development/python-packages"
+    },
+    "name": "Run adb_push_pull_stress.py"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[BUILD]/../adb_stress_tests/adb_reboot_stress.py",
+      "--duration",
+      "1",
+      "--count",
+      "1",
+      "--progress",
+      "--log-dir",
+      "adb_stress_logs-build_12"
+    ],
+    "cwd": "[SLAVE_BUILD]",
+    "env": {
+      "PATH": "%(PATH)s:/usr/local/google/home/cpilch/Android/android-sdk-linux_public/platform-tools",
+      "PYTHONPATH": "[SLAVE_BUILD]/development/python-packages"
+    },
+    "name": "Run adb_reboot_stress.py"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[BUILD]/../adb_stress_tests/adb_restart_stress.py",
+      "--duration",
+      "1",
+      "--count",
+      "1",
+      "--progress",
+      "--log-dir",
+      "adb_stress_logs-build_12"
+    ],
+    "cwd": "[SLAVE_BUILD]",
+    "env": {
+      "PATH": "%(PATH)s:/usr/local/google/home/cpilch/Android/android-sdk-linux_public/platform-tools",
+      "PYTHONPATH": "[SLAVE_BUILD]/development/python-packages"
+    },
+    "name": "Run adb_restart_stress.py"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[BUILD]/../adb_stress_tests/adb_sleep_wake_stress.py",
+      "--duration",
+      "1",
+      "--count",
+      "1",
+      "--progress",
+      "--log-dir",
+      "adb_stress_logs-build_12"
+    ],
+    "cwd": "[SLAVE_BUILD]",
+    "env": {
+      "PATH": "%(PATH)s:/usr/local/google/home/cpilch/Android/android-sdk-linux_public/platform-tools",
+      "PYTHONPATH": "[SLAVE_BUILD]/development/python-packages"
+    },
+    "name": "Run adb_sleep_wake_stress.py"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[BUILD]/../emu_test/utils/zip_upload_logs.py",
+      "--dir",
+      "adb_stress_logs-build_12",
+      "--name",
+      "build_12.zip",
+      "--ip",
+      "172.27.213.40",
+      "--user",
+      "user",
+      "--dst",
+      "/home/user/buildbot/external/adt-infra/build/masters/master.client.adt/slave_logs/Ubuntu 14.04 Intel HD 520/",
+      "--build-dir",
+      "[BUILD]",
+      "--skiplog"
+    ],
+    "cwd": "[SLAVE_BUILD]",
+    "name": "Zip and Upload Logs"
+  },
+  {
+    "name": "$result",
+    "recipe_result": null,
+    "status_code": 0
+  }
+]

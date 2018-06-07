@@ -1,0 +1,54 @@
+[
+    {
+        "name": "systemImageBranch",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "systemImageApi",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "systemImageTag",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "systemImageAbi",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "emulatorBranch",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "emulatorQemu",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "ctsBranch",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "ctsFlakinessRecords",
+        "type": "RECORD",
+        "fields": [
+            {
+                "mode": "NULLABLE",
+                "name": "fullName",
+                "type": "STRING"
+            },
+            {
+                "mode": "NULLABLE",
+                "name": "flakinessResult",
+                "type": "STRING"
+            }
+        ]
+    }
+]

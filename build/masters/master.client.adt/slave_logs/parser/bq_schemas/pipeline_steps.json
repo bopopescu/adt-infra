@@ -1,0 +1,22 @@
+[
+  {
+    "name": "timestamp",
+    "type": "timestamp",
+    "mode": "required"
+  },
+  {
+    "name": "tag",
+    "type": "string",
+    "mode": "required"
+  },
+  {
+    "name": "state",
+    "type": "string",
+    "mode": "required"
+  },
+  {
+    "name": "job_id",
+    "type": "string",
+    "mode": "nullable"
+  }
+]

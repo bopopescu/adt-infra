@@ -1,0 +1,166 @@
+[
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[BUILD]/../emu_test/utils/emu_bot_init.py",
+      "--build-dir",
+      "[SLAVE_BUILD]",
+      "--props",
+      "{\"TESTING\": true, \"blamelist\": [], \"branch\": \"\", \"buildbotURL\": \"http://chromeos1-row3-rack2-host1.cros.corp.google.com:8200/\", \"buildername\": \"Ubuntu CTS\", \"buildnumber\": \"7640\", \"got_revision\": \"LATEST\", \"mastername\": \"client.adt\", \"project\": \"\", \"recipe\": \"adt/adt\", \"repository\": \"\", \"requestedAt\": 1522746361, \"revision\": \"LATEST\", \"slavename\": \"chromeos1-row3-rack3-host1\", \"workdir\": \"/home/adt_build/Buildbot/adt-infra/build/slave/CTS\"}",
+      "--log-dir",
+      "logs-build_7640-rev_LATEST"
+    ],
+    "cwd": "[SLAVE_BUILD]",
+    "env": {
+      "ANDROID_HOME": "/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds",
+      "ANDROID_SDK_ROOT": "/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds",
+      "PATH": "%(PATH)s:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/tools:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/tools/bin:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/platform-tools:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/build-tools/23.0.2:/usr/local/google/home/cpilch/bin/jdk1.8.0_121/bin"
+    },
+    "name": "Initialize Bot"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[BUILD]/../emu_test/utils/download_unzip_image.py",
+      "--file",
+      "cts",
+      "--build-dir",
+      "[BUILD]"
+    ],
+    "cwd": "[SLAVE_BUILD]",
+    "env": {
+      "ANDROID_HOME": "/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds",
+      "ANDROID_SDK_ROOT": "/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds",
+      "PATH": "%(PATH)s:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/tools:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/tools/bin:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/platform-tools:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/build-tools/23.0.2:/usr/local/google/home/cpilch/bin/jdk1.8.0_121/bin"
+    },
+    "name": "Download and Unzip Images"
+  },
+  {
+    "cmd": [
+      "echo",
+      "foo"
+    ],
+    "cwd": "[SLAVE_BUILD]",
+    "name": "Rev emu-img foo"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[BUILD]/../emu_test/dotest.py",
+      "--loglevel",
+      "INFO",
+      "--emulator",
+      "emu-master-dev/emulator/emulator",
+      "--session_dir",
+      "logs-build_7640-rev_LATEST",
+      "--test_dir",
+      "CTS_test",
+      "--file_pattern",
+      "test_cts.*",
+      "--config_file",
+      "[BUILD]/../emu_test/config/cts_cfg.csv",
+      "--buildername",
+      "Ubuntu CTS",
+      "--filter",
+      "{}",
+      "--skip-adb-perf"
+    ],
+    "cwd": "[SLAVE_BUILD]",
+    "env": {
+      "ANDROID_HOME": "/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds",
+      "ANDROID_SDK_ROOT": "/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds",
+      "PATH": "%(PATH)s:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/tools:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/tools/bin:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/platform-tools:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/build-tools/23.0.2:/usr/local/google/home/cpilch/bin/jdk1.8.0_121/bin"
+    },
+    "name": "Run Emulator CTS Test",
+    "stderr": "01b989ab25634ccf843c297e43598666",
+    "~followup_annotations": [
+      "@@@STEP_LINK@View XML@../../../CTS_Result/Ubuntu_CTS/build_7640-rev_LATEST/testResult.xml@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[BUILD]/../emu_test/dotest.py",
+      "--loglevel",
+      "INFO",
+      "--emulator",
+      "emu-master-dev/emulator/emulator",
+      "--session_dir",
+      "logs-build_7640-rev_LATEST",
+      "--test_dir",
+      "GTS_test",
+      "--file_pattern",
+      "test_cts.*",
+      "--config_file",
+      "[BUILD]/../emu_test/config/cts_cfg.csv",
+      "--buildername",
+      "Ubuntu CTS",
+      "--filter",
+      "{}",
+      "--skip-adb-perf",
+      "--is-gts"
+    ],
+    "cwd": "[SLAVE_BUILD]",
+    "env": {
+      "ANDROID_HOME": "/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds",
+      "ANDROID_SDK_ROOT": "/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds",
+      "PATH": "%(PATH)s:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/tools:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/tools/bin:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/platform-tools:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/build-tools/23.0.2:/usr/local/google/home/cpilch/bin/jdk1.8.0_121/bin"
+    },
+    "name": "Run Emulator GTS Test",
+    "stderr": "c39040a67bdf424dacc141ca4ffd15e5",
+    "~followup_annotations": [
+      "@@@STEP_LINK@View XML@../../../GTS_Result/Ubuntu_CTS/build_7640-rev_LATEST/xtsTestResult.xml@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[BUILD]/../emu_test/utils/zip_upload_logs.py",
+      "--dir",
+      "logs-build_7640-rev_LATEST",
+      "--name",
+      "build_7640-rev_LATEST.zip",
+      "--ip",
+      "172.27.213.40",
+      "--user",
+      "user",
+      "--dst",
+      "/home/user/buildbot/external/adt-infra/build/masters/master.client.adt/slave_logs/Ubuntu CTS/",
+      "--build-dir",
+      "[BUILD]"
+    ],
+    "cwd": "[SLAVE_BUILD]",
+    "env": {
+      "ANDROID_HOME": "/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds",
+      "ANDROID_SDK_ROOT": "/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds",
+      "PATH": "%(PATH)s:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/tools:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/tools/bin:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/platform-tools:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/build-tools/23.0.2:/usr/local/google/home/cpilch/bin/jdk1.8.0_121/bin"
+    },
+    "name": "Zip and Upload Logs"
+  },
+  {
+    "cmd": [],
+    "cwd": "[SLAVE_BUILD]",
+    "name": "trigger",
+    "trigger_specs": [
+      {
+        "builder_name": "Ubuntu CTS",
+        "properties": {
+          "got_revision": "LATEST"
+        }
+      }
+    ],
+    "~followup_annotations": [
+      "@@@STEP_TEXT@Ubuntu CTS@@@"
+    ]
+  },
+  {
+    "name": "$result",
+    "recipe_result": null,
+    "status_code": 0
+  }
+]

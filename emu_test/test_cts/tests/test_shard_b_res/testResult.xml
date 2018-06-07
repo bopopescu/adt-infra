@@ -1,0 +1,173 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no' ?><?xml-stylesheet type="text/xsl"  href="cts_result.xsl"?>
+<TestResult testPlan="CTS-small-subset-for-test_1_of_2" starttime="Thu Jun 30 16:11:00 PDT 2016" endtime="Thu Jun 30 16:12:13 PDT 2016" version="4.4" suite="CTS">
+  <DeviceInfo>
+    <Screen resolution="1080x1920" screen_density="3.0" screen_density_bucket="480" screen_size="normal" smallest_screen_width_dp="360" />
+    <PhoneSubInfo subscriberId="15555215554" />
+    <MemoryInfo is_low_ram_device="false" memory_class="384" large_memory_class="384" total_memory="1588387840" />
+    <BuildInfo build_board="unknown" keypad="nokeys" available_processors="4" reference_build_fingerprint="" build_device="generic_x86" navigation="nonav" build_abi="x86" build_abi2="" build_type="eng" partitions="Filesystem               Size     Used     Free   Blksize;/dev                   757.4M    44.0K   757.4M   4096;/sys/fs/cgroup         757.4M    12.0K   757.4M   4096;/mnt                   757.4M     0.0K   757.4M   4096;/system                  1.2G   565.9M   673.9M   4096;/cache                  61.0M    64.0K    60.9M   4096;/data                    3.9G     2.0G     1.9G   4096;/storage               757.4M     0.0K   757.4M   4096;/storage/emulated        3.9G     2.0G     1.9G   4096;/storage/5120-14F0      98.9M   224.0K    98.7M   32768;/storage/self          757.4M     0.0K   757.4M   4096;" buildVersion="6.0" build_abis_32="x86" build_brand="Android" security_patch="2015-10-01" touch="finger" Xdpi="480.0" storage_devices="1 emulated, 1 physical media" base_os="" build_abis_64="" build_manufacturer="unknown" buildID="MASTER" build_fingerprint="Android/aosp_x86/generic_x86:6.0/MASTER/ddetlefs06141642:eng/test-keys" imsi="310260000000000" Ydpi="480.0" network="Android" build_abis="x86" graphicsRenderer="Android Emulator OpenGL ES Translator (Quadro K2200/PCIe/SSE2)" openGlEsVersion="2.0" androidPlatformVersion="23" buildName="aosp_x86" graphicsVendor="Google (NVIDIA Corporation)" deviceID="unknown" multi_user="single user" locales="en_US;ca;da;fa;ja;nb;de;af;bg;th;fi;hi;vi;sk;uk;el;nl;pl;sl;fil;am;in;ko;ro;ar;fr;hr;sr;tr;cs;es;it;lt;pt;hu;ru;zu;lv;sv;iw;sw;en-CA;fr-CA;lo-LA;uk-UA;en-XA;en-GB;ar-XB;bn-BD;in-ID;et-EE;ka-GE;ar-EG;ky-KG;en-SG;km-KH;th-TH;fi-FI;sl-SI;zh-HK;si-LK;mk-MK;ur-PK;sk-SK;sq-AL;hy-AM;my-MM;zh-CN;pa-IN;ta-IN;te-IN;hi-IN;ml-IN;en-IN;kn-IN;mr-IN;gu-IN;mn-MN;vi-VN;ro-RO;ne-NP;pt-BR;hr-HR;gl-ES;eu-ES;is-IS;sr-RS;en-US;es-US;lt-LT;pt-PT;en-AU;hu-HU;lv-LV;zh-TW;ms-MY;az-AZ;kk-KZ;en-NZ;uz-UZ;af-ZA;zu-ZA;nl-BE;fr-BE;de-DE;sv-SE;bg-BG;de-CH;rm-CH;fr-CH;it-CH;fil-PH;de-LI;da-DK;iw-IL;nl-NL;pl-PL;nb-NO;ja-JP;fr-FR;el-GR;fa-IR;ko-KR;tr-TR;ca-ES;es-ES;de-AT;am-ET;it-IT;ru-RU;cs-CZ;sw-TZ;en;rm;" encrypted="0" build_model="AOSP on IA Emulator" imei="000000000000000" />
+    <FeatureInfo>
+      <Feature name="android.software.app_widgets" type="sdk" available="true" />
+      <Feature name="android.hardware.audio.low_latency" type="sdk" available="false" />
+      <Feature name="android.hardware.audio.output" type="sdk" available="true" />
+      <Feature name="android.hardware.audio.pro" type="sdk" available="false" />
+      <Feature name="android.hardware.type.automotive" type="sdk" available="false" />
+      <Feature name="android.software.backup" type="sdk" available="true" />
+      <Feature name="android.hardware.bluetooth" type="sdk" available="true" />
+      <Feature name="android.hardware.bluetooth_le" type="sdk" available="false" />
+      <Feature name="android.hardware.camera" type="sdk" available="true" />
+      <Feature name="android.hardware.camera.any" type="sdk" available="false" />
+      <Feature name="android.hardware.camera.autofocus" type="sdk" available="false" />
+      <Feature name="android.hardware.camera.capability.manual_post_processing" type="sdk" available="false" />
+      <Feature name="android.hardware.camera.capability.manual_sensor" type="sdk" available="false" />
+      <Feature name="android.hardware.camera.capability.raw" type="sdk" available="false" />
+      <Feature name="android.hardware.camera.external" type="sdk" available="false" />
+      <Feature name="android.hardware.camera.flash" type="sdk" available="false" />
+      <Feature name="android.hardware.camera.front" type="sdk" available="false" />
+      <Feature name="android.hardware.camera.level.full" type="sdk" available="false" />
+      <Feature name="android.software.connectionservice" type="sdk" available="true" />
+      <Feature name="android.hardware.consumerir" type="sdk" available="false" />
+      <Feature name="android.software.device_admin" type="sdk" available="true" />
+      <Feature name="android.hardware.ethernet" type="sdk" available="false" />
+      <Feature name="android.hardware.faketouch" type="sdk" available="false" />
+      <Feature name="android.hardware.faketouch.multitouch.distinct" type="sdk" available="false" />
+      <Feature name="android.hardware.faketouch.multitouch.jazzhand" type="sdk" available="false" />
+      <Feature name="android.hardware.fingerprint" type="sdk" available="false" />
+      <Feature name="android.hardware.gamepad" type="sdk" available="false" />
+      <Feature name="android.hardware.hdmi.cec" type="sdk" available="false" />
+      <Feature name="android.hardware.sensor.hifi_sensors" type="sdk" available="false" />
+      <Feature name="android.software.home_screen" type="sdk" available="true" />
+      <Feature name="android.software.input_methods" type="sdk" available="true" />
+      <Feature name="android.software.leanback" type="sdk" available="false" />
+      <Feature name="android.software.leanback_only" type="sdk" available="false" />
+      <Feature name="android.software.live_tv" type="sdk" available="false" />
+      <Feature name="android.software.live_wallpaper" type="sdk" available="true" />
+      <Feature name="android.hardware.location" type="sdk" available="true" />
+      <Feature name="android.hardware.location.gps" type="sdk" available="false" />
+      <Feature name="android.hardware.location.network" type="sdk" available="true" />
+      <Feature name="android.software.managed_users" type="sdk" available="true" />
+      <Feature name="android.software.managed_users" type="sdk" available="true" />
+      <Feature name="android.hardware.microphone" type="sdk" available="true" />
+      <Feature name="android.software.midi" type="sdk" available="false" />
+      <Feature name="android.hardware.nfc" type="sdk" available="false" />
+      <Feature name="android.hardware.nfc.hce" type="sdk" available="false" />
+      <Feature name="android.hardware.nfc.hce" type="sdk" available="false" />
+      <Feature name="android.hardware.opengles.aep" type="sdk" available="false" />
+      <Feature name="android.software.print" type="sdk" available="true" />
+      <Feature name="android.hardware.screen.landscape" type="sdk" available="true" />
+      <Feature name="android.hardware.screen.portrait" type="sdk" available="true" />
+      <Feature name="android.software.securely_removes_users" type="sdk" available="false" />
+      <Feature name="android.hardware.sensor.accelerometer" type="sdk" available="true" />
+      <Feature name="android.hardware.sensor.ambient_temperature" type="sdk" available="false" />
+      <Feature name="android.hardware.sensor.barometer" type="sdk" available="false" />
+      <Feature name="android.hardware.sensor.compass" type="sdk" available="true" />
+      <Feature name="android.hardware.sensor.gyroscope" type="sdk" available="false" />
+      <Feature name="android.hardware.sensor.heartrate" type="sdk" available="false" />
+      <Feature name="android.hardware.sensor.heartrate.ecg" type="sdk" available="false" />
+      <Feature name="android.hardware.sensor.light" type="sdk" available="false" />
+      <Feature name="android.hardware.sensor.proximity" type="sdk" available="false" />
+      <Feature name="android.hardware.sensor.relative_humidity" type="sdk" available="false" />
+      <Feature name="android.hardware.sensor.stepcounter" type="sdk" available="false" />
+      <Feature name="android.hardware.sensor.stepdetector" type="sdk" available="false" />
+      <Feature name="android.software.sip" type="sdk" available="false" />
+      <Feature name="android.software.sip.voip" type="sdk" available="false" />
+      <Feature name="android.hardware.telephony" type="sdk" available="false" />
+      <Feature name="android.hardware.telephony.cdma" type="sdk" available="false" />
+      <Feature name="android.hardware.telephony.gsm" type="sdk" available="false" />
+      <Feature name="android.hardware.type.television" type="sdk" available="false" />
+      <Feature name="android.hardware.touchscreen" type="sdk" available="true" />
+      <Feature name="android.hardware.touchscreen.multitouch" type="sdk" available="false" />
+      <Feature name="android.hardware.touchscreen.multitouch.distinct" type="sdk" available="false" />
+      <Feature name="android.hardware.touchscreen.multitouch.jazzhand" type="sdk" available="false" />
+      <Feature name="android.hardware.usb.accessory" type="sdk" available="true" />
+      <Feature name="android.hardware.usb.host" type="sdk" available="false" />
+      <Feature name="android.software.verified_boot" type="sdk" available="false" />
+      <Feature name="android.software.voice_recognizers" type="sdk" available="true" />
+      <Feature name="android.hardware.type.watch" type="sdk" available="false" />
+      <Feature name="android.software.webview" type="sdk" available="true" />
+      <Feature name="android.hardware.wifi" type="sdk" available="false" />
+      <Feature name="android.hardware.wifi.direct" type="sdk" available="false" />
+    </FeatureInfo>
+    <ProcessInfo />
+    <SystemLibrariesInfo>
+      <Library name="com.android.location.provider" />
+      <Library name="com.android.future.usb.accessory" />
+      <Library name="javax.obex" />
+      <Library name="android.test.runner" />
+      <Library name="org.apache.http.legacy" />
+      <Library name="com.android.media.remotedisplay" />
+      <Library name="com.android.mediadrm.signer" />
+    </SystemLibrariesInfo>
+    <OpenGLCompressedTextureFormatsInfo>
+      <TextureFormat name="GL_OES_compressed_paletted_texture" />
+      <TextureFormat name="GL_OES_compressed_ETC1_RGB8_texture" />
+    </OpenGLCompressedTextureFormatsInfo>
+    <OpenGlExtensions>
+      <OpenGlExtension name="GL_OES_rgb8_rgba8" />
+      <OpenGlExtension name="GL_OES_depth_texture" />
+      <OpenGlExtension name="GL_OES_EGL_image" />
+      <OpenGlExtension name="GL_OES_texture_cube_map" />
+      <OpenGlExtension name="GL_OES_texture_float_linear" />
+      <OpenGlExtension name="GL_OES_texture_env_crossbar" />
+      <OpenGlExtension name="GL_OES_byte_coordinates" />
+      <OpenGlExtension name="GL_OES_depth24" />
+      <OpenGlExtension name="GL_OES_texture_half_float_linear" />
+      <OpenGlExtension name="GL_OES_stencil8" />
+      <OpenGlExtension name="GL_OES_fbo_render_mipmap" />
+      <OpenGlExtension name="GL_OES_texture_half_float" />
+      <OpenGlExtension name="GL_OES_compressed_paletted_texture" />
+      <OpenGlExtension name="GL_OES_blend_subtract" />
+      <OpenGlExtension name="GL_EXT_texture_format_BGRA8888" />
+      <OpenGlExtension name="GL_OES_framebuffer_object" />
+      <OpenGlExtension name="GL_OES_EGL_image_external" />
+      <OpenGlExtension name="GL_OES_compressed_ETC1_RGB8_texture" />
+      <OpenGlExtension name="GL_OES_vertex_half_float" />
+      <OpenGlExtension name="GL_OES_depth32" />
+      <OpenGlExtension name="GL_OES_point_size_array" />
+      <OpenGlExtension name="GL_OES_draw_texture" />
+      <OpenGlExtension name="GL_OES_element_index_uint" />
+      <OpenGlExtension name="GL_OES_texture_npot" />
+      <OpenGlExtension name="GL_OES_texture_mirored_repeat" />
+      <OpenGlExtension name="GL_OES_packed_depth_stencil" />
+      <OpenGlExtension name="GL_EXT_debug_marker" />
+      <OpenGlExtension name="GL_OES_stencil1" />
+      <OpenGlExtension name="GL_OES_blend_equation_separate" />
+      <OpenGlExtension name="GL_OES_point_sprite" />
+      <OpenGlExtension name="GL_OES_single_precision" />
+      <OpenGlExtension name="GL_OES_blend_func_separate" />
+      <OpenGlExtension name="GL_APPLE_texture_format_BGRA8888" />
+      <OpenGlExtension name="GL_OES_stencil4" />
+      <OpenGlExtension name="GL_OES_stencil_wrap" />
+      <OpenGlExtension name="GL_OES_texture_float" />
+    </OpenGlExtensions>
+  </DeviceInfo>
+  <HostInfo name="ddetlefs-linux1.kir.corp.google.com">
+    <Os name="Linux" version="3.13.0-83-generic" arch="amd64" />
+    <Java name="Oracle Corporation" version="1.8.0_45-internal" />
+    <Cts version="6.0_r6" build="2813453">
+      <IntValue name="testStatusTimeoutMs" value="600000" />
+    </Cts>
+  </HostInfo>
+  <Summary failed="0" notExecuted="0" timeout="0" pass="10" />
+  <TestPackage name="CtsAdbTests" appPackageName="android.aadb" abi="x86" digest="0c8b646b698bbc3324567e7a02ee034975771366">
+    <TestSuite name="com">
+      <TestSuite name="android">
+        <TestSuite name="cts">
+          <TestSuite name="aadb">
+            <TestCase name="TestDeviceFuncTest" priority="">
+              <Test name="testBugreport" result="pass" starttime="Thu Jun 30 16:11:49 PDT 2016" endtime="Thu Jun 30 16:12:05 PDT 2016" />
+              <Test name="testExecuteShellCommand" result="pass" starttime="Thu Jun 30 16:12:05 PDT 2016" endtime="Thu Jun 30 16:12:05 PDT 2016" />
+              <Test name="testGetLogcat_size" result="pass" starttime="Thu Jun 30 16:12:05 PDT 2016" endtime="Thu Jun 30 16:12:09 PDT 2016" />
+              <Test name="testGetScreenshot" result="pass" starttime="Thu Jun 30 16:12:09 PDT 2016" endtime="Thu Jun 30 16:12:09 PDT 2016" />
+              <Test name="testPull_noexist" result="pass" starttime="Thu Jun 30 16:12:09 PDT 2016" endtime="Thu Jun 30 16:12:09 PDT 2016" />
+              <Test name="testPushDir" result="pass" starttime="Thu Jun 30 16:12:09 PDT 2016" endtime="Thu Jun 30 16:12:10 PDT 2016" />
+              <Test name="testPushPull_extStorageVariable" result="pass" starttime="Thu Jun 30 16:12:10 PDT 2016" endtime="Thu Jun 30 16:12:10 PDT 2016" />
+              <Test name="testPushPull_normal" result="pass" starttime="Thu Jun 30 16:12:10 PDT 2016" endtime="Thu Jun 30 16:12:10 PDT 2016" />
+              <Test name="testSyncFiles_extStorageVariable" result="pass" starttime="Thu Jun 30 16:12:10 PDT 2016" endtime="Thu Jun 30 16:12:12 PDT 2016" />
+              <Test name="testSyncFiles_normal" result="pass" starttime="Thu Jun 30 16:12:12 PDT 2016" endtime="Thu Jun 30 16:12:13 PDT 2016" />
+            </TestCase>
+          </TestSuite>
+        </TestSuite>
+      </TestSuite>
+    </TestSuite>
+  </TestPackage>
+</TestResult>

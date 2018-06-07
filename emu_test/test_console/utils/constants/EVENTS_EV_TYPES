@@ -1,0 +1,15 @@
+event <type> can be an integer or one of the following aliases
+    EV_SYN
+    EV_KEY    (405 code aliases)
+    EV_REL    (2 code aliases)
+    EV_ABS    (27 code aliases)
+    EV_MSC
+    EV_SW     (4 code aliases)
+    EV_LED
+    EV_SND
+    EV_REP
+    EV_FF
+    EV_PWR
+    EV_FF_STATUS
+    EV_MAX
+OK

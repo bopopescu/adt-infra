@@ -1,0 +1,732 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no' ?><?xml-stylesheet type="text/xsl"  href="cts_result.xsl"?>
+<TestResult testPlan="CTS" starttime="Mon Jun 27 11:19:28 PDT 2016" endtime="Mon Jun 27 21:53:12 PDT 2016" version="4.4" suite="CTS">
+  <DeviceInfo>
+    <Screen resolution="1080x1920" screen_density="3.0" screen_density_bucket="480" screen_size="normal" smallest_screen_width_dp="360" />
+    <PhoneSubInfo subscriberId="15555215554" />
+    <MemoryInfo is_low_ram_device="false" memory_class="384" large_memory_class="384" total_memory="1588387840" />
+    <BuildInfo build_board="unknown" keypad="nokeys" available_processors="4" reference_build_fingerprint="" build_device="generic_x86" navigation="nonav" build_abi="x86" build_abi2="" build_type="eng" partitions="Filesystem               Size     Used     Free   Blksize;/dev                   757.4M    44.0K   757.4M   4096;/sys/fs/cgroup         757.4M    12.0K   757.4M   4096;/mnt                   757.4M     0.0K   757.4M   4096;/system                  1.2G   565.9M   673.9M   4096;/cache                  61.0M    64.0K    60.9M   4096;/data                    3.9G     1.9G     2.0G   4096;/storage               757.4M     0.0K   757.4M   4096;/storage/emulated        3.9G     1.9G     2.0G   4096;/storage/6D2A-1AE6      98.9M   224.0K    98.7M   32768;/storage/self          757.4M     0.0K   757.4M   4096;" buildVersion="6.0" build_abis_32="x86" build_brand="Android" security_patch="2015-10-01" touch="finger" Xdpi="480.0" storage_devices="1 emulated, 1 physical media" base_os="" build_abis_64="" build_manufacturer="unknown" buildID="MASTER" build_fingerprint="Android/aosp_x86/generic_x86:6.0/MASTER/ddetlefs06141642:eng/test-keys" imsi="310260000000000" Ydpi="480.0" network="Android" build_abis="x86" graphicsRenderer="Android Emulator OpenGL ES Translator (Quadro K2200/PCIe/SSE2)" openGlEsVersion="2.0" androidPlatformVersion="23" buildName="aosp_x86" graphicsVendor="Google (NVIDIA Corporation)" deviceID="unknown" multi_user="single user" locales="en_US;ca;da;fa;ja;nb;de;af;bg;th;fi;hi;vi;sk;uk;el;nl;pl;sl;fil;am;in;ko;ro;ar;fr;hr;sr;tr;cs;es;it;lt;pt;hu;ru;zu;lv;sv;iw;sw;en-CA;fr-CA;lo-LA;uk-UA;en-XA;en-GB;ar-XB;bn-BD;in-ID;et-EE;ka-GE;ar-EG;ky-KG;en-SG;km-KH;th-TH;fi-FI;sl-SI;zh-HK;si-LK;mk-MK;ur-PK;sk-SK;sq-AL;hy-AM;my-MM;zh-CN;pa-IN;ta-IN;te-IN;hi-IN;ml-IN;en-IN;kn-IN;mr-IN;gu-IN;mn-MN;vi-VN;ro-RO;ne-NP;pt-BR;hr-HR;gl-ES;eu-ES;is-IS;sr-RS;en-US;es-US;lt-LT;pt-PT;en-AU;hu-HU;lv-LV;zh-TW;ms-MY;az-AZ;kk-KZ;en-NZ;uz-UZ;af-ZA;zu-ZA;nl-BE;fr-BE;de-DE;sv-SE;bg-BG;de-CH;rm-CH;fr-CH;it-CH;fil-PH;de-LI;da-DK;iw-IL;nl-NL;pl-PL;nb-NO;ja-JP;fr-FR;el-GR;fa-IR;ko-KR;tr-TR;ca-ES;es-ES;de-AT;am-ET;it-IT;ru-RU;cs-CZ;sw-TZ;en;rm;" encrypted="0" build_model="AOSP on IA Emulator" imei="000000000000000" />
+    <FeatureInfo>
+      <Feature name="android.software.app_widgets" type="sdk" available="true" />
+      <Feature name="android.hardware.audio.low_latency" type="sdk" available="false" />
+      <Feature name="android.hardware.audio.output" type="sdk" available="true" />
+      <Feature name="android.hardware.audio.pro" type="sdk" available="false" />
+      <Feature name="android.hardware.type.automotive" type="sdk" available="false" />
+      <Feature name="android.software.backup" type="sdk" available="true" />
+      <Feature name="android.hardware.bluetooth" type="sdk" available="true" />
+      <Feature name="android.hardware.bluetooth_le" type="sdk" available="false" />
+      <Feature name="android.hardware.camera" type="sdk" available="true" />
+      <Feature name="android.hardware.camera.any" type="sdk" available="false" />
+      <Feature name="android.hardware.camera.autofocus" type="sdk" available="false" />
+      <Feature name="android.hardware.camera.capability.manual_post_processing" type="sdk" available="false" />
+      <Feature name="android.hardware.camera.capability.manual_sensor" type="sdk" available="false" />
+      <Feature name="android.hardware.camera.capability.raw" type="sdk" available="false" />
+      <Feature name="android.hardware.camera.external" type="sdk" available="false" />
+      <Feature name="android.hardware.camera.flash" type="sdk" available="false" />
+      <Feature name="android.hardware.camera.front" type="sdk" available="false" />
+      <Feature name="android.hardware.camera.level.full" type="sdk" available="false" />
+      <Feature name="android.software.connectionservice" type="sdk" available="true" />
+      <Feature name="android.hardware.consumerir" type="sdk" available="false" />
+      <Feature name="android.software.device_admin" type="sdk" available="true" />
+      <Feature name="android.hardware.ethernet" type="sdk" available="false" />
+      <Feature name="android.hardware.faketouch" type="sdk" available="false" />
+      <Feature name="android.hardware.faketouch.multitouch.distinct" type="sdk" available="false" />
+      <Feature name="android.hardware.faketouch.multitouch.jazzhand" type="sdk" available="false" />
+      <Feature name="android.hardware.fingerprint" type="sdk" available="false" />
+      <Feature name="android.hardware.gamepad" type="sdk" available="false" />
+      <Feature name="android.hardware.hdmi.cec" type="sdk" available="false" />
+      <Feature name="android.hardware.sensor.hifi_sensors" type="sdk" available="false" />
+      <Feature name="android.software.home_screen" type="sdk" available="true" />
+      <Feature name="android.software.input_methods" type="sdk" available="true" />
+      <Feature name="android.software.leanback" type="sdk" available="false" />
+      <Feature name="android.software.leanback_only" type="sdk" available="false" />
+      <Feature name="android.software.live_tv" type="sdk" available="false" />
+      <Feature name="android.software.live_wallpaper" type="sdk" available="true" />
+      <Feature name="android.hardware.location" type="sdk" available="true" />
+      <Feature name="android.hardware.location.gps" type="sdk" available="false" />
+      <Feature name="android.hardware.location.network" type="sdk" available="true" />
+      <Feature name="android.software.managed_users" type="sdk" available="true" />
+      <Feature name="android.software.managed_users" type="sdk" available="true" />
+      <Feature name="android.hardware.microphone" type="sdk" available="true" />
+      <Feature name="android.software.midi" type="sdk" available="false" />
+      <Feature name="android.hardware.nfc" type="sdk" available="false" />
+      <Feature name="android.hardware.nfc.hce" type="sdk" available="false" />
+      <Feature name="android.hardware.nfc.hce" type="sdk" available="false" />
+      <Feature name="android.hardware.opengles.aep" type="sdk" available="false" />
+      <Feature name="android.software.print" type="sdk" available="true" />
+      <Feature name="android.hardware.screen.landscape" type="sdk" available="true" />
+      <Feature name="android.hardware.screen.portrait" type="sdk" available="true" />
+      <Feature name="android.software.securely_removes_users" type="sdk" available="false" />
+      <Feature name="android.hardware.sensor.accelerometer" type="sdk" available="true" />
+      <Feature name="android.hardware.sensor.ambient_temperature" type="sdk" available="false" />
+      <Feature name="android.hardware.sensor.barometer" type="sdk" available="false" />
+      <Feature name="android.hardware.sensor.compass" type="sdk" available="true" />
+      <Feature name="android.hardware.sensor.gyroscope" type="sdk" available="false" />
+      <Feature name="android.hardware.sensor.heartrate" type="sdk" available="false" />
+      <Feature name="android.hardware.sensor.heartrate.ecg" type="sdk" available="false" />
+      <Feature name="android.hardware.sensor.light" type="sdk" available="false" />
+      <Feature name="android.hardware.sensor.proximity" type="sdk" available="false" />
+      <Feature name="android.hardware.sensor.relative_humidity" type="sdk" available="false" />
+      <Feature name="android.hardware.sensor.stepcounter" type="sdk" available="false" />
+      <Feature name="android.hardware.sensor.stepdetector" type="sdk" available="false" />
+      <Feature name="android.software.sip" type="sdk" available="false" />
+      <Feature name="android.software.sip.voip" type="sdk" available="false" />
+      <Feature name="android.hardware.telephony" type="sdk" available="false" />
+      <Feature name="android.hardware.telephony.cdma" type="sdk" available="false" />
+      <Feature name="android.hardware.telephony.gsm" type="sdk" available="false" />
+      <Feature name="android.hardware.type.television" type="sdk" available="false" />
+      <Feature name="android.hardware.touchscreen" type="sdk" available="true" />
+      <Feature name="android.hardware.touchscreen.multitouch" type="sdk" available="false" />
+      <Feature name="android.hardware.touchscreen.multitouch.distinct" type="sdk" available="false" />
+      <Feature name="android.hardware.touchscreen.multitouch.jazzhand" type="sdk" available="false" />
+      <Feature name="android.hardware.usb.accessory" type="sdk" available="true" />
+      <Feature name="android.hardware.usb.host" type="sdk" available="false" />
+      <Feature name="android.software.verified_boot" type="sdk" available="false" />
+      <Feature name="android.software.voice_recognizers" type="sdk" available="true" />
+      <Feature name="android.hardware.type.watch" type="sdk" available="false" />
+      <Feature name="android.software.webview" type="sdk" available="true" />
+      <Feature name="android.hardware.wifi" type="sdk" available="false" />
+      <Feature name="android.hardware.wifi.direct" type="sdk" available="false" />
+    </FeatureInfo>
+    <ProcessInfo />
+    <SystemLibrariesInfo>
+      <Library name="com.android.location.provider" />
+      <Library name="com.android.future.usb.accessory" />
+      <Library name="javax.obex" />
+      <Library name="android.test.runner" />
+      <Library name="org.apache.http.legacy" />
+      <Library name="com.android.media.remotedisplay" />
+      <Library name="com.android.mediadrm.signer" />
+    </SystemLibrariesInfo>
+    <OpenGLCompressedTextureFormatsInfo>
+      <TextureFormat name="GL_OES_compressed_paletted_texture" />
+      <TextureFormat name="GL_OES_compressed_ETC1_RGB8_texture" />
+    </OpenGLCompressedTextureFormatsInfo>
+    <OpenGlExtensions>
+      <OpenGlExtension name="GL_OES_rgb8_rgba8" />
+      <OpenGlExtension name="GL_OES_depth_texture" />
+      <OpenGlExtension name="GL_OES_EGL_image" />
+      <OpenGlExtension name="GL_OES_texture_cube_map" />
+      <OpenGlExtension name="GL_OES_texture_float_linear" />
+      <OpenGlExtension name="GL_OES_texture_env_crossbar" />
+      <OpenGlExtension name="GL_OES_byte_coordinates" />
+      <OpenGlExtension name="GL_OES_depth24" />
+      <OpenGlExtension name="GL_OES_texture_half_float_linear" />
+      <OpenGlExtension name="GL_OES_stencil8" />
+      <OpenGlExtension name="GL_OES_fbo_render_mipmap" />
+      <OpenGlExtension name="GL_OES_texture_half_float" />
+      <OpenGlExtension name="GL_OES_compressed_paletted_texture" />
+      <OpenGlExtension name="GL_OES_blend_subtract" />
+      <OpenGlExtension name="GL_EXT_texture_format_BGRA8888" />
+      <OpenGlExtension name="GL_OES_framebuffer_object" />
+      <OpenGlExtension name="GL_OES_EGL_image_external" />
+      <OpenGlExtension name="GL_OES_compressed_ETC1_RGB8_texture" />
+      <OpenGlExtension name="GL_OES_vertex_half_float" />
+      <OpenGlExtension name="GL_OES_depth32" />
+      <OpenGlExtension name="GL_OES_point_size_array" />
+      <OpenGlExtension name="GL_OES_draw_texture" />
+      <OpenGlExtension name="GL_OES_element_index_uint" />
+      <OpenGlExtension name="GL_OES_texture_npot" />
+      <OpenGlExtension name="GL_OES_texture_mirored_repeat" />
+      <OpenGlExtension name="GL_OES_packed_depth_stencil" />
+      <OpenGlExtension name="GL_EXT_debug_marker" />
+      <OpenGlExtension name="GL_OES_stencil1" />
+      <OpenGlExtension name="GL_OES_blend_equation_separate" />
+      <OpenGlExtension name="GL_OES_point_sprite" />
+      <OpenGlExtension name="GL_OES_single_precision" />
+      <OpenGlExtension name="GL_OES_blend_func_separate" />
+      <OpenGlExtension name="GL_APPLE_texture_format_BGRA8888" />
+      <OpenGlExtension name="GL_OES_stencil4" />
+      <OpenGlExtension name="GL_OES_stencil_wrap" />
+      <OpenGlExtension name="GL_OES_texture_float" />
+    </OpenGlExtensions>
+  </DeviceInfo>
+  <HostInfo name="ddetlefs-linux1.kir.corp.google.com">
+    <Os name="Linux" version="3.13.0-83-generic" arch="amd64" />
+    <Java name="Oracle Corporation" version="1.8.0_45-internal" />
+    <Cts version="6.0_r7" build="eng.ddetlefs.20160615.122200">
+      <IntValue name="testStatusTimeoutMs" value="600000" />
+    </Cts>
+  </HostInfo>
+  <Summary failed="527" notExecuted="2" timeout="0" pass="126232" />
+  <TestPackage name="CtsJobSchedulerDeviceTestCases" appPackageName="android.JobScheduler" abi="x86" digest="8855be8160aacddeae519e3ead8cb726d490bf72">
+    <TestSuite name="android">
+      <TestSuite name="jobscheduler">
+        <TestSuite name="cts">
+          <TestCase name="ConnectivityConstraintTest" priority="">
+            <Test name="testUnmeteredConstraintFails_withMobile" result="pass" starttime="Mon Jun 27 11:23:00 PDT 2016" endtime="Mon Jun 27 11:23:30 PDT 2016" />
+            <Test name="testAndroidTestCaseSetupProperly" result="pass" starttime="Mon Jun 27 11:23:30 PDT 2016" endtime="Mon Jun 27 11:24:00 PDT 2016" />
+          </TestCase>
+          <TestCase name="TimingConstraintsTest" priority="">
+            <Test name="testCancel" result="pass" starttime="Mon Jun 27 11:24:00 PDT 2016" endtime="Mon Jun 27 11:24:30 PDT 2016" />
+            <Test name="testJobParameters_expiredDeadline" result="pass" starttime="Mon Jun 27 11:24:30 PDT 2016" endtime="Mon Jun 27 11:24:35 PDT 2016" />
+            <Test name="testScheduleOnce" result="pass" starttime="Mon Jun 27 11:24:35 PDT 2016" endtime="Mon Jun 27 11:24:40 PDT 2016" />
+            <Test name="testSchedulePeriodic" result="pass" starttime="Mon Jun 27 11:24:40 PDT 2016" endtime="Mon Jun 27 11:24:55 PDT 2016" />
+            <Test name="testAndroidTestCaseSetupProperly" result="pass" starttime="Mon Jun 27 11:24:55 PDT 2016" endtime="Mon Jun 27 11:24:55 PDT 2016" />
+          </TestCase>
+        </TestSuite>
+      </TestSuite>
+    </TestSuite>
+  </TestPackage>
+  <TestPackage name="CtsAdbTests" appPackageName="android.aadb" abi="x86" digest="305dcf9813f1a74864174adaa4c4bde3c6cc358c">
+    <TestSuite name="com">
+      <TestSuite name="android">
+        <TestSuite name="cts">
+          <TestSuite name="aadb">
+            <TestCase name="TestDeviceFuncTest" priority="">
+              <Test name="testBugreport" result="pass" starttime="Mon Jun 27 11:24:57 PDT 2016" endtime="Mon Jun 27 11:25:14 PDT 2016" />
+              <Test name="testExecuteShellCommand" result="pass" starttime="Mon Jun 27 11:25:14 PDT 2016" endtime="Mon Jun 27 11:25:14 PDT 2016" />
+              <Test name="testGetLogcat_size" result="pass" starttime="Mon Jun 27 11:25:14 PDT 2016" endtime="Mon Jun 27 11:25:18 PDT 2016" />
+              <Test name="testGetScreenshot" result="pass" starttime="Mon Jun 27 11:25:18 PDT 2016" endtime="Mon Jun 27 11:25:19 PDT 2016" />
+              <Test name="testPull_noexist" result="pass" starttime="Mon Jun 27 11:25:19 PDT 2016" endtime="Mon Jun 27 11:25:19 PDT 2016" />
+              <Test name="testPushDir" result="pass" starttime="Mon Jun 27 11:25:19 PDT 2016" endtime="Mon Jun 27 11:25:19 PDT 2016" />
+              <Test name="testPushPull_extStorageVariable" result="pass" starttime="Mon Jun 27 11:25:19 PDT 2016" endtime="Mon Jun 27 11:25:19 PDT 2016" />
+              <Test name="testPushPull_normal" result="pass" starttime="Mon Jun 27 11:25:19 PDT 2016" endtime="Mon Jun 27 11:25:20 PDT 2016" />
+              <Test name="testSyncFiles_extStorageVariable" result="pass" starttime="Mon Jun 27 11:25:20 PDT 2016" endtime="Mon Jun 27 11:25:21 PDT 2016" />
+              <Test name="testSyncFiles_normal" result="pass" starttime="Mon Jun 27 11:25:21 PDT 2016" endtime="Mon Jun 27 11:25:23 PDT 2016" />
+            </TestCase>
+            <TestCase name="TestDeviceStressTest" priority="">
+              <Test name="testPushFolderWithManyFiles" result="pass" starttime="Mon Jun 27 11:25:23 PDT 2016" endtime="Mon Jun 27 11:29:52 PDT 2016" />
+            </TestCase>
+          </TestSuite>
+        </TestSuite>
+      </TestSuite>
+    </TestSuite>
+  </TestPackage>
+  <TestPackage name="CtsAccelerationTestCases" appPackageName="android.acceleration" abi="x86" digest="9080b8ea45ce4425809baeb92dcbc360d213bfb5">
+    <TestSuite name="android">
+      <TestSuite name="acceleration">
+        <TestSuite name="cts">
+          <TestCase name="HardwareAccelerationTest" priority="">
+            <Test name="testIsHardwareAccelerated" result="pass" starttime="Mon Jun 27 11:29:54 PDT 2016" endtime="Mon Jun 27 11:29:58 PDT 2016" />
+            <Test name="testNotAttachedView" result="pass" starttime="Mon Jun 27 11:29:58 PDT 2016" endtime="Mon Jun 27 11:29:59 PDT 2016" />
+          </TestCase>
+          <TestCase name="SoftwareAccelerationTest" priority="">
+            <Test name="testIsHardwareAccelerated" result="pass" starttime="Mon Jun 27 11:29:59 PDT 2016" endtime="Mon Jun 27 11:30:00 PDT 2016" />
+            <Test name="testNotAttachedView" result="pass" starttime="Mon Jun 27 11:30:00 PDT 2016" endtime="Mon Jun 27 11:30:01 PDT 2016" />
+          </TestCase>
+          <TestCase name="WindowFlagHardwareAccelerationTest" priority="">
+            <Test name="testIsHardwareAccelerated" result="pass" starttime="Mon Jun 27 11:30:01 PDT 2016" endtime="Mon Jun 27 11:30:03 PDT 2016" />
+            <Test name="testNotAttachedView" result="pass" starttime="Mon Jun 27 11:30:03 PDT 2016" endtime="Mon Jun 27 11:30:04 PDT 2016" />
+          </TestCase>
+        </TestSuite>
+      </TestSuite>
+    </TestSuite>
+  </TestPackage>
+  <TestPackage name="CtsAccessibilityTestCases" appPackageName="android.accessibility" abi="x86" digest="9a9babc4b7a80e86ab6d95ccac15a6b330379a60">
+    <TestSuite name="android">
+      <TestSuite name="view">
+        <TestSuite name="accessibility">
+          <TestSuite name="cts">
+            <TestCase name="AccessibilityEventTest" priority="">
+              <Test name="testDescribeContents" result="pass" starttime="Mon Jun 27 11:30:09 PDT 2016" endtime="Mon Jun 27 11:30:09 PDT 2016" />
+              <Test name="testEventTypeToString" result="pass" starttime="Mon Jun 27 11:30:09 PDT 2016" endtime="Mon Jun 27 11:30:09 PDT 2016" />
+              <Test name="testMarshaling" result="pass" starttime="Mon Jun 27 11:30:09 PDT 2016" endtime="Mon Jun 27 11:30:09 PDT 2016" />
+              <Test name="testMarshaling2" result="pass" starttime="Mon Jun 27 11:30:09 PDT 2016" endtime="Mon Jun 27 11:30:09 PDT 2016" />
+              <Test name="testNoNewFieldsAddedWithoutUpdadingMarshallTests" result="pass" starttime="Mon Jun 27 11:30:09 PDT 2016" endtime="Mon Jun 27 11:30:09 PDT 2016" />
+              <Test name="testRecycle" result="pass" starttime="Mon Jun 27 11:30:09 PDT 2016" endtime="Mon Jun 27 11:30:09 PDT 2016" />
+              <Test name="testReuse" result="pass" starttime="Mon Jun 27 11:30:09 PDT 2016" endtime="Mon Jun 27 11:30:09 PDT 2016" />
+            </TestCase>
+            <TestCase name="AccessibilityManagerTest" priority="">
+              <Test name="testAddAndRemoveAccessibilityStateChangeListener" result="pass" starttime="Mon Jun 27 11:30:09 PDT 2016" endtime="Mon Jun 27 11:30:10 PDT 2016" />
+              <Test name="testGetAccessibilityServiceList" result="pass" starttime="Mon Jun 27 11:30:10 PDT 2016" endtime="Mon Jun 27 11:30:10 PDT 2016" />
+              <Test name="testGetEnabledAccessibilityServiceList" result="pass" starttime="Mon Jun 27 11:30:10 PDT 2016" endtime="Mon Jun 27 11:30:10 PDT 2016" />
+              <Test name="testGetEnabledAccessibilityServiceListForType" result="pass" starttime="Mon Jun 27 11:30:10 PDT 2016" endtime="Mon Jun 27 11:30:10 PDT 2016" />
+              <Test name="testGetInstalledAccessibilityServicesList" result="pass" starttime="Mon Jun 27 11:30:10 PDT 2016" endtime="Mon Jun 27 11:30:10 PDT 2016" />
+              <Test name="testInterrupt" result="pass" starttime="Mon Jun 27 11:30:10 PDT 2016" endtime="Mon Jun 27 11:30:10 PDT 2016" />
+              <Test name="testIsTouchExplorationEnabled" result="pass" starttime="Mon Jun 27 11:30:10 PDT 2016" endtime="Mon Jun 27 11:30:10 PDT 2016" />
+              <Test name="testSendAccessibilityEvent" result="pass" starttime="Mon Jun 27 11:30:10 PDT 2016" endtime="Mon Jun 27 11:30:10 PDT 2016" />
+              <Test name="testAndroidTestCaseSetupProperly" result="pass" starttime="Mon Jun 27 11:30:10 PDT 2016" endtime="Mon Jun 27 11:30:10 PDT 2016" />
+            </TestCase>
+            <TestCase name="AccessibilityNodeInfoTest" priority="">
+              <Test name="testAddActions" result="pass" starttime="Mon Jun 27 11:30:10 PDT 2016" endtime="Mon Jun 27 11:30:10 PDT 2016" />
+              <Test name="testCreateInvalidActionId" result="pass" starttime="Mon Jun 27 11:30:10 PDT 2016" endtime="Mon Jun 27 11:30:10 PDT 2016" />
+              <Test name="testDescribeContents" result="pass" starttime="Mon Jun 27 11:30:10 PDT 2016" endtime="Mon Jun 27 11:30:10 PDT 2016" />
+              <Test name="testMarshaling" result="pass" starttime="Mon Jun 27 11:30:10 PDT 2016" endtime="Mon Jun 27 11:30:10 PDT 2016" />
+              <Test name="testRecycle" result="pass" starttime="Mon Jun 27 11:30:10 PDT 2016" endtime="Mon Jun 27 11:30:10 PDT 2016" />
+              <Test name="testRemoveActions" result="pass" starttime="Mon Jun 27 11:30:10 PDT 2016" endtime="Mon Jun 27 11:30:10 PDT 2016" />
+              <Test name="testReuse" result="pass" starttime="Mon Jun 27 11:30:10 PDT 2016" endtime="Mon Jun 27 11:30:10 PDT 2016" />
+              <Test name="testAndroidTestCaseSetupProperly" result="pass" starttime="Mon Jun 27 11:30:10 PDT 2016" endtime="Mon Jun 27 11:30:10 PDT 2016" />
+            </TestCase>
+            <TestCase name="AccessibilityRecordTest" priority="">
+              <Test name="testNoNewFieldsAddedWithoutUpdadingMarshallTests" result="pass" starttime="Mon Jun 27 11:30:10 PDT 2016" endtime="Mon Jun 27 11:30:10 PDT 2016" />
+              <Test name="testObtain" result="pass" starttime="Mon Jun 27 11:30:10 PDT 2016" endtime="Mon Jun 27 11:30:10 PDT 2016" />
+              <Test name="testRecycle" result="pass" starttime="Mon Jun 27 11:30:10 PDT 2016" endtime="Mon Jun 27 11:30:10 PDT 2016" />
+              <Test name="testAndroidTestCaseSetupProperly" result="pass" starttime="Mon Jun 27 11:30:10 PDT 2016" endtime="Mon Jun 27 11:30:10 PDT 2016" />
+            </TestCase>
+            <TestCase name="AccessibilityServiceInfoTest" priority="">
+              <Test name="testAccessibilityServiceInfoForEnabledService" result="pass" starttime="Mon Jun 27 11:30:10 PDT 2016" endtime="Mon Jun 27 11:30:10 PDT 2016" />
+              <Test name="testAndroidTestCaseSetupProperly" result="pass" starttime="Mon Jun 27 11:30:10 PDT 2016" endtime="Mon Jun 27 11:30:10 PDT 2016" />
+            </TestCase>
+            <TestCase name="CaptioningManagerTest" priority="">
+              <Test name="testChangeListener" result="pass" starttime="Mon Jun 27 11:30:10 PDT 2016" endtime="Mon Jun 27 11:30:14 PDT 2016" />
+              <Test name="testProperties" result="pass" starttime="Mon Jun 27 11:30:14 PDT 2016" endtime="Mon Jun 27 11:30:15 PDT 2016" />
+              <Test name="testUserStyle" result="pass" starttime="Mon Jun 27 11:30:15 PDT 2016" endtime="Mon Jun 27 11:30:18 PDT 2016" />
+            </TestCase>
+          </TestSuite>
+        </TestSuite>
+      </TestSuite>
+    </TestSuite>
+  </TestPackage>
+  <TestPackage name="CtsAccessibilityServiceTestCases" appPackageName="android.accessibilityservice" abi="x86" digest="59f139e1680db83e0ba70ec2be1917097fa71157">
+    <TestSuite name="android">
+      <TestSuite name="accessibilityservice">
+        <TestSuite name="cts">
+          <TestCase name="AccessibilityEndToEndTest" priority="">
+            <Test name="testTypeNotificationStateChangedAccessibilityEvent" result="pass" starttime="Mon Jun 27 11:30:23 PDT 2016" endtime="Mon Jun 27 11:30:27 PDT 2016" />
+            <Test name="testTypeViewClickedAccessibilityEvent" result="pass" starttime="Mon Jun 27 11:30:27 PDT 2016" endtime="Mon Jun 27 11:30:29 PDT 2016" />
+            <Test name="testTypeViewFocusedAccessibilityEvent" result="pass" starttime="Mon Jun 27 11:30:29 PDT 2016" endtime="Mon Jun 27 11:30:30 PDT 2016" />
+            <Test name="testTypeViewLongClickedAccessibilityEvent" result="pass" starttime="Mon Jun 27 11:30:30 PDT 2016" endtime="Mon Jun 27 11:30:32 PDT 2016" />
+            <Test name="testTypeViewSelectedAccessibilityEvent" result="pass" starttime="Mon Jun 27 11:30:32 PDT 2016" endtime="Mon Jun 27 11:30:33 PDT 2016" />
+            <Test name="testTypeViewTextChangedAccessibilityEvent" result="pass" starttime="Mon Jun 27 11:30:33 PDT 2016" endtime="Mon Jun 27 11:30:35 PDT 2016" />
+            <Test name="testTypeWindowStateChangedAccessibilityEvent" result="pass" starttime="Mon Jun 27 11:30:35 PDT 2016" endtime="Mon Jun 27 11:30:37 PDT 2016" />
+          </TestCase>
+          <TestCase name="AccessibilityFocusAndInputFocusSyncTest" priority="">
+            <Test name="testActionAccessibilityFocus" result="pass" starttime="Mon Jun 27 11:30:37 PDT 2016" endtime="Mon Jun 27 11:30:38 PDT 2016" />
+            <Test name="testActionClearAccessibilityFocus" result="pass" starttime="Mon Jun 27 11:30:38 PDT 2016" endtime="Mon Jun 27 11:30:40 PDT 2016" />
+            <Test name="testFindAccessibilityFocus" result="pass" starttime="Mon Jun 27 11:30:40 PDT 2016" endtime="Mon Jun 27 11:30:41 PDT 2016" />
+            <Test name="testInitialStateNoAccessibilityFocus" result="pass" starttime="Mon Jun 27 11:30:41 PDT 2016" endtime="Mon Jun 27 11:30:42 PDT 2016" />
+            <Test name="testOnlyOneNodeHasAccessibilityFocus" result="pass" starttime="Mon Jun 27 11:30:42 PDT 2016" endtime="Mon Jun 27 11:30:44 PDT 2016" />
+          </TestCase>
+          <TestCase name="AccessibilityServiceInfoTest" priority="">
+            <Test name="testDescribeContents" result="pass" starttime="Mon Jun 27 11:30:44 PDT 2016" endtime="Mon Jun 27 11:30:44 PDT 2016" />
+            <Test name="testFeedbackTypeToString" result="pass" starttime="Mon Jun 27 11:30:44 PDT 2016" endtime="Mon Jun 27 11:30:44 PDT 2016" />
+            <Test name="testFlagToString" result="pass" starttime="Mon Jun 27 11:30:44 PDT 2016" endtime="Mon Jun 27 11:30:44 PDT 2016" />
+            <Test name="testMarshalling" result="pass" starttime="Mon Jun 27 11:30:44 PDT 2016" endtime="Mon Jun 27 11:30:44 PDT 2016" />
+            <Test name="testAndroidTestCaseSetupProperly" result="pass" starttime="Mon Jun 27 11:30:44 PDT 2016" endtime="Mon Jun 27 11:30:44 PDT 2016" />
+          </TestCase>
+          <TestCase name="AccessibilitySettingsTest" priority="">
+            <Test name="testAccessibilitySettingsIntentHandled" result="pass" starttime="Mon Jun 27 11:30:44 PDT 2016" endtime="Mon Jun 27 11:30:44 PDT 2016" />
+            <Test name="testAndroidTestCaseSetupProperly" result="pass" starttime="Mon Jun 27 11:30:44 PDT 2016" endtime="Mon Jun 27 11:30:44 PDT 2016" />
+          </TestCase>
+          <TestCase name="AccessibilityTextTraversalTest" priority="">
+            <Test name="testActionNextAndPreviousAtGranularityCharacterOverContentDescription" result="pass" starttime="Mon Jun 27 11:30:44 PDT 2016" endtime="Mon Jun 27 11:30:45 PDT 2016" />
+            <Test name="testActionNextAndPreviousAtGranularityCharacterOverText" result="pass" starttime="Mon Jun 27 11:30:45 PDT 2016" endtime="Mon Jun 27 11:30:47 PDT 2016" />
+            <Test name="testActionNextAndPreviousAtGranularityCharacterOverTextExtend" result="pass" starttime="Mon Jun 27 11:30:47 PDT 2016" endtime="Mon Jun 27 11:30:49 PDT 2016" />
+            <Test name="testActionNextAndPreviousAtGranularityLineOverText" result="pass" starttime="Mon Jun 27 11:30:49 PDT 2016" endtime="Mon Jun 27 11:30:50 PDT 2016" />
+            <Test name="testActionNextAndPreviousAtGranularityLineOverTextExtend" result="pass" starttime="Mon Jun 27 11:30:50 PDT 2016" endtime="Mon Jun 27 11:30:53 PDT 2016" />
+            <Test name="testActionNextAndPreviousAtGranularityParagraphOverText" result="pass" starttime="Mon Jun 27 11:30:53 PDT 2016" endtime="Mon Jun 27 11:30:55 PDT 2016" />
+            <Test name="testActionNextAndPreviousAtGranularityParagraphOverTextExtend" result="pass" starttime="Mon Jun 27 11:30:55 PDT 2016" endtime="Mon Jun 27 11:30:56 PDT 2016" />
+            <Test name="testActionNextAndPreviousAtGranularityWordOverContentDescription" result="pass" starttime="Mon Jun 27 11:30:56 PDT 2016" endtime="Mon Jun 27 11:30:58 PDT 2016" />
+            <Test name="testActionNextAndPreviousAtGranularityWordOverEditTextWithContentDescription" result="pass" starttime="Mon Jun 27 11:30:58 PDT 2016" endtime="Mon Jun 27 11:30:59 PDT 2016" />
+            <Test name="testActionNextAndPreviousAtGranularityWordOverText" result="pass" starttime="Mon Jun 27 11:30:59 PDT 2016" endtime="Mon Jun 27 11:31:00 PDT 2016" />
+            <Test name="testActionNextAndPreviousAtGranularityWordOverTextExtend" result="pass" starttime="Mon Jun 27 11:31:00 PDT 2016" endtime="Mon Jun 27 11:31:02 PDT 2016" />
+            <Test name="testSelectionPositionForNonEditableView" result="pass" starttime="Mon Jun 27 11:31:02 PDT 2016" endtime="Mon Jun 27 11:31:03 PDT 2016" />
+            <Test name="testSetSelectionInContentDescription" result="pass" starttime="Mon Jun 27 11:31:03 PDT 2016" endtime="Mon Jun 27 11:31:05 PDT 2016" />
+            <Test name="testTextEditingActions" result="pass" starttime="Mon Jun 27 11:31:05 PDT 2016" endtime="Mon Jun 27 11:31:06 PDT 2016" />
+          </TestCase>
+          <TestCase name="AccessibilityViewTreeReportingTest" priority="">
+            <Test name="testDescendantsOfNotImportantViewReportedInOrder1" result="pass" starttime="Mon Jun 27 11:31:06 PDT 2016" endtime="Mon Jun 27 11:31:08 PDT 2016" />
+            <Test name="testDescendantsOfNotImportantViewReportedInOrder2" result="pass" starttime="Mon Jun 27 11:31:08 PDT 2016" endtime="Mon Jun 27 11:31:09 PDT 2016" />
+            <Test name="testDescendantsOfNotImportantViewReportedInOrder3" result="pass" starttime="Mon Jun 27 11:31:09 PDT 2016" endtime="Mon Jun 27 11:31:10 PDT 2016" />
+          </TestCase>
+          <TestCase name="AccessibilityWindowQueryTest" priority="">
+            <Test name="testFindByContentDescription" result="pass" starttime="Mon Jun 27 11:31:10 PDT 2016" endtime="Mon Jun 27 11:31:12 PDT 2016" />
+            <Test name="testFindByText" result="pass" starttime="Mon Jun 27 11:31:12 PDT 2016" endtime="Mon Jun 27 11:31:13 PDT 2016" />
+            <Test name="testGetEventSource" result="pass" starttime="Mon Jun 27 11:31:13 PDT 2016" endtime="Mon Jun 27 11:31:14 PDT 2016" />
+            <Test name="testInteractWithAppWindow" result="pass" starttime="Mon Jun 27 11:31:14 PDT 2016" endtime="Mon Jun 27 11:31:16 PDT 2016" />
+            <Test name="testNoWindowsAccessIfFlagNotSet" result="pass" starttime="Mon Jun 27 11:31:16 PDT 2016" endtime="Mon Jun 27 11:31:17 PDT 2016" />
+            <Test name="testObjectContract" result="pass" starttime="Mon Jun 27 11:31:17 PDT 2016" endtime="Mon Jun 27 11:31:18 PDT 2016" />
+            <Test name="testPerformActionClearFocus" result="pass" starttime="Mon Jun 27 11:31:18 PDT 2016" endtime="Mon Jun 27 11:31:19 PDT 2016" />
+            <Test name="testPerformActionClearSelection" result="pass" starttime="Mon Jun 27 11:31:19 PDT 2016" endtime="Mon Jun 27 11:31:21 PDT 2016" />
+            <Test name="testPerformActionClick" result="pass" starttime="Mon Jun 27 11:31:21 PDT 2016" endtime="Mon Jun 27 11:31:22 PDT 2016" />
+            <Test name="testPerformActionFocus" result="pass" starttime="Mon Jun 27 11:31:22 PDT 2016" endtime="Mon Jun 27 11:31:24 PDT 2016" />
+            <Test name="testPerformActionLongClick" result="pass" starttime="Mon Jun 27 11:31:24 PDT 2016" endtime="Mon Jun 27 11:31:25 PDT 2016" />
+            <Test name="testPerformActionSelect" result="pass" starttime="Mon Jun 27 11:31:25 PDT 2016" endtime="Mon Jun 27 11:31:26 PDT 2016" />
+            <Test name="testPerformCustomAction" result="pass" starttime="Mon Jun 27 11:31:26 PDT 2016" endtime="Mon Jun 27 11:31:28 PDT 2016" />
+            <Test name="testPerformGlobalActionBack" result="pass" starttime="Mon Jun 27 11:31:28 PDT 2016" endtime="Mon Jun 27 11:31:29 PDT 2016" />
+            <Test name="testPerformGlobalActionHome" result="pass" starttime="Mon Jun 27 11:31:29 PDT 2016" endtime="Mon Jun 27 11:31:30 PDT 2016" />
+            <Test name="testPerformGlobalActionNotifications" result="pass" starttime="Mon Jun 27 11:31:30 PDT 2016" endtime="Mon Jun 27 11:31:37 PDT 2016" />
+            <Test name="testPerformGlobalActionPowerDialog" result="pass" starttime="Mon Jun 27 11:31:37 PDT 2016" endtime="Mon Jun 27 11:31:38 PDT 2016" />
+            <Test name="testPerformGlobalActionQuickSettings" result="pass" starttime="Mon Jun 27 11:31:38 PDT 2016" endtime="Mon Jun 27 11:31:40 PDT 2016" />
+            <Test name="testPerformGlobalActionRecents" result="pass" starttime="Mon Jun 27 11:31:40 PDT 2016" endtime="Mon Jun 27 11:31:46 PDT 2016" />
+            <Test name="testSingleAccessibilityFocusAcrossWindows" result="pass" starttime="Mon Jun 27 11:31:46 PDT 2016" endtime="Mon Jun 27 11:31:48 PDT 2016" />
+            <Test name="testTraverseAllWindows" result="pass" starttime="Mon Jun 27 11:31:48 PDT 2016" endtime="Mon Jun 27 11:31:50 PDT 2016" />
+            <Test name="testTraverseWindow" result="pass" starttime="Mon Jun 27 11:31:50 PDT 2016" endtime="Mon Jun 27 11:31:51 PDT 2016" />
+            <Test name="testTraverseWindowFromEvent" result="pass" starttime="Mon Jun 27 11:31:51 PDT 2016" endtime="Mon Jun 27 11:31:52 PDT 2016" />
+          </TestCase>
+        </TestSuite>
+      </TestSuite>
+    </TestSuite>
+  </TestPackage>
+  <TestPackage name="CtsAccountManagerTestCases" appPackageName="android.accounts" abi="x86" digest="919d61398f11639341314cf5e536b42a13587732">
+    <TestSuite name="android">
+      <TestSuite name="accounts">
+        <TestSuite name="cts">
+          <TestCase name="AccountManagerTest" priority="">
+            <Test name="testAccountRenameAndGetPreviousName" result="pass" starttime="Mon Jun 27 11:31:56 PDT 2016" endtime="Mon Jun 27 11:31:59 PDT 2016" />
+            <Test name="testAddAccount" result="pass" starttime="Mon Jun 27 11:31:59 PDT 2016" endtime="Mon Jun 27 11:32:01 PDT 2016" />
+            <Test name="testAddAccountExplicitlyAndRemoveAccount" result="pass" starttime="Mon Jun 27 11:32:01 PDT 2016" endtime="Mon Jun 27 11:32:02 PDT 2016" />
+            <Test name="testAddAccountExplicitlyAndRemoveAccountExplicitly" result="pass" starttime="Mon Jun 27 11:32:02 PDT 2016" endtime="Mon Jun 27 11:32:03 PDT 2016" />
+            <Test name="testAddAccountExplicitlyAndRemoveAccountWithDeprecatedApi" result="pass" starttime="Mon Jun 27 11:32:04 PDT 2016" endtime="Mon Jun 27 11:32:05 PDT 2016" />
+            <Test name="testAddAccountExplicitlyAndRemoveAccountWithNewApi" result="pass" starttime="Mon Jun 27 11:32:05 PDT 2016" endtime="Mon Jun 27 11:32:06 PDT 2016" />
+            <Test name="testAddAccountWithCallbackAndHandler" result="pass" starttime="Mon Jun 27 11:32:06 PDT 2016" endtime="Mon Jun 27 11:32:07 PDT 2016" />
+            <Test name="testAddOnAccountsUpdatedListenerWithHandler" result="pass" starttime="Mon Jun 27 11:32:07 PDT 2016" endtime="Mon Jun 27 11:32:08 PDT 2016" />
+            <Test name="testBlockingGetAuthToken_CustomToken_ExpiringCache_Success" result="pass" starttime="Mon Jun 27 11:32:08 PDT 2016" endtime="Mon Jun 27 11:32:10 PDT 2016" />
+            <Test name="testBlockingGetAuthToken_CustomToken_NoCaching_Success" result="pass" starttime="Mon Jun 27 11:32:10 PDT 2016" endtime="Mon Jun 27 11:32:12 PDT 2016" />
+            <Test name="testBlockingGetAuthToken_DefaultToken_Success" result="pass" starttime="Mon Jun 27 11:32:12 PDT 2016" endtime="Mon Jun 27 11:32:13 PDT 2016" />
+            <Test name="testConfirmCredentials" result="pass" starttime="Mon Jun 27 11:32:13 PDT 2016" endtime="Mon Jun 27 11:32:14 PDT 2016" />
+            <Test name="testConfirmCredentialsAccountNotOnDevice" result="pass" starttime="Mon Jun 27 11:32:14 PDT 2016" endtime="Mon Jun 27 11:32:15 PDT 2016" />
+            <Test name="testConfirmCredentialsWithCallbackAndHandler" result="pass" starttime="Mon Jun 27 11:32:15 PDT 2016" endtime="Mon Jun 27 11:32:16 PDT 2016" />
+            <Test name="testDeprecatedGetAuthTokenWithFuture_NoOptions_CustomToken_Success" result="pass" starttime="Mon Jun 27 11:32:16 PDT 2016" endtime="Mon Jun 27 11:32:19 PDT 2016" />
+            <Test name="testDeprecatedGetAuthTokenWithFuture_NoOptions_DefaultToken_Success" result="pass" starttime="Mon Jun 27 11:32:19 PDT 2016" endtime="Mon Jun 27 11:32:20 PDT 2016" />
+            <Test name="testEditProperties" result="pass" starttime="Mon Jun 27 11:32:20 PDT 2016" endtime="Mon Jun 27 11:32:21 PDT 2016" />
+            <Test name="testEditPropertiesWithCallbackAndHandler" result="pass" starttime="Mon Jun 27 11:32:21 PDT 2016" endtime="Mon Jun 27 11:32:22 PDT 2016" />
+            <Test name="testGet" result="pass" starttime="Mon Jun 27 11:32:22 PDT 2016" endtime="Mon Jun 27 11:32:23 PDT 2016" />
+            <Test name="testGetAccountsAndGetAccountsByType" result="pass" starttime="Mon Jun 27 11:32:23 PDT 2016" endtime="Mon Jun 27 11:32:24 PDT 2016" />
+            <Test name="testGetAccountsByTypeAndFeatures" result="pass" starttime="Mon Jun 27 11:32:25 PDT 2016" endtime="Mon Jun 27 11:32:26 PDT 2016" />
+            <Test name="testGetAccountsByTypeAndFeaturesWithCallbackAndHandler" result="pass" starttime="Mon Jun 27 11:32:26 PDT 2016" endtime="Mon Jun 27 11:32:27 PDT 2016" />
+            <Test name="testGetAuthTokenByFeatures" result="pass" starttime="Mon Jun 27 11:32:27 PDT 2016" endtime="Mon Jun 27 11:32:28 PDT 2016" />
+            <Test name="testGetAuthTokenWithCallbackAndHandler" result="pass" starttime="Mon Jun 27 11:32:28 PDT 2016" endtime="Mon Jun 27 11:32:29 PDT 2016" />
+            <Test name="testGetAuthTokenWithCallback_Options_Handler_CustomToken_Success" result="pass" starttime="Mon Jun 27 11:32:30 PDT 2016" endtime="Mon Jun 27 11:32:32 PDT 2016" />
+            <Test name="testGetAuthTokenWithCallback_Options_Handler_DefaultToken_Success" result="pass" starttime="Mon Jun 27 11:32:32 PDT 2016" endtime="Mon Jun 27 11:32:35 PDT 2016" />
+            <Test name="testGetAuthTokenWithFuture_Options_CustomToken_Success" result="pass" starttime="Mon Jun 27 11:32:35 PDT 2016" endtime="Mon Jun 27 11:32:38 PDT 2016" />
+            <Test name="testGetAuthTokenWithFuture_Options_DefaultToken_Success" result="pass" starttime="Mon Jun 27 11:32:38 PDT 2016" endtime="Mon Jun 27 11:32:39 PDT 2016" />
+            <Test name="testGetAuthTokenWithOptionsAndCallback" result="pass" starttime="Mon Jun 27 11:32:39 PDT 2016" endtime="Mon Jun 27 11:32:40 PDT 2016" />
+            <Test name="testGetAuthenticatorTypes" result="pass" starttime="Mon Jun 27 11:32:40 PDT 2016" endtime="Mon Jun 27 11:32:41 PDT 2016" />
+            <Test name="testGetsAreCached" result="pass" starttime="Mon Jun 27 11:32:41 PDT 2016" endtime="Mon Jun 27 11:32:42 PDT 2016" />
+            <Test name="testHasFeature" result="pass" starttime="Mon Jun 27 11:32:42 PDT 2016" endtime="Mon Jun 27 11:32:43 PDT 2016" />
+            <Test name="testLastAuthenticatedTimeAfterAddAccount" result="pass" starttime="Mon Jun 27 11:32:44 PDT 2016" endtime="Mon Jun 27 11:32:44 PDT 2016" />
+            <Test name="testLastAuthenticatedTimeAfterConfirmCredentialsSuccess" result="pass" starttime="Mon Jun 27 11:32:44 PDT 2016" endtime="Mon Jun 27 11:32:46 PDT 2016" />
+            <Test name="testLastAuthenticatedTimeAfterSetPassword" result="pass" starttime="Mon Jun 27 11:32:46 PDT 2016" endtime="Mon Jun 27 11:32:47 PDT 2016" />
+            <Test name="testLastAuthenticatedTimeAfterUpdateCredentialsSuccess" result="pass" starttime="Mon Jun 27 11:32:47 PDT 2016" endtime="Mon Jun 27 11:32:48 PDT 2016" />
+            <Test name="testRemoveOnAccountsUpdatedListener" result="pass" starttime="Mon Jun 27 11:32:49 PDT 2016" endtime="Mon Jun 27 11:32:50 PDT 2016" />
+            <Test name="testSetAndGetAndClearPassword" result="pass" starttime="Mon Jun 27 11:32:50 PDT 2016" endtime="Mon Jun 27 11:32:51 PDT 2016" />
+            <Test name="testSetAndGetUserData" result="pass" starttime="Mon Jun 27 11:32:51 PDT 2016" endtime="Mon Jun 27 11:32:52 PDT 2016" />
+            <Test name="testSetAndPeekAndInvalidateAuthToken" result="pass" starttime="Mon Jun 27 11:32:52 PDT 2016" endtime="Mon Jun 27 11:32:53 PDT 2016" />
+            <Test name="testUpdateCredentials" result="pass" starttime="Mon Jun 27 11:32:53 PDT 2016" endtime="Mon Jun 27 11:32:54 PDT 2016" />
+            <Test name="testUpdateCredentialsWithCallbackAndHandler" result="pass" starttime="Mon Jun 27 11:32:54 PDT 2016" endtime="Mon Jun 27 11:32:55 PDT 2016" />
+          </TestCase>
+          <TestCase name="AccountManagerUnaffiliatedAuthenticatorTests" priority="">
+            <Test name="testAddAccountExplicitly" result="pass" starttime="Mon Jun 27 11:32:55 PDT 2016" endtime="Mon Jun 27 11:32:55 PDT 2016" />
+            <Test name="testClearPassword" result="pass" starttime="Mon Jun 27 11:32:55 PDT 2016" endtime="Mon Jun 27 11:32:55 PDT 2016" />
+            <Test name="testEditProperties" result="pass" starttime="Mon Jun 27 11:32:55 PDT 2016" endtime="Mon Jun 27 11:32:55 PDT 2016" />
+            <Test name="testGetAccounts" result="pass" starttime="Mon Jun 27 11:32:56 PDT 2016" endtime="Mon Jun 27 11:32:56 PDT 2016" />
+            <Test name="testGetAccountsByType" result="pass" starttime="Mon Jun 27 11:32:56 PDT 2016" endtime="Mon Jun 27 11:32:56 PDT 2016" />
+            <Test name="testGetAccountsByTypeAndFeatures" result="pass" starttime="Mon Jun 27 11:32:56 PDT 2016" endtime="Mon Jun 27 11:32:56 PDT 2016" />
+            <Test name="testGetAccountsByTypeForPackage" result="pass" starttime="Mon Jun 27 11:32:56 PDT 2016" endtime="Mon Jun 27 11:32:56 PDT 2016" />
+            <Test name="testGetPassword" result="pass" starttime="Mon Jun 27 11:32:56 PDT 2016" endtime="Mon Jun 27 11:32:56 PDT 2016" />
+            <Test name="testGetUserData" result="pass" starttime="Mon Jun 27 11:32:56 PDT 2016" endtime="Mon Jun 27 11:32:56 PDT 2016" />
+            <Test name="testNotifyAccountAuthenticated" result="pass" starttime="Mon Jun 27 11:32:56 PDT 2016" endtime="Mon Jun 27 11:32:56 PDT 2016" />
+            <Test name="testPeekAuthToken" result="pass" starttime="Mon Jun 27 11:32:56 PDT 2016" endtime="Mon Jun 27 11:32:56 PDT 2016" />
+            <Test name="testRemoveAccountExplicitly" result="pass" starttime="Mon Jun 27 11:32:56 PDT 2016" endtime="Mon Jun 27 11:32:56 PDT 2016" />
+            <Test name="testRemoveAccount_withBooleanResult" result="pass" starttime="Mon Jun 27 11:32:56 PDT 2016" endtime="Mon Jun 27 11:32:56 PDT 2016" />
+            <Test name="testRemoveAccount_withBundleResult" result="pass" starttime="Mon Jun 27 11:32:56 PDT 2016" endtime="Mon Jun 27 11:32:56 PDT 2016" />
+            <Test name="testSetPassword" result="pass" starttime="Mon Jun 27 11:32:56 PDT 2016" endtime="Mon Jun 27 11:32:56 PDT 2016" />
+            <Test name="testSetUserData" result="pass" starttime="Mon Jun 27 11:32:56 PDT 2016" endtime="Mon Jun 27 11:32:56 PDT 2016" />
+            <Test name="testAndroidTestCaseSetupProperly" result="pass" starttime="Mon Jun 27 11:32:56 PDT 2016" endtime="Mon Jun 27 11:32:56 PDT 2016" />
+          </TestCase>
+        </TestSuite>
+      </TestSuite>
+    </TestSuite>
+  </TestPackage>
+  <TestPackage name="CtsAdminTestCases" appPackageName="android.admin" abi="x86" digest="423d89dbe5a29a817ec058c13925a53e401dd69d">
+    <TestSuite name="android">
+      <TestSuite name="admin">
+        <TestSuite name="cts">
+          <TestCase name="DeviceAdminActivationTest" priority="">
+            <Test name="testActivateBrokenReceiver2Fails" result="pass" starttime="Mon Jun 27 11:33:00 PDT 2016" endtime="Mon Jun 27 11:33:03 PDT 2016" />
+            <Test name="testActivateBrokenReceiver3Fails" result="pass" starttime="Mon Jun 27 11:33:03 PDT 2016" endtime="Mon Jun 27 11:33:04 PDT 2016" />
+            <Test name="testActivateBrokenReceiver4Fails" result="pass" starttime="Mon Jun 27 11:33:04 PDT 2016" endtime="Mon Jun 27 11:33:05 PDT 2016" />
+            <Test name="testActivateBrokenReceiver5Fails" result="pass" starttime="Mon Jun 27 11:33:05 PDT 2016" endtime="Mon Jun 27 11:33:07 PDT 2016" />
+            <Test name="testActivateBrokenReceiverFails" result="pass" starttime="Mon Jun 27 11:33:07 PDT 2016" endtime="Mon Jun 27 11:33:08 PDT 2016" />
+            <Test name="testActivateGoodReceiverDisplaysActivationUi" result="pass" starttime="Mon Jun 27 11:33:08 PDT 2016" endtime="Mon Jun 27 11:33:14 PDT 2016" />
+          </TestCase>
+          <TestCase name="DeviceAdminInfoTest" priority="">
+            <Test name="testDeviceAdminInfo" result="pass" starttime="Mon Jun 27 11:33:14 PDT 2016" endtime="Mon Jun 27 11:33:14 PDT 2016" />
+            <Test name="testDeviceAdminInfo2" result="pass" starttime="Mon Jun 27 11:33:14 PDT 2016" endtime="Mon Jun 27 11:33:14 PDT 2016" />
+            <Test name="testAndroidTestCaseSetupProperly" result="pass" starttime="Mon Jun 27 11:33:14 PDT 2016" endtime="Mon Jun 27 11:33:14 PDT 2016" />
+          </TestCase>
+          <TestCase name="DeviceAdminReceiverTest" priority="">
+            <Test name="testOnReceive" result="pass" starttime="Mon Jun 27 11:33:14 PDT 2016" endtime="Mon Jun 27 11:33:14 PDT 2016" />
+            <Test name="testAndroidTestCaseSetupProperly" result="pass" starttime="Mon Jun 27 11:33:14 PDT 2016" endtime="Mon Jun 27 11:33:14 PDT 2016" />
+          </TestCase>
+          <TestCase name="DevicePolicyManagerTest" priority="">
+            <Test name="testAddPersistentPreferredActivity_failIfNotProfileOwner" result="pass" starttime="Mon Jun 27 11:33:14 PDT 2016" endtime="Mon Jun 27 11:33:14 PDT 2016" />
+            <Test name="testAddUserRestriction_failIfNotProfileOwner" result="pass" starttime="Mon Jun 27 11:33:14 PDT 2016" endtime="Mon Jun 27 11:33:14 PDT 2016" />
+            <Test name="testClearDeviceOwnerApp_failIfNotDeviceOwner" result="pass" starttime="Mon Jun 27 11:33:14 PDT 2016" endtime="Mon Jun 27 11:33:14 PDT 2016" />
+            <Test name="testClearPackagePersistentPreferredActivities_failIfNotProfileOwner" result="pass" starttime="Mon Jun 27 11:33:14 PDT 2016" endtime="Mon Jun 27 11:33:14 PDT 2016" />
+            <Test name="testCreateAndInitializeUser_failIfNotDeviceOwner" result="pass" starttime="Mon Jun 27 11:33:14 PDT 2016" endtime="Mon Jun 27 11:33:14 PDT 2016" />
+            <Test name="testCreateUser_failIfNotDeviceOwner" result="pass" starttime="Mon Jun 27 11:33:14 PDT 2016" endtime="Mon Jun 27 11:33:14 PDT 2016" />
+            <Test name="testGetActiveAdmins" result="pass" starttime="Mon Jun 27 11:33:14 PDT 2016" endtime="Mon Jun 27 11:33:14 PDT 2016" />
+            <Test name="testGetDelegatedCertInstaller_failIfNotProfileOwner" result="pass" starttime="Mon Jun 27 11:33:14 PDT 2016" endtime="Mon Jun 27 11:33:14 PDT 2016" />
+            <Test name="testGetInstalledCaCerts_failIfNotCertInstaller" result="pass" starttime="Mon Jun 27 11:33:14 PDT 2016" endtime="Mon Jun 27 11:33:15 PDT 2016" />
+            <Test name="testGetInstalledCaCerts_failIfNotProfileOwner" result="pass" starttime="Mon Jun 27 11:33:15 PDT 2016" endtime="Mon Jun 27 11:33:15 PDT 2016" />
+            <Test name="testGetMaximumFailedPasswordsForWipe" result="pass" starttime="Mon Jun 27 11:33:15 PDT 2016" endtime="Mon Jun 27 11:33:15 PDT 2016" />
+            <Test name="testHasCaCertInstalled_failIfNotCertInstaller" result="pass" starttime="Mon Jun 27 11:33:15 PDT 2016" endtime="Mon Jun 27 11:33:15 PDT 2016" />
+            <Test name="testHasCaCertInstalled_failIfNotProfileOwner" result="pass" starttime="Mon Jun 27 11:33:15 PDT 2016" endtime="Mon Jun 27 11:33:15 PDT 2016" />
+            <Test name="testInstallCaCert_failIfNotCertInstaller" result="pass" starttime="Mon Jun 27 11:33:15 PDT 2016" endtime="Mon Jun 27 11:33:15 PDT 2016" />
+            <Test name="testInstallCaCert_failIfNotProfileOwner" result="pass" starttime="Mon Jun 27 11:33:15 PDT 2016" endtime="Mon Jun 27 11:33:15 PDT 2016" />
+            <Test name="testIsApplicationHidden_failIfNotDeviceOrProfileOwner" result="pass" starttime="Mon Jun 27 11:33:15 PDT 2016" endtime="Mon Jun 27 11:33:15 PDT 2016" />
+            <Test name="testIsMasterVolumeMuted_failIfNotDeviceOrProfileOwner" result="pass" starttime="Mon Jun 27 11:33:15 PDT 2016" endtime="Mon Jun 27 11:33:15 PDT 2016" />
+            <Test name="testKeyguardDisabledFeatures" result="pass" starttime="Mon Jun 27 11:33:15 PDT 2016" endtime="Mon Jun 27 11:33:15 PDT 2016" />
+            <Test name="testLauncherVersionAtLeastL" result="pass" starttime="Mon Jun 27 11:33:15 PDT 2016" endtime="Mon Jun 27 11:33:15 PDT 2016" />
+            <Test name="testManagedProvisioningPreInstalled" result="pass" starttime="Mon Jun 27 11:33:15 PDT 2016" endtime="Mon Jun 27 11:33:15 PDT 2016" />
+            <Test name="testPasswordExpirationTimeout" result="pass" starttime="Mon Jun 27 11:33:15 PDT 2016" endtime="Mon Jun 27 11:33:15 PDT 2016" />
+            <Test name="testPasswordHistoryLength" result="pass" starttime="Mon Jun 27 11:33:15 PDT 2016" endtime="Mon Jun 27 11:33:15 PDT 2016" />
+            <Test name="testPasswordQuality_alphabetic" result="pass" starttime="Mon Jun 27 11:33:15 PDT 2016" endtime="Mon Jun 27 11:33:16 PDT 2016" />
+            <Test name="testPasswordQuality_alphanumeric" result="pass" starttime="Mon Jun 27 11:33:16 PDT 2016" endtime="Mon Jun 27 11:33:16 PDT 2016" />
+            <Test name="testPasswordQuality_complexLetters" result="pass" starttime="Mon Jun 27 11:33:16 PDT 2016" endtime="Mon Jun 27 11:33:17 PDT 2016" />
+            <Test name="testPasswordQuality_complexLowerCase" result="pass" starttime="Mon Jun 27 11:33:17 PDT 2016" endtime="Mon Jun 27 11:33:19 PDT 2016" />
+            <Test name="testPasswordQuality_complexNonLetter" result="pass" starttime="Mon Jun 27 11:33:19 PDT 2016" endtime="Mon Jun 27 11:33:20 PDT 2016" />
+            <Test name="testPasswordQuality_complexNumeric" result="pass" starttime="Mon Jun 27 11:33:20 PDT 2016" endtime="Mon Jun 27 11:33:21 PDT 2016" />
+            <Test name="testPasswordQuality_complexSymbols" result="pass" starttime="Mon Jun 27 11:33:21 PDT 2016" endtime="Mon Jun 27 11:33:22 PDT 2016" />
+            <Test name="testPasswordQuality_complexUpperCase" result="pass" starttime="Mon Jun 27 11:33:22 PDT 2016" endtime="Mon Jun 27 11:33:23 PDT 2016" />
+            <Test name="testPasswordQuality_numeric" result="pass" starttime="Mon Jun 27 11:33:23 PDT 2016" endtime="Mon Jun 27 11:33:24 PDT 2016" />
+            <Test name="testPasswordQuality_something" result="pass" starttime="Mon Jun 27 11:33:24 PDT 2016" endtime="Mon Jun 27 11:33:25 PDT 2016" />
+            <Test name="testRemoveUser_failIfNotDeviceOwner" result="pass" starttime="Mon Jun 27 11:33:25 PDT 2016" endtime="Mon Jun 27 11:33:25 PDT 2016" />
+            <Test name="testSetAccountManagementDisabled_failIfNotProfileOwner" result="pass" starttime="Mon Jun 27 11:33:25 PDT 2016" endtime="Mon Jun 27 11:33:25 PDT 2016" />
+            <Test name="testSetApplicationHidden_failIfNotDeviceOrProfileOwner" result="pass" starttime="Mon Jun 27 11:33:25 PDT 2016" endtime="Mon Jun 27 11:33:25 PDT 2016" />
+            <Test name="testSetApplicationRestrictions_failIfNotProfileOwner" result="pass" starttime="Mon Jun 27 11:33:25 PDT 2016" endtime="Mon Jun 27 11:33:25 PDT 2016" />
+            <Test name="testSetAutoTimeRequired_failIfNotDeviceOwner" result="pass" starttime="Mon Jun 27 11:33:25 PDT 2016" endtime="Mon Jun 27 11:33:25 PDT 2016" />
+            <Test name="testSetBluetoothContactSharingDisabled_failIfNotProfileOwner" result="pass" starttime="Mon Jun 27 11:33:25 PDT 2016" endtime="Mon Jun 27 11:33:25 PDT 2016" />
+            <Test name="testSetDelegatedCertInstaller_failIfNotProfileOwner" result="pass" starttime="Mon Jun 27 11:33:25 PDT 2016" endtime="Mon Jun 27 11:33:25 PDT 2016" />
+            <Test name="testSetGlobalSetting_failIfNotDeviceOwner" result="pass" starttime="Mon Jun 27 11:33:25 PDT 2016" endtime="Mon Jun 27 11:33:25 PDT 2016" />
+            <Test name="testSetLockTaskPackages_failIfNotDeviceOwner" result="pass" starttime="Mon Jun 27 11:33:25 PDT 2016" endtime="Mon Jun 27 11:33:25 PDT 2016" />
+            <Test name="testSetMasterVolumeMuted_failIfNotDeviceOrProfileOwner" result="pass" starttime="Mon Jun 27 11:33:25 PDT 2016" endtime="Mon Jun 27 11:33:25 PDT 2016" />
+            <Test name="testSetPermittedAccessibilityServices_failIfNotProfileOwner" result="pass" starttime="Mon Jun 27 11:33:25 PDT 2016" endtime="Mon Jun 27 11:33:25 PDT 2016" />
+            <Test name="testSetPermittedInputMethods_failIfNotProfileOwner" result="pass" starttime="Mon Jun 27 11:33:25 PDT 2016" endtime="Mon Jun 27 11:33:25 PDT 2016" />
+            <Test name="testSetRecommendedGlobalProxy_failIfNotDeviceOwner" result="pass" starttime="Mon Jun 27 11:33:25 PDT 2016" endtime="Mon Jun 27 11:33:25 PDT 2016" />
+            <Test name="testSetRestrictionsProvider_failIfNotProfileOwner" result="pass" starttime="Mon Jun 27 11:33:25 PDT 2016" endtime="Mon Jun 27 11:33:25 PDT 2016" />
+            <Test name="testSetScreenCaptureDisabled_failIfNotProfileOwner" result="pass" starttime="Mon Jun 27 11:33:25 PDT 2016" endtime="Mon Jun 27 11:33:25 PDT 2016" />
+            <Test name="testSetSecureSetting_failIfNotDeviceOrProfileOwner" result="pass" starttime="Mon Jun 27 11:33:25 PDT 2016" endtime="Mon Jun 27 11:33:25 PDT 2016" />
+            <Test name="testSetSystemUpdatePolicy_failIfNotDeviceOwner" result="pass" starttime="Mon Jun 27 11:33:25 PDT 2016" endtime="Mon Jun 27 11:33:25 PDT 2016" />
+            <Test name="testSetUninstallBlocked_failIfNotProfileOwner" result="pass" starttime="Mon Jun 27 11:33:25 PDT 2016" endtime="Mon Jun 27 11:33:25 PDT 2016" />
+            <Test name="testSwitchUser_failIfNotDeviceOwner" result="pass" starttime="Mon Jun 27 11:33:25 PDT 2016" endtime="Mon Jun 27 11:33:25 PDT 2016" />
+            <Test name="testUninstallAllUserCaCerts_failIfNotCertInstaller" result="pass" starttime="Mon Jun 27 11:33:25 PDT 2016" endtime="Mon Jun 27 11:33:25 PDT 2016" />
+            <Test name="testUninstallCaCert_failIfNotCertInstaller" result="pass" starttime="Mon Jun 27 11:33:25 PDT 2016" endtime="Mon Jun 27 11:33:25 PDT 2016" />
+            <Test name="testUninstallCaCert_failIfNotProfileOwner" result="pass" starttime="Mon Jun 27 11:33:25 PDT 2016" endtime="Mon Jun 27 11:33:25 PDT 2016" />
+            <Test name="testAndroidTestCaseSetupProperly" result="pass" starttime="Mon Jun 27 11:33:25 PDT 2016" endtime="Mon Jun 27 11:33:25 PDT 2016" />
+          </TestCase>
+        </TestSuite>
+      </TestSuite>
+    </TestSuite>
+  </TestPackage>
+  <TestPackage name="CtsDevicePolicyManagerTestCases" appPackageName="android.adminhostside" abi="x86" digest="ce976c8278808f354b7594dc805b9e1436c0ab8b">
+    <TestSuite name="com">
+      <TestSuite name="android">
+        <TestSuite name="cts">
+          <TestSuite name="devicepolicy">
+            <TestCase name="CustomDeviceOwnerTest" priority="">
+              <Test name="testCannotSetDeviceOwnerWhenAccountPresent" result="pass" starttime="Mon Jun 27 15:24:35 PDT 2016" endtime="Mon Jun 27 15:24:40 PDT 2016" />
+              <Test name="testCannotSetDeviceOwnerWhenSecondaryUserPresent" result="pass" starttime="Mon Jun 27 15:24:40 PDT 2016" endtime="Mon Jun 27 15:24:43 PDT 2016" />
+              <Test name="testOwnerChangedBroadcast" result="pass" starttime="Mon Jun 27 15:24:43 PDT 2016" endtime="Mon Jun 27 15:24:59 PDT 2016" />
+              <Test name="testSilentPackageInstall" result="pass" starttime="Mon Jun 27 15:24:59 PDT 2016" endtime="Mon Jun 27 15:25:06 PDT 2016" />
+            </TestCase>
+            <TestCase name="DeviceOwnerTest" priority="">
+              <Test name="testCaCertManagement" result="pass" starttime="Mon Jun 27 15:25:06 PDT 2016" endtime="Mon Jun 27 15:25:11 PDT 2016" />
+              <Test name="testCannotSetDeviceOwnerAgain" result="pass" starttime="Mon Jun 27 15:25:11 PDT 2016" endtime="Mon Jun 27 15:25:17 PDT 2016" />
+              <Test name="testDeviceOwnerSetup" result="pass" starttime="Mon Jun 27 15:25:17 PDT 2016" endtime="Mon Jun 27 15:25:21 PDT 2016" />
+              <Test name="testKeyManagement" result="pass" starttime="Mon Jun 27 15:25:21 PDT 2016" endtime="Mon Jun 27 15:25:28 PDT 2016" />
+              <Test name="testLockTask" result="pass" starttime="Mon Jun 27 15:25:28 PDT 2016" endtime="Mon Jun 27 15:28:06 PDT 2016" />
+              <Test name="testSystemUpdatePolicy" result="pass" starttime="Mon Jun 27 15:28:06 PDT 2016" endtime="Mon Jun 27 15:28:10 PDT 2016" />
+              <Test name="testWifiConfigLockdown" result="pass" starttime="Mon Jun 27 15:28:10 PDT 2016" endtime="Mon Jun 27 15:28:14 PDT 2016" />
+            </TestCase>
+            <TestCase name="LauncherAppsMultiUserTest" priority="">
+              <Test name="testGetActivitiesForNonProfileFails" result="pass" starttime="Mon Jun 27 15:28:14 PDT 2016" endtime="Mon Jun 27 15:28:16 PDT 2016" />
+              <Test name="testNoLauncherCallbackPackageAddedSecondaryUser" result="pass" starttime="Mon Jun 27 15:28:16 PDT 2016" endtime="Mon Jun 27 15:28:18 PDT 2016" />
+            </TestCase>
+            <TestCase name="LauncherAppsProfileTest" priority="">
+              <Test name="testGetActivitiesWithProfile" result="pass" starttime="Mon Jun 27 15:28:18 PDT 2016" endtime="Mon Jun 27 15:28:30 PDT 2016" />
+              <Test name="testLauncherCallbackPackageAddedProfile" result="pass" starttime="Mon Jun 27 15:28:30 PDT 2016" endtime="Mon Jun 27 15:28:43 PDT 2016" />
+              <Test name="testLauncherCallbackPackageChangedProfile" result="pass" starttime="Mon Jun 27 15:28:43 PDT 2016" endtime="Mon Jun 27 15:28:55 PDT 2016" />
+              <Test name="testLauncherCallbackPackageRemovedProfile" result="pass" starttime="Mon Jun 27 15:28:55 PDT 2016" endtime="Mon Jun 27 15:29:07 PDT 2016" />
+            </TestCase>
+            <TestCase name="LauncherAppsSingleUserTest" priority="">
+              <Test name="testInstallAppMainUser" result="pass" starttime="Mon Jun 27 15:29:07 PDT 2016" endtime="Mon Jun 27 15:29:13 PDT 2016" />
+              <Test name="testLaunchMainActivity" result="pass" starttime="Mon Jun 27 15:29:13 PDT 2016" endtime="Mon Jun 27 15:29:19 PDT 2016" />
+              <Test name="testLaunchNonExportActivityFails" result="pass" starttime="Mon Jun 27 15:29:19 PDT 2016" endtime="Mon Jun 27 15:29:26 PDT 2016" />
+              <Test name="testLauncherCallbackPackageAddedMainUser" result="pass" starttime="Mon Jun 27 15:29:26 PDT 2016" endtime="Mon Jun 27 15:29:32 PDT 2016" />
+              <Test name="testLauncherCallbackPackageChangedMainUser" result="pass" starttime="Mon Jun 27 15:29:32 PDT 2016" endtime="Mon Jun 27 15:29:39 PDT 2016" />
+              <Test name="testLauncherCallbackPackageRemovedMainUser" result="pass" starttime="Mon Jun 27 15:29:39 PDT 2016" endtime="Mon Jun 27 15:29:46 PDT 2016" />
+              <Test name="testLauncherNonExportedAppFails" result="pass" starttime="Mon Jun 27 15:29:46 PDT 2016" endtime="Mon Jun 27 15:29:52 PDT 2016" />
+            </TestCase>
+            <TestCase name="ManagedProfileTest" priority="">
+              <Test name="testAppLinks" result="pass" starttime="Mon Jun 27 15:29:52 PDT 2016" endtime="Mon Jun 27 15:30:13 PDT 2016" />
+              <Test name="testBluetooth" result="pass" starttime="Mon Jun 27 15:30:13 PDT 2016" endtime="Mon Jun 27 15:30:21 PDT 2016">
+              </Test>
+              <Test name="testBluetoothContactSharingDisabled" result="pass" starttime="Mon Jun 27 15:30:21 PDT 2016" endtime="Mon Jun 27 15:30:29 PDT 2016" />
+              <Test name="testCameraPolicy" result="pass" starttime="Mon Jun 27 15:30:29 PDT 2016" endtime="Mon Jun 27 15:30:39 PDT 2016">
+              </Test>
+              <Test name="testCannotSetDeviceOwnerWhenProfilePresent" result="pass" starttime="Mon Jun 27 15:30:39 PDT 2016" endtime="Mon Jun 27 15:30:49 PDT 2016" />
+              <Test name="testCannotSetProfileOwnerAgain" result="pass" starttime="Mon Jun 27 15:30:49 PDT 2016" endtime="Mon Jun 27 15:30:56 PDT 2016" />
+              <Test name="testCrossProfileContent" result="pass" starttime="Mon Jun 27 15:30:56 PDT 2016" endtime="Mon Jun 27 15:32:27 PDT 2016" />
+              <Test name="testCrossProfileCopyPaste" result="pass" starttime="Mon Jun 27 15:32:27 PDT 2016" endtime="Mon Jun 27 15:32:58 PDT 2016" />
+              <Test name="testCrossProfileIntentFilters" result="pass" starttime="Mon Jun 27 15:32:58 PDT 2016" endtime="Mon Jun 27 15:33:21 PDT 2016" />
+              <Test name="testCrossProfileWidgets" result="pass" starttime="Mon Jun 27 15:33:21 PDT 2016" endtime="Mon Jun 27 15:34:28 PDT 2016" />
+              <Test name="testManagedContacts" result="pass" starttime="Mon Jun 27 15:34:28 PDT 2016" endtime="Mon Jun 27 15:34:57 PDT 2016" />
+              <Test name="testManagedProfileSetup" result="pass" starttime="Mon Jun 27 15:34:57 PDT 2016" endtime="Mon Jun 27 15:35:06 PDT 2016" />
+              <Test name="testMaxOneManagedProfile" result="pass" starttime="Mon Jun 27 15:35:06 PDT 2016" endtime="Mon Jun 27 15:35:12 PDT 2016" />
+              <Test name="testNfcRestriction" result="pass" starttime="Mon Jun 27 15:35:12 PDT 2016" endtime="Mon Jun 27 15:35:18 PDT 2016" />
+              <Test name="testNoDebuggingFeaturesRestriction" result="pass" starttime="Mon Jun 27 15:35:18 PDT 2016" endtime="Mon Jun 27 15:35:24 PDT 2016" />
+              <Test name="testProfileWifiCleanup" result="pass" starttime="Mon Jun 27 15:35:24 PDT 2016" endtime="Mon Jun 27 15:35:30 PDT 2016" />
+              <Test name="testSettingsIntents" result="pass" starttime="Mon Jun 27 15:35:30 PDT 2016" endtime="Mon Jun 27 15:35:45 PDT 2016" />
+              <Test name="testWipeData" result="pass" starttime="Mon Jun 27 15:35:45 PDT 2016" endtime="Mon Jun 27 15:35:52 PDT 2016" />
+            </TestCase>
+            <TestCase name="MixedDeviceOwnerTest" priority="">
+              <Test name="testAccountManagement" result="pass" starttime="Mon Jun 27 15:35:52 PDT 2016" endtime="Mon Jun 27 15:35:59 PDT 2016" />
+              <Test name="testApplicationHidden" result="pass" starttime="Mon Jun 27 15:35:59 PDT 2016" endtime="Mon Jun 27 15:36:05 PDT 2016" />
+              <Test name="testApplicationRestrictions" result="pass" starttime="Mon Jun 27 15:36:05 PDT 2016" endtime="Mon Jun 27 15:36:12 PDT 2016" />
+              <Test name="testDelegatedCertInstaller" result="pass" starttime="Mon Jun 27 15:36:12 PDT 2016" endtime="Mon Jun 27 15:36:23 PDT 2016" />
+              <Test name="testPackageInstallUserRestrictions" result="pass" starttime="Mon Jun 27 15:36:23 PDT 2016" endtime="Mon Jun 27 15:36:45 PDT 2016" />
+              <Test name="testPermissionAppUpdate" result="pass" starttime="Mon Jun 27 15:36:45 PDT 2016" endtime="Mon Jun 27 15:37:14 PDT 2016" />
+              <Test name="testPermissionGrant" result="pass" starttime="Mon Jun 27 15:37:14 PDT 2016" endtime="Mon Jun 27 15:37:22 PDT 2016" />
+              <Test name="testPermissionGrantPreMApp" result="pass" starttime="Mon Jun 27 15:37:22 PDT 2016" endtime="Mon Jun 27 15:37:28 PDT 2016" />
+              <Test name="testPermissionMixedPolicies" result="pass" starttime="Mon Jun 27 15:37:28 PDT 2016" endtime="Mon Jun 27 15:37:38 PDT 2016" />
+              <Test name="testPermissionPolicy" result="pass" starttime="Mon Jun 27 15:37:38 PDT 2016" endtime="Mon Jun 27 15:37:49 PDT 2016" />
+              <Test name="testPermissionPrompts" result="pass" starttime="Mon Jun 27 15:37:49 PDT 2016" endtime="Mon Jun 27 15:38:00 PDT 2016" />
+              <Test name="testPersistentIntentResolving" result="pass" starttime="Mon Jun 27 15:38:00 PDT 2016" endtime="Mon Jun 27 15:38:21 PDT 2016" />
+              <Test name="testScreenCaptureDisabled" result="pass" starttime="Mon Jun 27 15:38:21 PDT 2016" endtime="Mon Jun 27 15:38:31 PDT 2016" />
+            </TestCase>
+            <TestCase name="MixedProfileOwnerTest" priority="">
+              <Test name="testAccountManagement" result="pass" starttime="Mon Jun 27 15:38:31 PDT 2016" endtime="Mon Jun 27 15:38:39 PDT 2016" />
+              <Test name="testApplicationHidden" result="pass" starttime="Mon Jun 27 15:38:39 PDT 2016" endtime="Mon Jun 27 15:38:48 PDT 2016" />
+              <Test name="testApplicationRestrictions" result="pass" starttime="Mon Jun 27 15:38:48 PDT 2016" endtime="Mon Jun 27 15:38:57 PDT 2016" />
+              <Test name="testDelegatedCertInstaller" result="pass" starttime="Mon Jun 27 15:38:57 PDT 2016" endtime="Mon Jun 27 15:39:10 PDT 2016" />
+              <Test name="testPackageInstallUserRestrictions" result="pass" starttime="Mon Jun 27 15:39:10 PDT 2016" endtime="Mon Jun 27 15:39:34 PDT 2016" />
+              <Test name="testPermissionAppUpdate" result="pass" starttime="Mon Jun 27 15:39:34 PDT 2016" endtime="Mon Jun 27 15:40:06 PDT 2016" />
+              <Test name="testPermissionGrant" result="pass" starttime="Mon Jun 27 15:40:06 PDT 2016" endtime="Mon Jun 27 15:40:16 PDT 2016" />
+              <Test name="testPermissionGrantPreMApp" result="pass" starttime="Mon Jun 27 15:40:16 PDT 2016" endtime="Mon Jun 27 15:40:25 PDT 2016" />
+              <Test name="testPermissionMixedPolicies" result="pass" starttime="Mon Jun 27 15:40:25 PDT 2016" endtime="Mon Jun 27 15:40:38 PDT 2016" />
+              <Test name="testPermissionPolicy" result="pass" starttime="Mon Jun 27 15:40:38 PDT 2016" endtime="Mon Jun 27 15:40:53 PDT 2016" />
+              <Test name="testPermissionPrompts" result="pass" starttime="Mon Jun 27 15:40:53 PDT 2016" endtime="Mon Jun 27 15:41:09 PDT 2016" />
+              <Test name="testPersistentIntentResolving" result="pass" starttime="Mon Jun 27 15:41:09 PDT 2016" endtime="Mon Jun 27 15:41:31 PDT 2016" />
+              <Test name="testScreenCaptureDisabled" result="pass" starttime="Mon Jun 27 15:41:31 PDT 2016" endtime="Mon Jun 27 15:41:43 PDT 2016" />
+              <Test name="testScreenCaptureDisabled_allowedPrimaryUser" result="pass" starttime="Mon Jun 27 15:41:43 PDT 2016" endtime="Mon Jun 27 15:41:52 PDT 2016">
+              </Test>
+            </TestCase>
+          </TestSuite>
+        </TestSuite>
+      </TestSuite>
+    </TestSuite>
+  </TestPackage>
+  <TestPackage name="CtsAnimationTestCases" appPackageName="android.animation" abi="x86" digest="3024c6e3879aad96aba6a67be4c07ce011bda0b9">
+    <TestSuite name="android">
+      <TestSuite name="animation">
+        <TestSuite name="cts">
+          <TestCase name="AnimatorSetTest" priority="">
+            <Test name="testClone" result="pass" starttime="Mon Jun 27 11:33:28 PDT 2016" endtime="Mon Jun 27 11:33:32 PDT 2016" />
+            <Test name="testDuration" result="pass" starttime="Mon Jun 27 11:33:32 PDT 2016" endtime="Mon Jun 27 11:33:33 PDT 2016" />
+            <Test name="testPlaySequentially" result="pass" starttime="Mon Jun 27 11:33:33 PDT 2016" endtime="Mon Jun 27 11:33:34 PDT 2016" />
+            <Test name="testPlayTogether" result="pass" starttime="Mon Jun 27 11:33:34 PDT 2016" endtime="Mon Jun 27 11:33:35 PDT 2016" />
+            <Test name="testSetInterpolator" result="pass" starttime="Mon Jun 27 11:33:35 PDT 2016" endtime="Mon Jun 27 11:33:36 PDT 2016" />
+            <Test name="testStartDelay" result="pass" starttime="Mon Jun 27 11:33:36 PDT 2016" endtime="Mon Jun 27 11:33:37 PDT 2016" />
+            <Test name="testgetChildAnimations" result="pass" starttime="Mon Jun 27 11:33:37 PDT 2016" endtime="Mon Jun 27 11:33:38 PDT 2016" />
+          </TestCase>
+          <TestCase name="AnimatorTest" priority="">
+            <Test name="testCancel" result="pass" starttime="Mon Jun 27 11:33:38 PDT 2016" endtime="Mon Jun 27 11:33:39 PDT 2016" />
+            <Test name="testClone" result="pass" starttime="Mon Jun 27 11:33:39 PDT 2016" endtime="Mon Jun 27 11:33:41 PDT 2016" />
+            <Test name="testConstructor" result="pass" starttime="Mon Jun 27 11:33:41 PDT 2016" endtime="Mon Jun 27 11:33:42 PDT 2016" />
+            <Test name="testEnd" result="pass" starttime="Mon Jun 27 11:33:42 PDT 2016" endtime="Mon Jun 27 11:33:43 PDT 2016" />
+            <Test name="testGetDuration" result="pass" starttime="Mon Jun 27 11:33:43 PDT 2016" endtime="Mon Jun 27 11:33:44 PDT 2016" />
+            <Test name="testIsRunning" result="pass" starttime="Mon Jun 27 11:33:44 PDT 2016" endtime="Mon Jun 27 11:33:45 PDT 2016" />
+            <Test name="testIsStarted" result="pass" starttime="Mon Jun 27 11:33:45 PDT 2016" endtime="Mon Jun 27 11:33:46 PDT 2016" />
+            <Test name="testNullObjectAnimator" result="pass" starttime="Mon Jun 27 11:33:47 PDT 2016" endtime="Mon Jun 27 11:33:48 PDT 2016" />
+            <Test name="testRemoveAllListenerers" result="pass" starttime="Mon Jun 27 11:33:48 PDT 2016" endtime="Mon Jun 27 11:33:49 PDT 2016" />
+            <Test name="testRemoveListener" result="pass" starttime="Mon Jun 27 11:33:49 PDT 2016" endtime="Mon Jun 27 11:33:50 PDT 2016" />
+            <Test name="testSetInterpolator" result="pass" starttime="Mon Jun 27 11:33:51 PDT 2016" endtime="Mon Jun 27 11:33:52 PDT 2016" />
+            <Test name="testSetListener" result="pass" starttime="Mon Jun 27 11:33:52 PDT 2016" endtime="Mon Jun 27 11:33:53 PDT 2016" />
+            <Test name="testStart" result="pass" starttime="Mon Jun 27 11:33:53 PDT 2016" endtime="Mon Jun 27 11:33:54 PDT 2016" />
+            <Test name="testStartDelay" result="pass" starttime="Mon Jun 27 11:33:54 PDT 2016" endtime="Mon Jun 27 11:33:54 PDT 2016" />
+          </TestCase>
+          <TestCase name="ArgbEvaluatorTest" priority="">
+            <Test name="testEvaluate" result="pass" starttime="Mon Jun 27 11:33:55 PDT 2016" endtime="Mon Jun 27 11:33:55 PDT 2016" />
+          </TestCase>
+          <TestCase name="FloatEvaluatorTest" priority="">
+            <Test name="testEvaluate" result="pass" starttime="Mon Jun 27 11:33:55 PDT 2016" endtime="Mon Jun 27 11:33:55 PDT 2016" />
+          </TestCase>
+          <TestCase name="IntEvaluatorTest" priority="">
+            <Test name="testEvaluate" result="pass" starttime="Mon Jun 27 11:33:55 PDT 2016" endtime="Mon Jun 27 11:33:55 PDT 2016" />
+          </TestCase>
+          <TestCase name="KeyframeTest" priority="">
+            <Test name="testClone" result="pass" starttime="Mon Jun 27 11:33:55 PDT 2016" endtime="Mon Jun 27 11:33:55 PDT 2016" />
+            <Test name="testGetFraction" result="pass" starttime="Mon Jun 27 11:33:55 PDT 2016" endtime="Mon Jun 27 11:33:55 PDT 2016" />
+            <Test name="testGetType" result="pass" starttime="Mon Jun 27 11:33:55 PDT 2016" endtime="Mon Jun 27 11:33:55 PDT 2016" />
+            <Test name="testOfFloat" result="pass" starttime="Mon Jun 27 11:33:55 PDT 2016" endtime="Mon Jun 27 11:33:55 PDT 2016" />
+            <Test name="testOfFloatValue" result="pass" starttime="Mon Jun 27 11:33:55 PDT 2016" endtime="Mon Jun 27 11:33:55 PDT 2016" />
+            <Test name="testOfIntValue" result="pass" starttime="Mon Jun 27 11:33:55 PDT 2016" endtime="Mon Jun 27 11:33:55 PDT 2016" />
+            <Test name="testOfObject" result="pass" starttime="Mon Jun 27 11:33:55 PDT 2016" endtime="Mon Jun 27 11:33:55 PDT 2016" />
+            <Test name="testOfObjectValue" result="pass" starttime="Mon Jun 27 11:33:55 PDT 2016" endtime="Mon Jun 27 11:33:55 PDT 2016" />
+            <Test name="testSetFraction" result="pass" starttime="Mon Jun 27 11:33:55 PDT 2016" endtime="Mon Jun 27 11:33:55 PDT 2016" />
+            <Test name="testSetInterpolator" result="pass" starttime="Mon Jun 27 11:33:55 PDT 2016" endtime="Mon Jun 27 11:33:55 PDT 2016" />
+            <Test name="testSetValue" result="pass" starttime="Mon Jun 27 11:33:55 PDT 2016" endtime="Mon Jun 27 11:33:55 PDT 2016" />
+          </TestCase>
+          <TestCase name="LayoutAnimationTest" priority="">
+            <Test name="testAddTransitionListener" result="pass" starttime="Mon Jun 27 11:33:55 PDT 2016" endtime="Mon Jun 27 11:33:56 PDT 2016" />
+            <Test name="testAnimationWithAnimator" result="pass" starttime="Mon Jun 27 11:33:56 PDT 2016" endtime="Mon Jun 27 11:33:59 PDT 2016" />
+            <Test name="testIsChangingLayout" result="pass" starttime="Mon Jun 27 11:33:59 PDT 2016" endtime="Mon Jun 27 11:34:01 PDT 2016" />
+            <Test name="testIsRunning" result="pass" starttime="Mon Jun 27 11:34:01 PDT 2016" endtime="Mon Jun 27 11:34:03 PDT 2016" />
+            <Test name="testSetAnimator" result="pass" starttime="Mon Jun 27 11:34:03 PDT 2016" endtime="Mon Jun 27 11:34:04 PDT 2016" />
+            <Test name="testSetDuration" result="pass" starttime="Mon Jun 27 11:34:04 PDT 2016" endtime="Mon Jun 27 11:34:05 PDT 2016" />
+            <Test name="testSetDurationForTransitionType" result="pass" starttime="Mon Jun 27 11:34:05 PDT 2016" endtime="Mon Jun 27 11:34:06 PDT 2016" />
+            <Test name="testSetInterpolator" result="pass" starttime="Mon Jun 27 11:34:07 PDT 2016" endtime="Mon Jun 27 11:34:07 PDT 2016" />
+            <Test name="testSetStagger" result="pass" starttime="Mon Jun 27 11:34:07 PDT 2016" endtime="Mon Jun 27 11:34:08 PDT 2016" />
+            <Test name="testStartDelay" result="pass" starttime="Mon Jun 27 11:34:09 PDT 2016" endtime="Mon Jun 27 11:34:09 PDT 2016" />
+          </TestCase>
+          <TestCase name="ObjectAnimatorTest" priority="">
+            <Test name="testClone" result="pass" starttime="Mon Jun 27 11:34:09 PDT 2016" endtime="Mon Jun 27 11:34:10 PDT 2016" />
+            <Test name="testDuration" result="pass" starttime="Mon Jun 27 11:34:10 PDT 2016" endtime="Mon Jun 27 11:34:12 PDT 2016" />
+            <Test name="testGetPropertyName" result="pass" starttime="Mon Jun 27 11:34:12 PDT 2016" endtime="Mon Jun 27 11:34:12 PDT 2016" />
+            <Test name="testGetTarget" result="pass" starttime="Mon Jun 27 11:34:12 PDT 2016" endtime="Mon Jun 27 11:34:13 PDT 2016" />
+            <Test name="testIsStarted" result="pass" starttime="Mon Jun 27 11:34:13 PDT 2016" endtime="Mon Jun 27 11:34:15 PDT 2016" />
+            <Test name="testOfFloat" result="pass" starttime="Mon Jun 27 11:34:15 PDT 2016" endtime="Mon Jun 27 11:34:16 PDT 2016" />
+            <Test name="testOfFloatBase" result="pass" starttime="Mon Jun 27 11:34:16 PDT 2016" endtime="Mon Jun 27 11:34:17 PDT 2016" />
+            <Test name="testOfInt" result="pass" starttime="Mon Jun 27 11:34:17 PDT 2016" endtime="Mon Jun 27 11:34:18 PDT 2016" />
+            <Test name="testOfObject" result="pass" starttime="Mon Jun 27 11:34:18 PDT 2016" endtime="Mon Jun 27 11:34:19 PDT 2016" />
+            <Test name="testOfPropertyValuesHolder" result="pass" starttime="Mon Jun 27 11:34:19 PDT 2016" endtime="Mon Jun 27 11:34:20 PDT 2016" />
+            <Test name="testSetFloatValues" result="pass" starttime="Mon Jun 27 11:34:20 PDT 2016" endtime="Mon Jun 27 11:34:21 PDT 2016" />
+          </TestCase>
+          <TestCase name="PropertyValuesHolderTest" priority="">
+            <Test name="testClone" result="pass" starttime="Mon Jun 27 11:34:21 PDT 2016" endtime="Mon Jun 27 11:34:22 PDT 2016" />
+            <Test name="testGetPropertyName" result="pass" starttime="Mon Jun 27 11:34:23 PDT 2016" endtime="Mon Jun 27 11:34:24 PDT 2016" />
+            <Test name="testOfFloat_Property" result="pass" starttime="Mon Jun 27 11:34:24 PDT 2016" endtime="Mon Jun 27 11:34:26 PDT 2016" />
+            <Test name="testOfInt" result="pass" starttime="Mon Jun 27 11:34:26 PDT 2016" endtime="Mon Jun 27 11:34:28 PDT 2016" />
+            <Test name="testOfInt_Property" result="pass" starttime="Mon Jun 27 11:34:28 PDT 2016" endtime="Mon Jun 27 11:34:29 PDT 2016" />
+            <Test name="testOffloat" result="pass" starttime="Mon Jun 27 11:34:29 PDT 2016" endtime="Mon Jun 27 11:34:33 PDT 2016" />
+            <Test name="testResetValues" result="pass" starttime="Mon Jun 27 11:34:33 PDT 2016" endtime="Mon Jun 27 11:34:43 PDT 2016" />
+            <Test name="testSetProperty" result="pass" starttime="Mon Jun 27 11:34:43 PDT 2016" endtime="Mon Jun 27 11:34:45 PDT 2016" />
+            <Test name="testSetPropertyName" result="pass" starttime="Mon Jun 27 11:34:45 PDT 2016" endtime="Mon Jun 27 11:34:46 PDT 2016" />
+            <Test name="testSetValues" result="pass" starttime="Mon Jun 27 11:34:46 PDT 2016" endtime="Mon Jun 27 11:34:48 PDT 2016" />
+          </TestCase>
+          <TestCase name="ValueAnimatorTest" priority="">
+            <Test name="testCancel" result="pass" starttime="Mon Jun 27 11:34:48 PDT 2016" endtime="Mon Jun 27 11:34:49 PDT 2016" />
+            <Test name="testCurrentPlayTime" result="pass" starttime="Mon Jun 27 11:34:49 PDT 2016" endtime="Mon Jun 27 11:34:50 PDT 2016" />
+            <Test name="testDuration" result="pass" starttime="Mon Jun 27 11:34:50 PDT 2016" endtime="Mon Jun 27 11:34:51 PDT 2016" />
+            <Test name="testEnd" result="pass" starttime="Mon Jun 27 11:34:52 PDT 2016" endtime="Mon Jun 27 11:34:52 PDT 2016" />
+            <Test name="testGetAnimatedFraction" result="pass" starttime="Mon Jun 27 11:34:52 PDT 2016" endtime="Mon Jun 27 11:34:55 PDT 2016" />
+            <Test name="testGetAnimatedValue" result="pass" starttime="Mon Jun 27 11:34:55 PDT 2016" endtime="Mon Jun 27 11:34:58 PDT 2016" />
+            <Test name="testGetAnimatedValue_PropertyName" result="pass" starttime="Mon Jun 27 11:34:58 PDT 2016" endtime="Mon Jun 27 11:35:01 PDT 2016" />
+            <Test name="testGetFrameDelay" result="pass" starttime="Mon Jun 27 11:35:01 PDT 2016" endtime="Mon Jun 27 11:35:03 PDT 2016" />
+            <Test name="testIsRunning" result="pass" starttime="Mon Jun 27 11:35:03 PDT 2016" endtime="Mon Jun 27 11:35:04 PDT 2016" />
+            <Test name="testIsStarted" result="pass" starttime="Mon Jun 27 11:35:04 PDT 2016" endtime="Mon Jun 27 11:35:05 PDT 2016" />
+            <Test name="testOfFloat" result="pass" starttime="Mon Jun 27 11:35:06 PDT 2016" endtime="Mon Jun 27 11:35:06 PDT 2016" />
+            <Test name="testOfInt" result="pass" starttime="Mon Jun 27 11:35:07 PDT 2016" endtime="Mon Jun 27 11:35:07 PDT 2016" />
+            <Test name="testRepeatCount" result="pass" starttime="Mon Jun 27 11:35:08 PDT 2016" endtime="Mon Jun 27 11:35:09 PDT 2016" />
+            <Test name="testRepeatMode" result="pass" starttime="Mon Jun 27 11:35:09 PDT 2016" endtime="Mon Jun 27 11:35:10 PDT 2016" />
+            <Test name="testSetInterpolator" result="pass" starttime="Mon Jun 27 11:35:10 PDT 2016" endtime="Mon Jun 27 11:35:11 PDT 2016" />
+            <Test name="testStartDelay" result="pass" starttime="Mon Jun 27 11:35:11 PDT 2016" endtime="Mon Jun 27 11:35:12 PDT 2016" />
+          </TestCase>
+        </TestSuite>
+      </TestSuite>
+    </TestSuite>
+  </TestPackage>
+  <TestPackage name="CtsUsageStatsTestCases" appPackageName="android.app.usage" abi="x86" digest="e856b0b10eef3b4ac7690c7a64b7bb9c17386816">
+    <TestSuite name="android">
+      <TestSuite name="app">
+        <TestSuite name="usage">
+          <TestSuite name="cts">
+            <TestCase name="ActivityTransitionTest" priority="">
+              <Test name="testOnSharedElementsArrived" result="pass" starttime="Mon Jun 27 11:35:16 PDT 2016" endtime="Mon Jun 27 11:35:20 PDT 2016" />
+            </TestCase>
+            <TestCase name="NetworkUsageStatsTest" priority="">
+              <Test name="testAppDetails" result="pass" starttime="Mon Jun 27 11:35:20 PDT 2016" endtime="Mon Jun 27 11:35:23 PDT 2016" />
+              <Test name="testAppSummary" result="pass" starttime="Mon Jun 27 11:35:23 PDT 2016" endtime="Mon Jun 27 11:35:25 PDT 2016" />
+              <Test name="testDeviceSummary" result="pass" starttime="Mon Jun 27 11:35:25 PDT 2016" endtime="Mon Jun 27 11:35:27 PDT 2016" />
+              <Test name="testUidDetails" result="pass" starttime="Mon Jun 27 11:35:27 PDT 2016" endtime="Mon Jun 27 11:35:29 PDT 2016" />
+              <Test name="testUserSummary" result="pass" starttime="Mon Jun 27 11:35:29 PDT 2016" endtime="Mon Jun 27 11:35:31 PDT 2016" />
+            </TestCase>
+          </TestSuite>
+        </TestSuite>
+      </TestSuite>
+    </TestSuite>
+  </TestPackage>
+</TestResult>

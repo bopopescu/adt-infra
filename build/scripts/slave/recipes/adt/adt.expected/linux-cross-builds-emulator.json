@@ -1,0 +1,140 @@
+[
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[BUILD]/../emu_test/utils/emu_bot_init.py",
+      "--build-dir",
+      "[SLAVE_BUILD]",
+      "--props",
+      "{\"TESTING\": true, \"aosp\": \"4696395\", \"aosp_file\": \"gs://android-build-emu-sysimage/builds/aosp-master-linux-sdk_x86_64-sdk/4686993/b056c89ab4797b9b869396ed45a83fb658244dce1c4df5f0b558341e999e1dc8/sdk-repo-linux-system-images-4686993.zip,gs://android-build-emu-sysimage/builds/aosp-master-linux-sdk_x86-sdk/4686993/5c360765bdd9949f14cd395d9e2eb4f71bc52a7b16c1ce4ed1fb8ef2d1a39002/sdk-repo-linux-system-images-4686993.zip\", \"blamelist\": [\"emulator_linux_poller\"], \"branch\": \"Ubuntu\", \"buildbotURL\": \"http://chromeos1-row3-rack2-host1.cros.corp.google.com:8200/\", \"buildername\": \"Ubuntu cross-builds\", \"buildnumber\": \"1090\", \"emu-master-dev\": \"4696395\", \"file_list\": \"gs://android-build-emu/builds/aosp-emu-master-dev-linux-sdk_tools_linux/4696395/7e4b04c674e12fb492b0834b0b6b1f769629d234103b3703c3e74aa17ffe8e19/sdk-repo-linux-emulator-4696395.zip,\", \"got_revision\": \"4696395\", \"logs_dir\": \"/home/user/buildbot/external/adt-infra/build/masters/master.client.adt/slave_logs/\", \"mastername\": \"client.adt\", \"mnc-emu-dev_file\": \"gs://android-build-emu-sysimage/builds/git_mnc-emu-dev-linux-sdk_google_phone_x86_64-sdk_addon/4666753/56c19893abc142ca533e77022e5828c13da3bb0d62faf5bbad5c2a9b0a3ac680/sdk-repo-linux-system-images-4666753.zip,gs://android-build-emu-sysimage/builds/git_mnc-emu-dev-linux-sdk_google_phone_x86-sdk_addon/4666753/78c88231a3e01959fa0097cc0a972eb1c48768357f91b65010d0c2e0f69a8a62/sdk-repo-linux-system-images-4666753.zip\", \"parent_buildername\": \"Ubuntu 14.04 HD 4400_sysimg-aosp\", \"parent_buildnumber\": \"516\", \"prev_build\": \"4696278\", \"project\": \"emu-master-dev\", \"recipe\": \"adt/adt\", \"repository\": \"\", \"requestedAt\": 1522746361, \"revision\": \"4696395\", \"slavename\": \"chromeos1-row3-rack3-host1\", \"triggered\": true, \"workdir\": \"/home/adt_build/Buildbot/adt-infra/build/slave/cross-builds\"}",
+      "--log-dir",
+      "logs-build_1090-rev_4696395"
+    ],
+    "cwd": "[SLAVE_BUILD]",
+    "env": {
+      "ANDROID_HOME": "/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds",
+      "ANDROID_SDK_ROOT": "/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds",
+      "PATH": "%(PATH)s:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/tools:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/tools/bin:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/platform-tools:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/build-tools/23.0.2:/usr/local/google/home/cpilch/bin/jdk1.8.0_121/bin"
+    },
+    "name": "Initialize Bot"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[BUILD]/../emu_test/utils/create_cl_list.py",
+      "--poller",
+      "('emulator_linux_poller',)",
+      "--prevRevision",
+      "4696278",
+      "--curRevision",
+      "4696395"
+    ],
+    "cwd": "[SLAVE_BUILD]",
+    "env": {
+      "ANDROID_HOME": "/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds",
+      "ANDROID_SDK_ROOT": "/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds",
+      "PATH": "%(PATH)s:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/tools:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/tools/bin:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/platform-tools:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/build-tools/23.0.2:/usr/local/google/home/cpilch/bin/jdk1.8.0_121/bin"
+    },
+    "name": "Create CL List"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[BUILD]/../emu_test/utils/download_unzip_image.py",
+      "--file",
+      "gs://android-build-emu/builds/aosp-emu-master-dev-linux-sdk_tools_linux/4696395/7e4b04c674e12fb492b0834b0b6b1f769629d234103b3703c3e74aa17ffe8e19/sdk-repo-linux-emulator-4696395.zip,",
+      "--build-dir",
+      "[BUILD]"
+    ],
+    "cwd": "[SLAVE_BUILD]",
+    "env": {
+      "ANDROID_HOME": "/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds",
+      "ANDROID_SDK_ROOT": "/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds",
+      "PATH": "%(PATH)s:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/tools:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/tools/bin:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/platform-tools:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/build-tools/23.0.2:/usr/local/google/home/cpilch/bin/jdk1.8.0_121/bin"
+    },
+    "name": "Download and Unzip Images"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[BUILD]/../emu_test/utils/download_unzip_image.py",
+      "--file",
+      "gs://android-build-emu-sysimage/builds/aosp-master-linux-sdk_x86_64-sdk/4686993/b056c89ab4797b9b869396ed45a83fb658244dce1c4df5f0b558341e999e1dc8/sdk-repo-linux-system-images-4686993.zip,gs://android-build-emu-sysimage/builds/aosp-master-linux-sdk_x86-sdk/4686993/5c360765bdd9949f14cd395d9e2eb4f71bc52a7b16c1ce4ed1fb8ef2d1a39002/sdk-repo-linux-system-images-4686993.zip",
+      "--build-dir",
+      "[BUILD]"
+    ],
+    "cwd": "[SLAVE_BUILD]",
+    "env": {
+      "ANDROID_HOME": "/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds",
+      "ANDROID_SDK_ROOT": "/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds",
+      "PATH": "%(PATH)s:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/tools:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/tools/bin:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/platform-tools:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/build-tools/23.0.2:/usr/local/google/home/cpilch/bin/jdk1.8.0_121/bin"
+    },
+    "name": "Download Image - aosp"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[BUILD]/../emu_test/dotest.py",
+      "--loglevel",
+      "INFO",
+      "--emulator",
+      "emu-master-dev/emulator/emulator",
+      "--session_dir",
+      "logs-build_1090-rev_4696395",
+      "--test_dir",
+      "boot_test_aosp_sysimage-emu-master-dev",
+      "--file_pattern",
+      "test_boot.*",
+      "--config_file",
+      "[BUILD]/../emu_test/config/boot_cfg.csv",
+      "--buildername",
+      "Ubuntu cross-builds",
+      "--filter",
+      "{\"ori\": \"aosp\"}"
+    ],
+    "cwd": "[SLAVE_BUILD]",
+    "env": {
+      "ANDROID_HOME": "/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds",
+      "ANDROID_SDK_ROOT": "/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds",
+      "PATH": "%(PATH)s:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/tools:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/tools/bin:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/platform-tools:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/build-tools/23.0.2:/usr/local/google/home/cpilch/bin/jdk1.8.0_121/bin"
+    },
+    "name": "Boot Test - aosp System Image - emu-master-dev",
+    "stderr": "4047d3d7f32f4d62bb69468d614851fa"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[BUILD]/../emu_test/utils/zip_upload_logs.py",
+      "--dir",
+      "logs-build_1090-rev_4696395",
+      "--name",
+      "build_1090-rev_4696395.zip",
+      "--ip",
+      "172.27.213.40",
+      "--user",
+      "user",
+      "--dst",
+      "/home/user/buildbot/external/adt-infra/build/masters/master.client.adt/slave_logs/Ubuntu cross-builds/",
+      "--build-dir",
+      "[BUILD]"
+    ],
+    "cwd": "[SLAVE_BUILD]",
+    "env": {
+      "ANDROID_HOME": "/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds",
+      "ANDROID_SDK_ROOT": "/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds",
+      "PATH": "%(PATH)s:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/tools:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/tools/bin:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/platform-tools:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/build-tools/23.0.2:/usr/local/google/home/cpilch/bin/jdk1.8.0_121/bin"
+    },
+    "name": "Zip and Upload Logs"
+  },
+  {
+    "name": "$result",
+    "recipe_result": null,
+    "status_code": 0
+  }
+]

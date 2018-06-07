@@ -1,0 +1,107 @@
+[
+    {
+        "name": "uuid",
+        "type": "STRING",
+        "mode": "REQUIRED"
+    },
+    {
+        "name": "runStartTime",
+        "type": "TIMESTAMP",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "runEndTime",
+        "type": "TIMESTAMP",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "buildbotSlaveName",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "buildbotRunId",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "systemImageBranch",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "systemImageBuildId",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "systemImageApi",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "systemImageTag",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "systemImageAbi",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "avdDevice",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "avdRam",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "avdGpu",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "emulatorBranch",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "emulatorRevision",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "emulatorQemu",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "ctsBranch",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "ctsBuild",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "numTestsNotExecuted",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "numTestsPassed",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "numTestsFailed",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    }
+]

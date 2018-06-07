@@ -1,0 +1,122 @@
+[
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[BUILD]/../emu_test/utils/emu_bot_init.py",
+      "--build-dir",
+      "[SLAVE_BUILD]",
+      "--props",
+      "{\"TESTING\": true, \"blamelist\": [\"sys_image_oc_dev_poller\"], \"branch\": \"Ubuntu\", \"buildbotURL\": \"http://chromeos1-row3-rack2-host1.cros.corp.google.com:8200/\", \"buildername\": \"Ubuntu sysimg-oc\", \"buildnumber\": \"1090\", \"file_list\": \"gs://android-build-emu-sysimage/builds/git_oc-emu-dev-linux-sdk_gphone_x86-sdk_addon/4695513/c79ac27430405771fe8249079eb3be15e8944f27ad07f68aea3b2974e29be7c0/sdk-repo-linux-system-images-4695513.zip,gs://android-build-emu-sysimage/builds/git_oc-emu-dev-linux-sdk_google_atv_x86-sdk/4695513/31a293ea4bb784ec7e768811687523475bfd9107695d52068f86a665b78e8ace/sdk-repo-linux-system-images-4695513.zip,\", \"got_revision\": \"4696395\", \"logs_dir\": \"/home/user/buildbot/external/adt-infra/build/masters/master.client.adt/slave_logs/\", \"mastername\": \"client.adt\", \"oc-emu-dev\": \"4695513\", \"prev_build\": \"4696278\", \"project\": \"oc-emu-dev\", \"recipe\": \"adt/adt\", \"repository\": \"\", \"requestedAt\": 1522746361, \"revision\": \"4695513\", \"scheduler\": \"sysimg-oc\", \"slavename\": \"chromeos1-row3-rack3-host1\", \"workdir\": \"/home/adt_build/Buildbot/adt-infra/build/slave/sysimg-oc\"}",
+      "--log-dir",
+      "logs-build_1090-rev_4695513"
+    ],
+    "cwd": "[SLAVE_BUILD]",
+    "env": {
+      "ANDROID_HOME": "/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds",
+      "ANDROID_SDK_ROOT": "/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds",
+      "PATH": "%(PATH)s:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/tools:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/tools/bin:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/platform-tools:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/build-tools/23.0.2:/usr/local/google/home/cpilch/bin/jdk1.8.0_121/bin"
+    },
+    "name": "Initialize Bot"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[BUILD]/../emu_test/utils/create_cl_list.py",
+      "--poller",
+      "('sys_image_oc_dev_poller',)",
+      "--prevRevision",
+      "4696278",
+      "--curRevision",
+      "4695513"
+    ],
+    "cwd": "[SLAVE_BUILD]",
+    "env": {
+      "ANDROID_HOME": "/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds",
+      "ANDROID_SDK_ROOT": "/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds",
+      "PATH": "%(PATH)s:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/tools:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/tools/bin:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/platform-tools:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/build-tools/23.0.2:/usr/local/google/home/cpilch/bin/jdk1.8.0_121/bin"
+    },
+    "name": "Create CL List"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[BUILD]/../emu_test/utils/download_unzip_image.py",
+      "--file",
+      "gs://android-build-emu-sysimage/builds/git_oc-emu-dev-linux-sdk_gphone_x86-sdk_addon/4695513/c79ac27430405771fe8249079eb3be15e8944f27ad07f68aea3b2974e29be7c0/sdk-repo-linux-system-images-4695513.zip,gs://android-build-emu-sysimage/builds/git_oc-emu-dev-linux-sdk_google_atv_x86-sdk/4695513/31a293ea4bb784ec7e768811687523475bfd9107695d52068f86a665b78e8ace/sdk-repo-linux-system-images-4695513.zip,",
+      "--build-dir",
+      "[BUILD]"
+    ],
+    "cwd": "[SLAVE_BUILD]",
+    "env": {
+      "ANDROID_HOME": "/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds",
+      "ANDROID_SDK_ROOT": "/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds",
+      "PATH": "%(PATH)s:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/tools:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/tools/bin:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/platform-tools:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/build-tools/23.0.2:/usr/local/google/home/cpilch/bin/jdk1.8.0_121/bin"
+    },
+    "name": "Download and Unzip Images"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[BUILD]/../emu_test/dotest.py",
+      "--loglevel",
+      "INFO",
+      "--emulator",
+      "/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/emulator/emulator",
+      "--session_dir",
+      "logs-build_1090-rev_4695513",
+      "--test_dir",
+      "boot_test_OC_sysimage-sdk emulator",
+      "--file_pattern",
+      "test_boot.*",
+      "--config_file",
+      "[BUILD]/../emu_test/config/boot_cfg.csv",
+      "--buildername",
+      "Ubuntu sysimg-oc",
+      "--filter",
+      "{\"ori\": \"oc\"}"
+    ],
+    "cwd": "[SLAVE_BUILD]",
+    "env": {
+      "ANDROID_HOME": "/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds",
+      "ANDROID_SDK_ROOT": "/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds",
+      "PATH": "%(PATH)s:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/tools:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/tools/bin:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/platform-tools:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/build-tools/23.0.2:/usr/local/google/home/cpilch/bin/jdk1.8.0_121/bin"
+    },
+    "name": "Boot Test - OC System Image - sdk emulator",
+    "stderr": "3877eebb5d4e472bb9583d1eb0a4e59c"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[BUILD]/../emu_test/utils/zip_upload_logs.py",
+      "--dir",
+      "logs-build_1090-rev_4695513",
+      "--name",
+      "build_1090-rev_4695513.zip",
+      "--ip",
+      "172.27.213.40",
+      "--user",
+      "user",
+      "--dst",
+      "/home/user/buildbot/external/adt-infra/build/masters/master.client.adt/slave_logs/Ubuntu sysimg-oc/",
+      "--build-dir",
+      "[BUILD]"
+    ],
+    "cwd": "[SLAVE_BUILD]",
+    "env": {
+      "ANDROID_HOME": "/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds",
+      "ANDROID_SDK_ROOT": "/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds",
+      "PATH": "%(PATH)s:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/tools:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/tools/bin:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/platform-tools:/usr/local/google/home/cpilch/Android/android-sdk-linux_image-builds/build-tools/23.0.2:/usr/local/google/home/cpilch/bin/jdk1.8.0_121/bin"
+    },
+    "name": "Zip and Upload Logs"
+  },
+  {
+    "name": "$result",
+    "recipe_result": null,
+    "status_code": 0
+  }
+]

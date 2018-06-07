@@ -1,0 +1,6 @@
+type 'EV_SW' accepts the following <code> aliases:
+    SW_LID
+    SW_TABLET_MODE
+    SW_HEADPHONE_INSERT
+    SW_MICROPHONE_INSER
+OK

@@ -1,0 +1,7 @@
+Device Config,,,,,,,Linux
+API*,TAG*,ABI*,DEVICE,RAM,GPU,ORI,Ubuntu 12.04 HD Graphics 4000,Win 10 64-bit Quadro 600,Mac 10.11.1 Iris Pro
+API P,google_apis,x86,Pixel 2,2048,yes,public,P,P,P
+API 27,google_apis,x86,Nexus 5,2048,yes,public,P,P,P
+API 25,google_apis,x86,Nexus 5,2048,yes,public,P,P,P
+API 24,google_apis,x86,Nexus 5,2048,yes,public,P,P,P
+API 23,google_apis,x86,Nexus 5,2048,yes,public,P,P,P

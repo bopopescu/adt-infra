@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+  <link rel="stylesheet" type="text/css" href="styles.css"/>
+  <title>emulator dashboard</title>
+  <script type='text/javascript'
+     src='https://www.google.com/jsapi'></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script type='text/javascript'>
+     google.load('visualization', '1', {'packages':
+       ['corechart', 'table']});
+     google.setOnLoadCallback(init);
+     var colorSet = ["Green", "Red", "Blue", "Salmon", "DarkOliveGreen", "MediumOrchid", "SkyBlue", "DarkOrange", "Aquamarine", "Crimson", "SpringGreen", "RoyalBlue", "DeepPink"]; 
+
+     function drawGraph(desc, data, sum_values, host_count, hAxis_desc, write_log) {
+       var data_table = new google.visualization.DataTable(data);
+
+       var log_area = document.getElementById("log_area");
+       for (var i = data_table.getNumberOfColumns()-1; i>=0; i--)
+       {
+           var range = data_table.getColumnRange(i);
+           if(range.min == null && range.max == null)
+           {
+              if(write_log)
+              {
+                if(i != 0)
+                  log_area.value += "No matching record for " + data_table.getColumnLabel(i) + "\n";
+                log_area.rows ++;
+              }
+              data_table.removeColumn(i);
+           }
+       }
+
+       var col_count = Math.max(data_table.getNumberOfColumns()-1, 0);
+       var row_count = data_table.getNumberOfRows();
+       document.getElementById('msg_result').innerHTML = row_count + " Build(s) Returned!"
+       if(col_count == 0 || row_count == 0)
+           return;
+       var col_per_host = col_count/host_count;
+
+       var lineDict = {};
+       for (var i = 1; i < col_per_host; i++)
+       {
+         for (var j = 0; j < host_count; j++)
+           lineDict[j*col_per_host+i] = {lineDashStyle: [i*2, 2]};
+       }
+       var lineColor = [];
+       for (var i = 0; i < col_count; i++)
+       {
+         lineColor.push(colorSet[Math.floor(i/col_per_host)]);
+       }
+
+       var options = {
+                      width: 1500,
+                      height: 900,
+                      title: desc,
+                      interpolateNulls: true,
+                      series: lineDict,
+                      colors: lineColor,
+                      hAxis: {title: 'Build'},
+                      vAxis: {title: hAxis_desc},
+       };
+       var chart_table = document.getElementById("chart_table");
+       var row = chart_table.insertRow();
+       var cell_data = row.insertCell(0);
+       var cell_sum = row.insertCell(1);
+
+       var line_chart = new google.visualization.LineChart(cell_data);
+       line_chart.draw(data_table, options);
+     }
+     function createCheckboxGroup(ele_arr, group_desc, parent_id, box_type, selected_vars) {
+       var fieldset = document.createElement('fieldset');
+       var legend = document.createElement ('legend');
+       legend.innerHTML = group_desc;
+       fieldset.appendChild (legend);
+
+       function toggle(source) {
+         checkboxes = document.getElementsByName(group_desc);
+         for(var i=0, n=checkboxes.length;i<n;i++) {
+           checkboxes[i].checked = source.checked;
+         }
+       }
+
+       function create_checkbox(display_name, group_name) {
+         var checkbox = document.createElement('input');
+         checkbox.type = box_type;
+         checkbox.name = group_name;
+         checkbox.value = display_name;
+         checkbox.id = display_name;
+         if (display_name == "ALL")
+           checkbox.onclick = function(){toggle(this);};
+         if(group_name in selected_vars && selected_vars[group_name].indexOf(display_name)>-1)
+             checkbox.checked = true;
+
+         var label = document.createElement('label_' + display_name)
+         label.htmlFor = display_name;
+         label.appendChild(document.createTextNode(display_name));
+
+         var br = document.createElement('br');
+         label.appendChild(br);
+
+         fieldset.appendChild(checkbox);
+         fieldset.appendChild(label);
+       }
+
+       for( var i = 0; i < ele_arr.length; i++) {
+         create_checkbox(ele_arr[i], group_desc);
+       }
+
+       if (box_type == 'checkbox')
+         create_checkbox("ALL", group_desc + "_ALL");
+       var container = document.getElementById(parent_id);
+       container.appendChild(fieldset);
+     }
+
+     function init() {
+       var host = ["Mac_10.10.5_Iris_Pro",
+                   "Mac_10.11.1_Iris_Pro",
+                   "Mac_10.8.5_Intel_HD_5000",
+                   "Mac_10.10.5_Intel_HD_5000",
+                   "Ubuntu_15.04_Quadro_K600",
+                   "Ubuntu_14.04_Quadro_600",
+                   "Ubuntu_14.04_HD_4400",
+                   "Ubuntu_12.04_HD_Graphics_4000",
+                   "Win_10_64-bit_Quadro_600",
+                   "Win_7_32-bit_HD_4400",
+                   "Win_7_64-bit_HD_4400",
+                   "Win_8.1_64-bit_Quadro_600",
+                   "Win_8_64-bit_Quadro_600"];
+       var apis = ["P", "27", "26", "25", "24", "23", "22", "21", "20", "19", "18", "17", "16", "15", "10"];
+       var tags = ["default", "google_apis", "android-wear", "android-tv"];
+       var abis = ["x86", "x86_64", "armeabi-v7a", "arm64-v8a", "mips", "mips64"];
+       var gpus = ["mesa", "on", "off"];
+       var qemus = ["qemu1", "qemu2"];
+       var emu_branches = ["sdk", "emu-master-dev", "emu-2.7-release"];
+       var image_branches = ["sdk", "image-builds"];
+
+       var selected_vars = {{ paint_vars|safe }};
+       createCheckboxGroup(apis, 'API', 'td_api', 'radio', selected_vars);
+       createCheckboxGroup(abis, 'ABI', 'td_abi', 'radio', selected_vars);
+       createCheckboxGroup(emu_branches, 'EMULATOR', 'td_emulator', 'radio', selected_vars);
+       createCheckboxGroup(image_branches, 'SYS_IMG', 'td_sysimage', 'radio', selected_vars);
+       createCheckboxGroup(host, 'HOST', 'td_host', 'checkbox', selected_vars);
+       createCheckboxGroup(tags, 'TAG', 'td_tag', 'checkbox', selected_vars);
+       createCheckboxGroup(gpus, 'GPU', 'td_gpu', 'checkbox', selected_vars);
+       createCheckboxGroup(qemus, 'QEMU', 'td_qemu', 'checkbox', selected_vars);
+
+       if ("{{ validate_form }}" == "1")
+         validateForm();
+
+       if ("{{ query_complete }}" =="1")
+       {
+          document.getElementById('paint_btn').disabled = true;
+          var host_count = ({{ paint_vars|safe }}["HOST"]).length;
+          drawGraph("{{ table_title|safe }}", {{ table_bootdata|safe }}, {{ table_sumdata|safe }}, host_count, "Boot Time in Seconds", true);
+          drawGraph("{{ table_title|safe }}", {{ table_adbdata|safe }}, {{ table_sumdata|safe }}, host_count, "Speed in KB/s", false);
+          document.getElementById('paint_btn').disabled = false;
+       }
+     }
+
+     function validateForm()
+     {
+       var empty_selection = "";
+       function get_var(group){
+         var checkedBoxes = document.querySelectorAll(group);
+         var arr = [];
+         for (var i=0; i<checkedBoxes.length; i++) {
+           arr.push(checkedBoxes[i].value);
+         }
+         if (arr.length == 0){
+           empty_selection += group.substring(group.indexOf("name=")+6, group.indexOf("]:checked")-1) + "/";
+         }
+         return arr;
+       };
+
+       var apis = get_var('input[name="API"]:checked');
+       var tags = get_var('input[name="TAG"]:checked');
+       var abis = get_var('input[name="ABI"]:checked');
+       var emulator = get_var('input[name="EMULATOR"]:checked');
+       var sys_image = get_var('input[name="SYS_IMG"]:checked');
+       var hosts = get_var('input[name="HOST"]:checked');
+       var gpus = get_var('input[name="GPU"]:checked');
+       var qemus = get_var('input[name="QEMU"]:checked');
+
+       if (empty_selection != ""){
+         alert("Please select " + empty_selection)
+         document.getElementById('paint_btn').disabled = false;
+         return false;
+       }
+       document.getElementById('paint_btn').disabled = true;
+       return true;
+     }
+  </script>
+</head>
+<body>
+  <h2>Emulator Dashboard</h2>
+  <!-- form name='form_config' id='form_config' action="javascript:paintOnSelection()" -->
+  <form name='form_config' onsubmit="return validateForm()" method="get">
+    <table>
+      <tr>
+        <td id='td_api'></td>
+        <td id='td_abi'></td>
+        <td id='td_emulator'></td>
+        <td id='td_sysimage'></td>
+        <td id='td_host'></td>
+        <td id='td_tag'></td>
+        <td id='td_gpu'></td>
+        <td id='td_qemu'></td>
+      </tr>
+      <tr>
+        <td colspan="8" align="right" style="padding: 10px;">
+          <button class='myButton' type='submit' id='paint_btn'>PAINT</button>
+        </td>
+      </tr>
+    </table>
+    <pre id='msg_result' align="left" style="color:#FF0000; font-weight:bold; padding: 10px"></pre>
+    <table id='chart_table'>
+    </table>
+  </form>
+  <textarea cols="100" id='log_area'></textarea>
+  <p>Backed by Google's BigQuery and running in Python on App Engine.</p>
+</body>
+</html>

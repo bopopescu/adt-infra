@@ -1,0 +1,28 @@
+# BigQuery Schemas
+
+This file briefly describes the bigquery schemas included in the current folder.
+
+### cts_raw_run.json
+This table contains one row per buildbot run of a CTS test. The row contains
+identifying information about the run -- cts test branch, emulator branch, total
+number of test passes etc.
+
+'uuid' is an important field that is (ahem) guaranteed to be unique in the table
+for each row. This field is used as a foreign key from other tables described
+below, although BigQuery does not itself have the notion of foreign key.
+
+### cts_raw_results.json
+This table contains the result of each individual CTS test, run as part of the
+CTS suite on the CTS bot. The 'f_uuid' column keys into the 'cts_raw_run'
+table to identify the CTS run that the row belongs to.
+
+### cts_flakiness_summary.json
+This table contains one row per buildbot run of a CTS test. The row contains the
+same context information as 'cts_raw_run' and 'f_uuid' indeed is a foreign key
+into that table. We duplicate the context information in this table to allow
+downstream dashboards to easily filter summaries based on the context.
+
+### cts_flakiness_results.json
+This table contains per CTS test flakiness information for every buildbot CTS
+run. 'f_uuid' keys into 'cts_raw_run' to identify the buildbot CTS run that a
+row corresponds to.
