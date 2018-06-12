@@ -335,7 +335,7 @@ class EmuBaseTestCase(LoggedTestCase):
         """
         Attempts to launch the passed in AVD.  Emulator Binary and other system settings are contained within
         emu_argparser.emy_args.  The emulator is started in a separate thread.  The timeout that is passed in via
-        emu_argparser.emu_args.timeout_in_seconds is the timeout value of the 'wait' -> it is not forever.
+        emu_argparser.emu_args.expected_boot_time is the timeout value of the 'wait' -> it is not forever.
         For API P, we also check network connection.
         :param avd: AVD we wish to launch.
         :return: Boot time (in seconds) it took to get a fully booted emulator.
@@ -348,7 +348,7 @@ class EmuBaseTestCase(LoggedTestCase):
         start_time = time.time()
         completed = '0'
         counter = 0
-        real_time_out = emu_argparser.emu_args.timeout_in_seconds
+        real_time_out = emu_argparser.emu_args.expected_boot_time
         # We wait 20 seconds after attempting to start the emulator before polling ADB.  This is because the ADB
         # Daemon can be unresponsive on some machines during the startup period with the device.
         time.sleep(20)
