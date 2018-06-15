@@ -26,6 +26,12 @@ from emu_test.utils import emu_unittest
 from emu_test.utils import path_utils
 from utils import util
 
+try:
+    from subunit import run as subunit_run
+except ImportError:
+    subunit_run = None
+
+
 CUR_DIR = os.path.dirname(os.path.realpath(__file__))
 CONSOLE_RESULT_XML_FILE = 'consoleTestResult.xml'
 CONSOLE_CSS_FILE = os.path.join(CUR_DIR, 'static', 'console.css')
@@ -229,9 +235,21 @@ class ConsoleTestCase(emu_testcase.EmuBaseTestCase):
                 if method.startswith('test_'):
                     emu_suite.addTest(test_class(method, avd, builder_name))
 
-        emu_runner = emu_unittest.EmuTextTestRunner(stream=sys.stdout)
-        emu_result = emu_runner.run(emu_suite)
-        self.print_console_result(emu_result)
+        # The fact that we have a single test case that in turn runs
+        # multiple other test cases makes it difficult to have a clean
+        # approach. Fixtures may be used at some point.
+        subunit_file = getattr(emu_argparser.emu_args, "subunit_file", None)
+        if subunit_file:
+            self.m_logger.info("Streaming subunit results to %s.",
+                               subunit_file)
+            with open(subunit_file, 'ab') as stream:
+                emu_runner = subunit_run.SubunitTestRunner(stream=stream)
+                emu_result = emu_runner.run(emu_suite)
+        else:
+            emu_runner = emu_unittest.EmuTextTestRunner(stream=sys.stdout)
+            emu_result = emu_runner.run(emu_suite)
+            self.print_console_result(emu_result)
+
         self.assertTrue(emu_result.wasSuccessful(),
                         '%s was failed.' % self._testMethodName)
 
