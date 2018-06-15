@@ -27,6 +27,11 @@ from emu_test.utils import emu_argparser
 from emu_test.utils import emu_unittest
 from emu_test.utils import path_utils
 
+try:
+    from subunit import run as subunit_run
+except ImportError:
+    subunit_run = None
+
 # Provides a regular expression for matching fail message
 TIMEOUT_REGEX = re.compile(r"(^\d+)([smhd])?$")
 
@@ -133,14 +138,25 @@ if __name__ == '__main__':
         setupLogger()
         logging.getLogger().info(emu_argparser.emu_args)
 
+        subunit_file = emu_argparser.emu_args.subunit_file
+        if subunit_file and not subunit_run:
+            err_msg = "Subunit requested, yet subunit is not installed."
+            raise Exception(err_msg)
+
         if emu_argparser.emu_args.avd_list is None:
             emu_argparser.emu_args.avd_list = findSystemAVDs()
 
         test_root_dir = os.path.dirname(os.path.realpath(__file__))
         emuSuite = unittest.TestLoader().discover(start_dir=test_root_dir, pattern=emu_argparser.emu_args.pattern)
-        emuRunner = emu_unittest.EmuTextTestRunner(stream=sys.stdout)
-        emuResult = emuRunner.run(emuSuite)
-        printResult(emuResult)
+
+        if subunit_file:
+            with open(subunit_file, 'ab') as stream:
+                emuRunner = subunit_run.SubunitTestRunner(stream=stream)
+                emuResult = emuRunner.run(emuSuite)
+        else:
+            emuRunner = emu_unittest.EmuTextTestRunner(stream=sys.stdout)
+            emuResult = emuRunner.run(emuSuite)
+            printResult(emuResult)
     except Exception:
         print "Error in dotest.py : " + traceback.format_exc()
         

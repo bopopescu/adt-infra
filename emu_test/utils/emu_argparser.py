@@ -64,5 +64,9 @@ def get_parser():
                         help='The TreeHugger branch that has initiated PSQ run.')
     parser.add_argument('--run_target', type=str, dest='run_target', action='store',
                         help='The run target of the TreeHugger invocation.')
+    parser.add_argument("--subunit-file",
+                        required=False,
+                        help="If specified, the tests results will be streamed "
+                             "in subunit format to this file.")
     parser.add_argument('unittest_args', nargs='*')
     return parser
