@@ -166,7 +166,10 @@ class UiAutomatorBaseTestCase(EmuBaseTestCase):
         self._pull_log_details(self._testMethodName)
 
         self.m_logger.info('System image UI tests (%s) end.' % self._testMethodName)
-        self.assertTrue(err is None or len(err.strip()) == 0, "The UI tests failed.")
+        self.assertTrue(err is None or len(err.strip()) == 0,
+                        "The UI tests failed.\n"
+                        "gradle_stdout:\n%s\n"
+                        "gradle_stderr:\n%s\n" % (out, err))
 
     def run_ui_test(self, avd_config, class_name=None):
         """Creates an AVD described by 'avd_config' and runs UI tests.
