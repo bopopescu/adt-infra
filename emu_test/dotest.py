@@ -26,6 +26,7 @@ sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)),
 from emu_test.utils import emu_argparser
 from emu_test.utils import emu_unittest
 from emu_test.utils import path_utils
+from emu_test.utils import windows_utils
 
 try:
     from subunit import run as subunit_run
@@ -137,6 +138,10 @@ if __name__ == '__main__':
         emu_argparser.emu_args = emu_argparser.get_parser().parse_args()
         setupLogger()
         logging.getLogger().info(emu_argparser.emu_args)
+
+        if emu_argparser.emu_args.as_win32_job and os.name == "nt":
+            putils = windows_utils.ProcessUtils()
+            putils.run_as_job()
 
         subunit_file = emu_argparser.emu_args.subunit_file
         if subunit_file and not subunit_run:

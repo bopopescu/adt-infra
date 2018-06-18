@@ -68,5 +68,11 @@ def get_parser():
                         required=False,
                         help="If specified, the tests results will be streamed "
                              "in subunit format to this file.")
+    parser.add_argument("--as-win32-job", required=False, action='store_true',
+                        help="Windows only: associate a job object with the test "
+                             "runner process, ensuring that child processes are "
+                             "killed when the main process dies. Adb or gradle "
+                             "may not be cleaned up otherwise, which can be "
+                             "troublesome, especially when run remotely.")
     parser.add_argument('unittest_args', nargs='*')
     return parser
