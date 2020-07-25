@@ -199,7 +199,7 @@ def RunSteps(api, test_arb_is_stopped):
       params = {'status': roll_status,
                 'password': password}
       if issue_url == '' and roll_status == 'Idle':
-        params['last_roll_rev'] = full_hash('origin/master')
+        params['last_roll_rev'] = full_hash('origin/main')
       if issue_url != '':
         params['deps_roll_link'] = issue_url
         split = issue_url.split('/')

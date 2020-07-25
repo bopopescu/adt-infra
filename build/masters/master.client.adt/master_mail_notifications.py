@@ -1,4 +1,4 @@
-# This file is used to define mail notifier for this master.
+# This file is used to define mail notifier for this main.
 
 import os
 
@@ -8,13 +8,13 @@ from twisted.python import log as twlog
 BUILD_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), os.pardir,
                                          os.pardir)
 
-def emailMessage(mode, name, build, results, master_status):
+def emailMessage(mode, name, build, results, main_status):
   """Generate a specalized buildbot mail message for new emulator failures and
      return a tuple of message text and type."""
   text = 'The Android Emulator bot found a new failure:\n'
-  text += 'link: %s\n' % master_status.getURLForThing(build)
+  text += 'link: %s\n' % main_status.getURLForThing(build)
   text += 'builder: %s\n' % name
-  text += 'buildslave: %s\n' % build.getSlavename()
+  text += 'buildsubordinate: %s\n' % build.getSubordinatename()
   text += 'build reason: %s\n\n' % build.getReason()
 
   result_text = build.getText()
@@ -45,12 +45,12 @@ def emailMessage(mode, name, build, results, master_status):
   subject = 'Emulator build/test failure on %s' % name
   return { 'subject': subject, 'body': text, 'type': 'plain' }
 
-def AddMailNotifier(BuildmasterConfig):
+def AddMailNotifier(BuildmainConfig):
   try:
     with open(os.path.join(BUILD_DIR, 'site_config', '.mail_password')) as f:
       p = f.read()
-    BuildmasterConfig['status'] = []
-    BuildmasterConfig['status'].extend([
+    BuildmainConfig['status'] = []
+    BuildmainConfig['status'].extend([
       mail.MailNotifier(
         fromaddr='adtinfrastructure@gmail.com',
         mode='failing',

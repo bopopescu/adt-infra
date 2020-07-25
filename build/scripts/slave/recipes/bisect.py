@@ -60,28 +60,28 @@ def GenTests(api):
   invalid_config_test = api.test('invalid_config_test')
   return_code_test = api.test('basic_return_code_test')
   basic_test += api.properties.generic(
-      mastername='tryserver.chromium.perf',
+      mainname='tryserver.chromium.perf',
       buildername='linux_perf_bisector')
   broken_bad_rev_test += api.properties.generic(
-      mastername='tryserver.chromium.perf',
+      mainname='tryserver.chromium.perf',
       buildername='linux_perf_bisector')
   broken_good_rev_test += api.properties.generic(
-      mastername='tryserver.chromium.perf',
+      mainname='tryserver.chromium.perf',
       buildername='linux_perf_bisector')
   broken_cp_test += api.properties.generic(
-      mastername='tryserver.chromium.perf',
+      mainname='tryserver.chromium.perf',
       buildername='linux_perf_bisector')
   broken_hash_test += api.properties.generic(
-      mastername='tryserver.chromium.perf',
+      mainname='tryserver.chromium.perf',
       buildername='linux_perf_bisector')
   invalid_config_test += api.properties.generic(
-      mastername='tryserver.chromium.perf',
+      mainname='tryserver.chromium.perf',
       buildername='linux_perf_bisector')
   encoded_config_test += api.properties.generic(
-      mastername='tryserver.chromium.perf',
+      mainname='tryserver.chromium.perf',
       buildername='linux_perf_bisector')
   return_code_test += api.properties.generic(
-      mastername='tryserver.chromium.perf',
+      mainname='tryserver.chromium.perf',
       buildername='linux_perf_bisector')
 
   bisect_config = {
@@ -95,7 +95,7 @@ def GenTests(api):
       'max_time_minutes': '5',
       'bug_id': '425582',
       'gs_bucket': 'chrome-perf',
-      'builder_host': 'master4.golo.chromium.org',
+      'builder_host': 'main4.golo.chromium.org',
       'builder_port': '8341',
       'dummy_initial_confidence': '95',
       'poll_sleep': 0,
@@ -326,7 +326,7 @@ def _get_step_data_for_revision(api, revision_data, broken_cp=None,
     if commit_hash == broken_hash:
       yield api.step_data(step_name, stdout=api.raw_io.output('UnCastable'))
     else:
-      commit_pos_str = 'refs/heads/master@{#%s}' % commit_pos
+      commit_pos_str = 'refs/heads/main@{#%s}' % commit_pos
       yield api.step_data(step_name, stdout=api.raw_io.output(commit_pos_str))
 
   if not skip_results:
@@ -345,12 +345,12 @@ def _get_step_data_for_revision(api, revision_data, broken_cp=None,
 
 
 def _ensure_checkout(api):
-  mastername = api.properties.get('mastername')
+  mainname = api.properties.get('mainname')
   buildername = api.properties.get('buildername')
   # TODO(akuegel): Explicitly load the configs for the builders and don't rely
   # on builders.py in chromium_tests recipe module.
-  api.chromium_tests.configure_build(mastername, buildername)
-  api.chromium_tests.prepare_checkout(mastername, buildername)
+  api.chromium_tests.configure_build(mainname, buildername)
+  api.chromium_tests.prepare_checkout(mainname, buildername)
 
 
 def _gather_reference_range(api, bisector):

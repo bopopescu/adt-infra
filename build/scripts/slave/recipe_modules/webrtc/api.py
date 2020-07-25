@@ -68,7 +68,7 @@ class WebRTCApi(recipe_api.RecipeApi):
 
   # Map of GS archive names to urls.
   # TODO(kjellander): Convert to use the auto-generated URLs once we've setup a
-  # separate bucket per master.
+  # separate bucket per main.
   GS_ARCHIVES = freeze({
     'android_dbg_archive': 'gs://chromium-webrtc/android_chromium_dbg',
     'android_dbg_archive_fyi': ('gs://chromium-webrtc/'
@@ -114,16 +114,16 @@ class WebRTCApi(recipe_api.RecipeApi):
 
   def apply_bot_config(self, builders, recipe_configs, perf_config=None,
                        git_hashes_as_perf_revisions=False):
-    mastername = self.m.properties.get('mastername')
+    mainname = self.m.properties.get('mainname')
     buildername = self.m.properties.get('buildername')
     self.git_hashes_as_perf_revisions = git_hashes_as_perf_revisions
-    master_dict = builders.get(mastername, {})
-    master_settings = master_dict.get('settings', {})
-    perf_config = master_settings.get('PERF_CONFIG')
+    main_dict = builders.get(mainname, {})
+    main_settings = main_dict.get('settings', {})
+    perf_config = main_settings.get('PERF_CONFIG')
 
-    self.bot_config = master_dict.get('builders', {}).get(buildername)
-    assert self.bot_config, ('Unrecognized builder name "%r" for master "%r".' %
-                             (buildername, mastername))
+    self.bot_config = main_dict.get('builders', {}).get(buildername)
+    assert self.bot_config, ('Unrecognized builder name "%r" for main "%r".' %
+                             (buildername, mainname))
 
     self.bot_type = self.bot_config.get('bot_type', 'builder_tester')
     recipe_config_name = self.bot_config['recipe_config']
@@ -167,7 +167,7 @@ class WebRTCApi(recipe_api.RecipeApi):
       self.m.chromium_tests.configure_swarming(
           'webrtc',
           precommit=self.m.tryserver.is_tryserver,
-          mastername=mastername)
+          mainname=mainname)
 
   def checkout(self, **kwargs):
     update_step = self.m.bot_update.ensure_checkout(**kwargs)
@@ -303,7 +303,7 @@ class WebRTCApi(recipe_api.RecipeApi):
     # module instead.
     assert self.c.PERF_ID, ('You must specify PERF_ID for the builder that '
                             'runs the sizes step.')
-    sizes_script = self.m.path['build'].join('scripts', 'slave', 'chromium',
+    sizes_script = self.m.path['build'].join('scripts', 'subordinate', 'chromium',
                                              'sizes.py')
     args = ['--target', self.m.chromium.c.BUILD_CONFIG,
             '--platform', self.m.chromium.c.TARGET_PLATFORM]

@@ -76,7 +76,7 @@ class PerfRevisionState(revision_state.RevisionState):
     ]
     try:
       if not self.bisector.bisect_config.get('skip_gclient_ops'):
-        self.bisector.ensure_sync_master_branch()
+        self.bisector.ensure_sync_main_branch()
       api.m.git(
           *try_cmd, name='Requesting build for %s via git try.'
           % str(self.commit_hash), git_config_options={
@@ -145,15 +145,15 @@ class PerfRevisionState(revision_state.RevisionState):
     if self.status not in (PerfRevisionState.BUILDING,
                            PerfRevisionState.TESTING):  # pragma: no cover
       return None
-    # TODO(robertocn): Remove hardcoded master.
-    master = 'tryserver.chromium.perf'
+    # TODO(robertocn): Remove hardcoded main.
+    main = 'tryserver.chromium.perf'
     if self.status == PerfRevisionState.BUILDING:
       builder = self.bisector.get_builder_bot_for_this_platform()
     if self.status == PerfRevisionState.TESTING:
       builder = self.bisector.get_perf_tester_name()
     return {
         'type': 'buildbot',
-        'master': master,
+        'main': main,
         'builder': builder,
         'job_name': self.job_name,
     }

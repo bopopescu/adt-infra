@@ -188,9 +188,9 @@ def all_compile_targets(api, tests):
 
 
 def _RunStepsInternal(api):
-  mastername = api.properties.get('mastername')
+  mainname = api.properties.get('mainname')
   buildername = api.properties.get('buildername')
-  bot_config = BUILDERS[mastername]['builders'][buildername]
+  bot_config = BUILDERS[mainname]['builders'][buildername]
   is_android = ('Android' in buildername or 'android' in buildername)
   force_clobber = bot_config.get('force_clobber', False)
 
@@ -205,16 +205,16 @@ def _RunStepsInternal(api):
   # TODO(dpranke): Unify this with the logic in the chromium_trybot and
   # chromium recipes so that we can actually run the tests as well
   # and deapply patches and retry as need be.
-  test_spec_file = '%s.json' % mastername
+  test_spec_file = '%s.json' % mainname
   test_spec = api.chromium_tests.read_test_spec(api, test_spec_file)
 
   tests = list(api.chromium_tests.steps.generate_gtest(
-      api, mastername, buildername, test_spec))
+      api, mainname, buildername, test_spec))
 
   scripts_compile_targets = \
       api.chromium_tests.get_compile_targets_for_scripts().json.output
   tests += list(api.chromium_tests.steps.generate_script(
-      api, mastername, buildername, test_spec,
+      api, mainname, buildername, test_spec,
       scripts_compile_targets=scripts_compile_targets))
 
   additional_compile_targets = test_spec.get(buildername, {}).get(
@@ -233,12 +233,12 @@ def _RunStepsInternal(api):
             test_compile_targets + additional_compile_targets,
             'trybot_analyze_config.json')
     if requires_compile:
-      api.chromium.run_mb(mastername, buildername, use_goma=True)
+      api.chromium.run_mb(mainname, buildername, use_goma=True)
       api.chromium.compile(compile_targets,
                            force_clobber=force_clobber)
     tests = tests_in_compile_targets(api, compile_targets, tests)
   else:
-    api.chromium.run_mb(mastername, buildername, use_goma=True)
+    api.chromium.run_mb(mainname, buildername, use_goma=True)
     api.chromium.compile(all_compile_targets(api, tests) +
                          additional_compile_targets,
                          force_clobber=force_clobber)
@@ -246,12 +246,12 @@ def _RunStepsInternal(api):
   if tests:
     if api.tryserver.is_tryserver:
       api.chromium_tests.run_tests_and_deapply_as_needed(
-          mastername, api, tests, bot_update_step)
+          mainname, api, tests, bot_update_step)
     else:
       api.chromium_tests.configure_swarming('chromium', precommit=False,
-                                            mastername=mastername)
+                                            mainname=mainname)
       test_runner = api.chromium_tests.create_test_runner(api, tests)
-      with api.chromium_tests.wrap_chromium_tests(mastername, tests):
+      with api.chromium_tests.wrap_chromium_tests(mainname, tests):
         test_runner()
 
 
@@ -262,8 +262,8 @@ def RunSteps(api):
 
 def GenTests(api):
   overrides = {}
-  for mastername, master_dict in BUILDERS.items():
-    for buildername in master_dict['builders']:
+  for mainname, main_dict in BUILDERS.items():
+    for buildername in main_dict['builders']:
 
       # The Android bots are currently all only builders and cannot
       # run tests; more importantly, the recipe isn't set up to run
@@ -274,8 +274,8 @@ def GenTests(api):
       is_android = ('Android' in buildername or 'android' in buildername)
       gtest_tests = [] if is_android else ['base_unittests']
 
-      overrides.setdefault(mastername, {})
-      overrides[mastername][buildername] = (
+      overrides.setdefault(mainname, {})
+      overrides[mainname][buildername] = (
           api.override_step_data(
               'read test spec',
               api.json.output({
@@ -284,8 +284,8 @@ def GenTests(api):
                   },
               })))
 
-      if 'tryserver' in mastername:
-          overrides[mastername][buildername] += api.override_step_data(
+      if 'tryserver' in mainname:
+          overrides[mainname][buildername] += api.override_step_data(
             'analyze',
             api.json.output({
                 'status': 'Found dependency',
@@ -301,7 +301,7 @@ def GenTests(api):
     api.platform.name('linux') +
     api.properties.tryserver(
         buildername='v8_linux_chromium_gn_rel',
-        mastername='tryserver.v8') +
+        mainname='tryserver.v8') +
     api.step_data('compile', retcode=1) +
     overrides['tryserver.v8']['v8_linux_chromium_gn_rel']
   )
@@ -311,7 +311,7 @@ def GenTests(api):
     api.platform.name('linux') +
     api.properties.tryserver(
         buildername='v8_linux_chromium_gn_rel',
-        mastername='tryserver.v8',
+        mainname='tryserver.v8',
         patch_project='v8') +
     overrides['tryserver.v8']['v8_linux_chromium_gn_rel']
   )
@@ -321,7 +321,7 @@ def GenTests(api):
     api.platform.name('linux') +
     api.properties.tryserver(
         buildername='v8_linux_chromium_gn_rel',
-        mastername='tryserver.v8') +
+        mainname='tryserver.v8') +
     api.override_step_data(
         'read test spec',
         api.json.output({'linux_chromium_gn_rel': {

@@ -406,13 +406,13 @@ def build_internal(c):
   c.got_revision_mapping['build'] = 'got_build_revision'
 
 @config_ctx(config_vars={'GIT_MODE': True})
-def build_internal_scripts_slave(c):
+def build_internal_scripts_subordinate(c):
   if not c.GIT_MODE:  # pragma: no cover
-    raise BadConf('build_internal_scripts_slave only supports git')
+    raise BadConf('build_internal_scripts_subordinate only supports git')
   s = c.solutions.add()
-  s.name = 'build_internal/scripts/slave'
+  s.name = 'build_internal/scripts/subordinate'
   s.url = 'https://chrome-internal.googlesource.com/chrome/tools/build_limited/scripts/slave.git'
-  c.got_revision_mapping['build_internal/scripts/slave'] = 'got_revision'
+  c.got_revision_mapping['build_internal/scripts/subordinate'] = 'got_revision'
   # We do not use 'includes' here, because we want build_internal to be the
   # first solution in the list as run_presubmit computes upstream revision
   # from the first solution.
@@ -436,7 +436,7 @@ def chromium_skia(c):
   c.solutions[0].revision = 'HEAD'
   del c.solutions[0].custom_deps
   c.revisions['src/third_party/skia'] = (
-      gclient_api.RevisionFallbackChain('origin/master'))
+      gclient_api.RevisionFallbackChain('origin/main'))
   c.got_revision_mapping['src'] = 'got_chromium_revision'
   c.got_revision_mapping['src/third_party/skia'] = 'got_revision'
   c.parent_got_revision_mapping['parent_got_revision'] = 'got_revision'
@@ -496,11 +496,11 @@ def infra_with_chromium(c):
 @config_ctx(includes=['infra'])
 def luci_gae(c):
   # luci/gae is checked out as a part of infra.git solution at HEAD.
-  c.revisions['infra'] = 'origin/master'
+  c.revisions['infra'] = 'origin/main'
   # luci/gae is developed together with luci-go, which should be at HEAD.
-  c.revisions['infra/go/src/github.com/luci/luci-go'] = 'origin/master'
+  c.revisions['infra/go/src/github.com/luci/luci-go'] = 'origin/main'
   c.revisions['infra/go/src/github.com/luci/gae'] = (
-      gclient_api.RevisionFallbackChain('origin/master'))
+      gclient_api.RevisionFallbackChain('origin/main'))
   m = c.got_revision_mapping
   del m['infra']
   m['infra/go/src/github.com/luci/gae'] = 'got_revision'
@@ -508,9 +508,9 @@ def luci_gae(c):
 @config_ctx(includes=['infra'])
 def luci_go(c):
   # luci-go is checked out as a part of infra.git solution at HEAD.
-  c.revisions['infra'] = 'origin/master'
+  c.revisions['infra'] = 'origin/main'
   c.revisions['infra/go/src/github.com/luci/luci-go'] = (
-      gclient_api.RevisionFallbackChain('origin/master'))
+      gclient_api.RevisionFallbackChain('origin/main'))
   m = c.got_revision_mapping
   del m['infra']
   m['infra/go/src/github.com/luci/luci-go'] = 'got_revision'
@@ -519,18 +519,18 @@ def luci_go(c):
 def luci_py(c):
   # luci-py is checked out as part of infra just to have appengine
   # pre-installed, as that's what luci-py PRESUBMIT relies on.
-  c.revisions['infra'] = 'origin/master'
+  c.revisions['infra'] = 'origin/main'
   c.revisions['infra/luci'] = (
-      gclient_api.RevisionFallbackChain('origin/master'))
+      gclient_api.RevisionFallbackChain('origin/main'))
   m = c.got_revision_mapping
   del m['infra']
   m['infra/luci'] = 'got_revision'
 
 @config_ctx(includes=['infra'])
 def recipes_py(c):
-  c.revisions['infra'] = 'origin/master'
+  c.revisions['infra'] = 'origin/main'
   c.revisions['infra/recipes-py'] = (
-      gclient_api.RevisionFallbackChain('origin/master'))
+      gclient_api.RevisionFallbackChain('origin/main'))
   m = c.got_revision_mapping
   del m['infra']
   m['infra/recipes-py'] = 'got_revision'
@@ -555,12 +555,12 @@ def catapult(c):
   c.got_revision_mapping['catapult'] = 'got_revision'
 
 @config_ctx(includes=['infra_internal'], config_vars={'GIT_MODE': True})
-def infradata_master_manager(c):
+def infradata_main_manager(c):
   soln = c.solutions.add()
-  soln.name = 'infra-data-master-manager'
+  soln.name = 'infra-data-main-manager'
   soln.url = (
       'https://chrome-internal.googlesource.com/infradata/master-manager.git')
-  c.got_revision_mapping['infra-data-master-manager'] = 'got_revision'
+  c.got_revision_mapping['infra-data-main-manager'] = 'got_revision'
 
 @config_ctx()
 def with_branch_heads(c):

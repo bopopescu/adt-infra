@@ -71,27 +71,27 @@ def GenTests(api):
   STABLE_BRANCH = '4.2'
   BETA_BRANCH = '4.3'
 
-  def get_test_branch_name(mastername, buildername):
-    if mastername == 'client.dart.fyi':
+  def get_test_branch_name(mainname, buildername):
+    if mainname == 'client.dart.fyi':
       return STABLE_BRANCH
     if re.search(r'stable branch', buildername):
       return STABLE_BRANCH
     if re.search(r'beta branch', buildername):
       return BETA_BRANCH
-    return 'master'
+    return 'main'
 
-  for mastername, builders, buildername, bot_config in api.v8.iter_builders():
+  for mainname, builders, buildername, bot_config in api.v8.iter_builders():
     bot_type = bot_config.get('bot_type', 'builder_tester')
 
     if bot_type in ['builder', 'builder_tester']:
       assert bot_config['testing'].get('parent_buildername') is None
 
-    branch = get_test_branch_name(mastername, buildername)
+    branch = get_test_branch_name(mainname, buildername)
     v8_config_kwargs = bot_config.get('v8_config_kwargs', {})
     test = (
-      api.test('full_%s_%s' % (_sanitize_nonalpha(mastername),
+      api.test('full_%s_%s' % (_sanitize_nonalpha(mainname),
                                _sanitize_nonalpha(buildername))) +
-      api.properties.generic(mastername=mastername,
+      api.properties.generic(mainname=mainname,
                              buildername=buildername,
                              branch=branch,
                              parent_buildername=bot_config.get(
@@ -109,7 +109,7 @@ def GenTests(api):
       if isolated_tests:
         test += api.properties(isolated_tests=isolated_tests)
 
-    if mastername.startswith('tryserver'):
+    if mainname.startswith('tryserver'):
       test += (api.properties(
           revision='12345',
           patch_url='svn://svn-mirror.golo.chromium.org/patch'))
@@ -118,7 +118,7 @@ def GenTests(api):
 
   yield (
     api.test('branch_sync_failure') +
-    api.properties.tryserver(mastername='client.v8.branches',
+    api.properties.tryserver(mainname='client.v8.branches',
                              buildername='V8 Linux - beta branch',
                              branch=BETA_BRANCH,
                              revision='20123') +
@@ -129,16 +129,16 @@ def GenTests(api):
   # Test usage of test filters. They're used when the buildbucket
   # job gets a property 'testfilter', which is expected to be a json list of
   # test-filter strings.
-  mastername = 'tryserver.v8'
+  mainname = 'tryserver.v8'
   buildername = 'v8_linux_rel'
-  bot_config = api.v8.BUILDERS[mastername]['builders'][buildername]
+  bot_config = api.v8.BUILDERS[mainname]['builders'][buildername]
   yield (
     api.test('full_%s_%s_test_filter' % (
-        _sanitize_nonalpha(mastername), _sanitize_nonalpha(buildername))) +
+        _sanitize_nonalpha(mainname), _sanitize_nonalpha(buildername))) +
     api.properties.generic(
-        mastername=mastername,
+        mainname=mainname,
         buildername=buildername,
-        branch='master',
+        branch='main',
         revision='12345',
         patch_url='svn://svn-mirror.golo.chromium.org/patch',
         testfilter=['mjsunit/regression/*', 'test262/foo', 'test262/bar'],
@@ -151,14 +151,14 @@ def GenTests(api):
   # Test using extra flags with a bot that already uses some extra flags as
   # positional argument.
   buildername = 'v8_linux_greedy_allocator_dbg'
-  bot_config = api.v8.BUILDERS[mastername]['builders'][buildername]
+  bot_config = api.v8.BUILDERS[mainname]['builders'][buildername]
   yield (
     api.test('full_%s_%s_positional_extra_flags' % (
-        _sanitize_nonalpha(mastername), _sanitize_nonalpha(buildername))) +
+        _sanitize_nonalpha(mainname), _sanitize_nonalpha(buildername))) +
     api.properties.generic(
-        mastername=mastername,
+        mainname=mainname,
         buildername=buildername,
-        branch='master',
+        branch='main',
         revision='12345',
         patch_url='svn://svn-mirror.golo.chromium.org/patch',
         extra_flags=['--trace_gc', '--turbo_stats'],
@@ -167,21 +167,21 @@ def GenTests(api):
                  v8_config_kwargs.get('TARGET_BITS', 64))
   )
 
-  mastername = 'client.v8'
+  mainname = 'client.v8'
   buildername = 'V8 Linux - isolates'
-  bot_config = api.v8.BUILDERS[mastername]['builders'][buildername]
+  bot_config = api.v8.BUILDERS[mainname]['builders'][buildername]
   def TestFailures(wrong_results, flakes):
     results_suffix = "_wrong_results" if wrong_results else ""
     flakes_suffix = "_flakes" if flakes else ""
     return (
       api.test('full_%s_%s_test_failures%s%s' %
-          (_sanitize_nonalpha(mastername),
+          (_sanitize_nonalpha(mainname),
           _sanitize_nonalpha(buildername),
           results_suffix,
           flakes_suffix)) +
-      api.properties.generic(mastername=mastername,
+      api.properties.generic(mainname=mainname,
                              buildername=buildername,
-                             branch='master',
+                             branch='main',
                              parent_buildername=bot_config.get(
                                  'parent_buildername')) +
       api.platform(bot_config['testing']['platform'],
@@ -198,10 +198,10 @@ def GenTests(api):
 
   yield (
     api.test('full_%s_%s_empty_json' % (
-        _sanitize_nonalpha(mastername), _sanitize_nonalpha(buildername))) +
-    api.properties.generic(mastername=mastername,
+        _sanitize_nonalpha(mainname), _sanitize_nonalpha(buildername))) +
+    api.properties.generic(mainname=mainname,
                            buildername=buildername,
-                           branch='master',
+                           branch='main',
                            parent_buildername=bot_config.get(
                                'parent_buildername')) +
     api.platform(bot_config['testing']['platform'],
@@ -212,11 +212,11 @@ def GenTests(api):
 
   yield (
     api.test('full_%s_%s_one_failure' %
-        (_sanitize_nonalpha(mastername),
+        (_sanitize_nonalpha(mainname),
         _sanitize_nonalpha(buildername))) +
-    api.properties.generic(mastername=mastername,
+    api.properties.generic(mainname=mainname,
                            buildername=buildername,
-                           branch='master',
+                           branch='main',
                            parent_buildername=bot_config.get(
                                'parent_buildername')) +
     api.platform(bot_config['testing']['platform'],
@@ -227,10 +227,10 @@ def GenTests(api):
   buildername = 'V8 Linux - memcheck'
   yield (
     api.test('full_%s_%s_no_errors' % (
-        _sanitize_nonalpha(mastername), _sanitize_nonalpha(buildername))) +
-    api.properties.generic(mastername=mastername,
+        _sanitize_nonalpha(mainname), _sanitize_nonalpha(buildername))) +
+    api.properties.generic(mainname=mainname,
                            buildername=buildername,
-                           branch='master',
+                           branch='main',
                            parent_buildername=bot_config.get(
                                'parent_buildername')) +
     api.platform(bot_config['testing']['platform'],
@@ -244,10 +244,10 @@ def GenTests(api):
   buildername = 'V8 Fuzzer'
   yield (
     api.test('full_%s_%s_fuzz_archive' % (
-        _sanitize_nonalpha(mastername), _sanitize_nonalpha(buildername))) +
-    api.properties.generic(mastername=mastername,
+        _sanitize_nonalpha(mainname), _sanitize_nonalpha(buildername))) +
+    api.properties.generic(mainname=mainname,
                            buildername=buildername,
-                           branch='master',
+                           branch='main',
                            parent_buildername=bot_config.get(
                                'parent_buildername')) +
     api.platform(bot_config['testing']['platform'],
@@ -268,10 +268,10 @@ def GenTests(api):
   buildername = 'V8 Linux - predictable'
   yield (
     api.test('full_%s_%s_bisect' % (
-        _sanitize_nonalpha(mastername), _sanitize_nonalpha(buildername))) +
-    api.properties.generic(mastername=mastername,
+        _sanitize_nonalpha(mainname), _sanitize_nonalpha(buildername))) +
+    api.properties.generic(mainname=mainname,
                            buildername=buildername,
-                           branch='master') +
+                           branch='main') +
     api.platform(bot_config['testing']['platform'],
                  v8_config_kwargs.get('TARGET_BITS', 64)) +
     api.override_step_data('Mjsunit', api.v8.bisect_failures_example()) +
@@ -284,10 +284,10 @@ def GenTests(api):
   # overall test time.
   yield (
     api.test('full_%s_%s_bisect_tests_too_long' % (
-        _sanitize_nonalpha(mastername), _sanitize_nonalpha(buildername))) +
-    api.properties.generic(mastername=mastername,
+        _sanitize_nonalpha(mainname), _sanitize_nonalpha(buildername))) +
+    api.properties.generic(mainname=mainname,
                            buildername=buildername,
-                           branch='master') +
+                           branch='main') +
     api.platform(bot_config['testing']['platform'],
                  v8_config_kwargs.get('TARGET_BITS', 64)) +
     api.override_step_data('Mjsunit', api.v8.bisect_failures_example()) +
@@ -300,13 +300,13 @@ def GenTests(api):
   # Bisect a1 -> no failures.
   # Report a2 and a3 as possible culprits.
   buildername = 'V8 Linux64 - debug - greedy allocator'
-  bot_config = api.v8.BUILDERS[mastername]['builders'][buildername]
+  bot_config = api.v8.BUILDERS[mainname]['builders'][buildername]
   yield (
     api.test('full_%s_%s_bisect_tester' % (
-        _sanitize_nonalpha(mastername), _sanitize_nonalpha(buildername))) +
-    api.properties.generic(mastername=mastername,
+        _sanitize_nonalpha(mainname), _sanitize_nonalpha(buildername))) +
+    api.properties.generic(mainname=mainname,
                            buildername=buildername,
-                           branch='master',
+                           branch='main',
                            parent_buildername=bot_config.get(
                                'parent_buildername')) +
     api.platform(bot_config['testing']['platform'],
@@ -320,10 +320,10 @@ def GenTests(api):
   buildername = 'V8 Linux - predictable'
   yield (
     api.test('full_%s_%s_bisect_recurring_failure' % (
-        _sanitize_nonalpha(mastername), _sanitize_nonalpha(buildername))) +
-    api.properties.generic(mastername=mastername,
+        _sanitize_nonalpha(mainname), _sanitize_nonalpha(buildername))) +
+    api.properties.generic(mainname=mainname,
                            buildername=buildername,
-                           branch='master') +
+                           branch='main') +
     api.platform(bot_config['testing']['platform'],
                  v8_config_kwargs.get('TARGET_BITS', 64)) +
     api.override_step_data('Mjsunit', api.v8.bisect_failures_example()) +
@@ -335,10 +335,10 @@ def GenTests(api):
   # Disable bisection due to less than two changes.
   yield (
     api.test('full_%s_%s_bisect_one_change' % (
-        _sanitize_nonalpha(mastername), _sanitize_nonalpha(buildername))) +
-    api.properties.generic(mastername=mastername,
+        _sanitize_nonalpha(mainname), _sanitize_nonalpha(buildername))) +
+    api.properties.generic(mainname=mainname,
                            buildername=buildername,
-                           branch='master') +
+                           branch='main') +
     api.platform(bot_config['testing']['platform'],
                  v8_config_kwargs.get('TARGET_BITS', 64)) +
     api.override_step_data('Mjsunit', api.v8.bisect_failures_example()) +
@@ -348,13 +348,13 @@ def GenTests(api):
   )
 
   buildername = 'V8 GC Stress - 3'
-  bot_config = api.v8.BUILDERS[mastername]['builders'][buildername]
+  bot_config = api.v8.BUILDERS[mainname]['builders'][buildername]
   yield (
     api.test('full_%s_%s_bisect_no_shards' % (
-        _sanitize_nonalpha(mastername), _sanitize_nonalpha(buildername))) +
-    api.properties.generic(mastername=mastername,
+        _sanitize_nonalpha(mainname), _sanitize_nonalpha(buildername))) +
+    api.properties.generic(mainname=mainname,
                            buildername=buildername,
-                           branch='master',
+                           branch='main',
                            parent_buildername=bot_config.get(
                                'parent_buildername')) +
     api.platform(bot_config['testing']['platform'],

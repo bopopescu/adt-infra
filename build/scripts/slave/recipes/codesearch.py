@@ -26,10 +26,10 @@ def RunSteps(api):
   s = spec.solutions[0]
   s.name = api.properties['repo_name']
   s.url = api.properties['repo_url']
-  s.revision = 'refs/remotes/origin/master'
+  s.revision = 'refs/remotes/origin/main'
   api.gclient.checkout(spec)
   # Many following steps depends on checkout being set as 'src'
-  api.path['checkout'] = api.path['slave_build'].join('src')
+  api.path['checkout'] = api.path['subordinate_build'].join('src')
   api.chromium.set_config('android_clang', BUILD_CONFIG='Debug',
                           TARGET_ARCH='arm', TARGET_BITS=32)
   api.chromium.runhooks()
@@ -77,7 +77,7 @@ def RunSteps(api):
 
   # Create the index pack
   api.python('create index pack',
-             api.path['build'].join('scripts', 'slave', 'chromium',
+             api.path['build'].join('scripts', 'subordinate', 'chromium',
                                     'package_index.py'),
              ['--path-to-compdb', debug_path.join('compile_commands.json'),
               '--path-to-archive-output', debug_path.join(INDEX_PACK_NAME)])
@@ -103,13 +103,13 @@ def RunSteps(api):
   # src-internal.
   # TODO(akuegel): migrate this recipe to infra_internal repo.
   api.python('archive source',
-             api.path['build'].join('scripts', 'slave',
+             api.path['build'].join('scripts', 'subordinate',
                                     'archive_source_codesearch.py'),
              ['src', 'src-internal', '-f', tarball_name])
 
   api.gsutil.upload(
       name='upload source tarball',
-      source=api.path['slave_build'].join(tarball_name),
+      source=api.path['subordinate_build'].join(tarball_name),
       bucket=bucket_name,
       dest=tarball_name_with_build_number
   )

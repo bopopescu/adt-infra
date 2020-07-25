@@ -1,6 +1,6 @@
 """Downloads a json of builds for the builder and finds breakages.
 
-   This script will query the BuildBot master for ADT (given a set of user
+   This script will query the BuildBot main for ADT (given a set of user
    inputs) and output the failure information it detects via the Buildbot
    JSON api.
 
@@ -161,7 +161,7 @@ def main():
   # This set of options are part of group 'A'.  All are required within this group when executing a
   # 'A' request.
   parser_a = subparsers.add_parser('family', help='Examine the last N builds on a particular family-os combination')
-  parser_a.add_argument('--machine_info', help='JSON file containing machine information.  Can be generated from the master builders.pyl '
+  parser_a.add_argument('--machine_info', help='JSON file containing machine information.  Can be generated from the main builders.pyl '
                                                'with the "create_machine_info" script.  Argument not needed if file is in local directory.')
   parser_a.add_argument('--builder_family', help='The builder family (such as "emu-2.2-release")', required=True)
   parser_a.add_argument('--os', help='The Operating System for the given builder-family', required=True)
@@ -169,7 +169,7 @@ def main():
   # This set of options are part of group 'B'.  All are required within this group when executing a
   # 'B' request.
   parser_b = subparsers.add_parser('machine', help='Examine failures on a particular machine between build numbers')
-  parser_b.add_argument('--machine_name', help='The Particular Machine (ie "Ubuntu 12.04 HD Graphics 4000_emu-master-dev")', required=True)
+  parser_b.add_argument('--machine_name', help='The Particular Machine (ie "Ubuntu 12.04 HD Graphics 4000_emu-main-dev")', required=True)
   parser_b.add_argument('--from_build', help='The build number to start at.', required=True)
   parser_b.add_argument('--to_build', help='The build number to end at (inclusively).', required=True)
   options = parser.parse_args()

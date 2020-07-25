@@ -65,10 +65,10 @@ BUILDERS = freeze({
 
 
 def _RunStepsInternal(api):
-  mastername = api.properties.get('mastername')
+  mainname = api.properties.get('mainname')
   buildername = api.properties.get('buildername')
-  master_dict = BUILDERS.get(mastername, {})
-  bot_config = master_dict.get('builders', {}).get(buildername)
+  main_dict = BUILDERS.get(mainname, {})
+  bot_config = main_dict.get('builders', {}).get(buildername)
 
   api.chromium.set_config('blink',
                           **bot_config.get('chromium_config_kwargs', {}))
@@ -82,9 +82,9 @@ def _RunStepsInternal(api):
     for dep, rev in bot_config.get('set_custom_revs', {}).iteritems():
       api.gclient.c.revisions[dep] = rev % api.properties
 
-  webkit_lint = api.path['build'].join('scripts', 'slave', 'chromium',
+  webkit_lint = api.path['build'].join('scripts', 'subordinate', 'chromium',
                                        'lint_test_files_wrapper.py')
-  webkit_python_tests = api.path['build'].join('scripts', 'slave', 'chromium',
+  webkit_python_tests = api.path['build'].join('scripts', 'subordinate', 'chromium',
                                                'test_webkitpy_wrapper.py')
 
   # Set patch_root used when applying the patch after checkout. Default None
@@ -184,16 +184,16 @@ def GenTests(api):
   with_patch = 'webkit_tests (with patch)'
   without_patch = 'webkit_tests (without patch)'
 
-  def properties(mastername, buildername, patch_project='blink', **kwargs):
-    return api.properties.tryserver(mastername=mastername,
+  def properties(mainname, buildername, patch_project='blink', **kwargs):
+    return api.properties.tryserver(mainname=mainname,
                                     buildername=buildername,
                                     patch_project=patch_project,
                                     swarm_hashes=api.gpu.dummy_swarm_hashes,
                                     **kwargs)
 
-  for mastername, master_config in BUILDERS.iteritems():
-    for buildername, bot_config in master_config['builders'].iteritems():
-      test_name = 'full_%s_%s' % (_sanitize_nonalpha(mastername),
+  for mainname, main_config in BUILDERS.iteritems():
+    for buildername, bot_config in main_config['builders'].iteritems():
+      test_name = 'full_%s_%s' % (_sanitize_nonalpha(mainname),
                                   _sanitize_nonalpha(buildername))
       tests = []
       for pass_first in (True, False):
@@ -208,7 +208,7 @@ def GenTests(api):
 
       for test in tests:
         test += (
-          properties(mastername, buildername,
+          properties(mainname, buildername,
                      blamelist_real=['someone@chromium.org']) +
           api.platform(bot_config['testing']['platform'],
                        bot_config.get(
@@ -291,7 +291,7 @@ def GenTests(api):
   yield (
     api.test('use_v8_patch_on_blink_trybot') +
     properties(buildername='v8_linux_layout_dbg',
-               mastername='tryserver.v8',
+               mainname='tryserver.v8',
                patch_project='v8') +
     api.platform.name('mac')
   )

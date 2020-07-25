@@ -171,11 +171,11 @@ BUILDERS = freeze({
 })
 
 def RunSteps(api):
-  mastername = api.properties['mastername']
+  mainname = api.properties['mainname']
   buildername = api.properties['buildername']
   # TODO(akuegel): Move the configs in builders.py in chromium_tests to this
   # recipe, and get rid of duplications.
-  builder = dict(BUILDERS[mastername][buildername])
+  builder = dict(BUILDERS[mainname][buildername])
   builder_config = builder.get('recipe_config', 'base_config')
   kwargs = {
     'REPO_NAME':'src',
@@ -217,10 +217,10 @@ def RunSteps(api):
         api.chromium_tests.get_compile_targets_for_scripts().json.output
 
     builder['tests'] = api.chromium_tests.generate_tests_from_test_spec(
-        api, test_spec, builder, buildername, mastername, False,
+        api, test_spec, builder, buildername, mainname, False,
         scripts_compile_targets, [api.chromium_tests.steps.generate_script])
 
-  api.path['checkout'] = api.path['slave_build'].join('src')
+  api.path['checkout'] = api.path['subordinate_build'].join('src')
   api.chromium_android.clean_local_files()
 
   api.chromium_android.download_build(bucket=builder['bucket'],
@@ -258,46 +258,46 @@ def _sanitize_nonalpha(text):
   return ''.join(c if c.isalnum() else '_' for c in text)
 
 def GenTests(api):
-  for mastername, builders in BUILDERS.iteritems():
+  for mainname, builders in BUILDERS.iteritems():
     for buildername in builders:
       yield (
-          api.test('full_%s_%s' % (_sanitize_nonalpha(mastername),
+          api.test('full_%s_%s' % (_sanitize_nonalpha(mainname),
                                    _sanitize_nonalpha(buildername))) +
           api.properties.generic(
               repo_name='src',
               repo_url=REPO_URL,
-              mastername=mastername,
+              mainname=mainname,
               buildername=buildername,
               parent_buildername='parent_buildername',
               parent_buildnumber='1729',
               parent_revision='deadbeef',
               revision='deadbeef',
-              slavename='slavename',
+              subordinatename='subordinatename',
               target='Release'))
   yield (api.test('provision_devices') +
       api.properties.generic(
           repo_name='src',
               repo_url=REPO_URL,
-              mastername='chromium.perf',
+              mainname='chromium.perf',
               buildername='Android Nexus5 Perf (1)',
               parent_buildername='parent_buildername',
               parent_buildnumber='1729',
               parent_revision='deadbeef',
               revision='deadbeef',
-              slavename='slavename',
+              subordinatename='subordinatename',
               target='Release')
       + api.step_data('provision_devices', retcode=1))
   yield (api.test('get_perf_test_list_old_data') +
       api.properties.generic(
           repo_name='src',
           repo_url=REPO_URL,
-          mastername='chromium.perf',
+          mainname='chromium.perf',
           buildername='Android Nexus5 Perf (1)',
           parent_buildername='parent_buildername',
           parent_buildnumber='1729',
           parent_revision='deadbeef',
           revision='deadbeef',
-          slavename='slavename',
+          subordinatename='subordinatename',
           target='Release') +
       api.override_step_data(
         'get perf test list',
@@ -306,13 +306,13 @@ def GenTests(api):
       api.properties.generic(
           repo_name='src',
           repo_url=REPO_URL,
-          mastername='chromium.perf',
+          mainname='chromium.perf',
           buildername='Android Nexus5 Perf (1)',
           parent_buildername='parent_buildername',
           parent_buildnumber='1729',
           parent_revision='deadbeef',
           revision='deadbeef',
-          slavename='slavename',
+          subordinatename='subordinatename',
           target='Release') +
       api.override_step_data(
         'read test spec',

@@ -195,7 +195,7 @@ class DefaultFlavorUtils(object):
     itself. For desktop bots, these are just local paths.
     """
     pardir = self._skia_api.m.path.pardir
-    join = self._skia_api.m.path['slave_build'].join
+    join = self._skia_api.m.path['subordinate_build'].join
     return DeviceDirs(
         dm_dir=join('dm'),
         perf_data_dir=self._skia_api.perf_data_dir,

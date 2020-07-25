@@ -34,7 +34,7 @@ def _FetchAppEngineSDKSteps(api):
       # This is a commit after the latest fix to the script.
       branch='f849aad85ac3589c931197bff861faf0e2ef0ece')
   api.python.inline('Run SDK downloader', script_content, args=['--dest=.'])
-  return api.path['slave_build'].join('google_appengine')
+  return api.path['subordinate_build'].join('google_appengine')
 
 
 def RunSteps(api):
@@ -88,9 +88,9 @@ def RunSteps(api):
 def GenTests(api):
   yield (
     api.test('basic') +
-    api.properties(mastername='master.client.catapult',
+    api.properties(mainname='main.client.catapult',
                    buildername='windows',
-                   slavename='windows_slave') +
+                   subordinatename='windows_subordinate') +
     api.step_data('Fetch SDK downloader',
                   api.gitiles.make_encoded_file(
                       '"<simulated contents of get_appengine.py>"'))

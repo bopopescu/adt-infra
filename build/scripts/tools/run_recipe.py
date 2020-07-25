@@ -3,7 +3,7 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 
-"""This allows easy execution of a recipe (scripts/slave/recipes, etc.)
+"""This allows easy execution of a recipe (scripts/subordinate/recipes, etc.)
 without buildbot.
 
 This is currently useful for testing recipes locally while developing them.
@@ -33,7 +33,7 @@ This would execute the run_presubmit recipe, passing
 
 This script can be run from any directory.
 
-See scripts/slave/annotated_run.py for more information about recipes.
+See scripts/subordinate/annotated_run.py for more information about recipes.
 """
 
 import argparse
@@ -46,11 +46,11 @@ import sys
 SCRIPT_PATH = os.path.abspath(os.path.dirname(__file__))
 ROOT_PATH = os.path.abspath(os.path.join(SCRIPT_PATH, os.pardir, os.pardir))
 DEFAULT_SLAVE_DIR = os.path.abspath(os.path.join(os.path.expanduser('~'),
-                                                 'slave', 'fake_slave',
+                                                 'subordinate', 'fake_subordinate',
                                                  'build'))
 
 RUNIT = os.path.join(SCRIPT_PATH, 'runit.py')
-ANNOTATED_RUN = os.path.join(ROOT_PATH, 'scripts', 'slave', 'annotated_run.py')
+ANNOTATED_RUN = os.path.join(ROOT_PATH, 'scripts', 'subordinate', 'annotated_run.py')
 
 USAGE = """
 %(prog)s <recipe_name [<property=value>*]
@@ -77,7 +77,7 @@ def parse_args(args):
   parser = argparse.ArgumentParser(usage=USAGE)
   parser.add_argument('recipe')
   parser.add_argument('--properties-file')
-  parser.add_argument('--master-overrides-slave', action='store_true')
+  parser.add_argument('--main-overrides-subordinate', action='store_true')
   known_args, extra_args = parser.parse_known_args(args)
 
   if known_args.properties_file:
@@ -92,7 +92,7 @@ def parse_args(args):
 
   assert type(properties) is dict
   properties['recipe'] = known_args.recipe
-  return properties, known_args.master_overrides_slave
+  return properties, known_args.main_overrides_subordinate
 
 
 def get_properties_from_args(args):
@@ -112,12 +112,12 @@ def get_properties_from_file(filename):
 
 def main(args):
   """Gets the recipe name and properties and runs an annotated run."""
-  properties, master_overrides_slave = parse_args(args)
+  properties, main_overrides_subordinate = parse_args(args)
   properties.setdefault('use_mirror', False)
 
-  slave_dir = os.environ.get('SLAVE_BUILD_DIR', DEFAULT_SLAVE_DIR)
-  if not os.path.exists(slave_dir):
-    os.makedirs(slave_dir)
+  subordinate_dir = os.environ.get('SLAVE_BUILD_DIR', DEFAULT_SLAVE_DIR)
+  if not os.path.exists(subordinate_dir):
+    os.makedirs(subordinate_dir)
 
   env = os.environ.copy()
   env['RUN_SLAVE_UPDATED_SCRIPTS'] = '1'
@@ -129,10 +129,10 @@ def main(args):
          '--factory-properties', json.dumps(properties),
          '--build-properties', json.dumps(properties)]
 
-  if master_overrides_slave:
-    cmd.append('--master-overrides-slave')
+  if main_overrides_subordinate:
+    cmd.append('--main-overrides-subordinate')
 
-  return subprocess.call(cmd, cwd=slave_dir, env=env)
+  return subprocess.call(cmd, cwd=subordinate_dir, env=env)
 
 
 if __name__ == '__main__':

@@ -31,8 +31,8 @@ class GpuTestApi(recipe_test_api.RecipeTestApi):
       (target, '[dummy hash for %s]' % target)
         for target in common.ALL_ANGLE_TRYBOT_GPU_ISOLATES)
 
-  def get_dummy_swarm_hashes_for_trybot(self, master):
-    if master == 'tryserver.chromium.angle':
+  def get_dummy_swarm_hashes_for_trybot(self, main):
+    if main == 'tryserver.chromium.angle':
       return self.dummy_angle_trybot_swarm_hashes
     else:
       return self.dummy_swarm_hashes

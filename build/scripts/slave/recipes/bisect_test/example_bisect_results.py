@@ -24,7 +24,7 @@ BASIC_CONFIG = {
     'truncate_percent': '0',
     'bug_id': '',
     'gs_bucket': 'chrome-perf',
-    'builder_host': 'master4.golo.chromium.org',
+    'builder_host': 'main4.golo.chromium.org',
     'builder_port': '8341',
     'dummy_builds': 'True',
     'skip_gclient_ops': 'True',
@@ -90,7 +90,7 @@ def add_revision_mapping(api, test, pos, sha):
   stdout = api.raw_io.output('hash:' + sha)
   test += api.step_data(step_name, stdout=stdout)
   step_name = 'Resolving reference range.resolving hash ' + sha
-  pos = 'refs/heads/master@{#%s}' % pos
+  pos = 'refs/heads/main@{#%s}' % pos
   stdout = api.raw_io.output(pos)
   test += api.step_data(step_name, stdout=stdout)
   return test

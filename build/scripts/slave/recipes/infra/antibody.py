@@ -23,8 +23,8 @@ def RunSteps(api):
 
   # project name, checkout path, database name
   repos = [
-    ['chromium', api.m.path['slave_build'].join('src'), 'CHROMIUM_DB'],
-    ['infra', api.m.path['slave_build'].join('infra'), 'INFRA_DB'],
+    ['chromium', api.m.path['subordinate_build'].join('src'), 'CHROMIUM_DB'],
+    ['infra', api.m.path['subordinate_build'].join('infra'), 'INFRA_DB'],
   ]
 
   repo_list = [repo_name for repo_name, _, _ in repos]
@@ -40,12 +40,12 @@ def RunSteps(api):
     cmd.extend(['--logs-debug'])
 
     api.python('Antibody', 'run.py', cmd,
-               cwd=api.m.path['slave_build'].join('infra'))
+               cwd=api.m.path['subordinate_build'].join('infra'))
   api.gsutil(['-m', 'cp', '-r', '-a', 'public-read', dirname, 'gs://antibody/'])
 
 
 def GenTests(api):
   yield (api.test('antibody') +
-         api.properties(mastername='chromium.infra.cron',
+         api.properties(mainname='chromium.infra.cron',
                         buildername='antibody',
-                        slavename='fake-slave'))
+                        subordinatename='fake-subordinate'))

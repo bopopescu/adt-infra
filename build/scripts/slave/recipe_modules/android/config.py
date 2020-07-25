@@ -25,9 +25,9 @@ def BaseConfig(USE_MIRROR=False):
     # Path stuff
     chromium_in_android_subpath = Static('/'.join(chromium_in_android_subpath)),
     build_path = Static(build_path),
-    slave_chromium_in_android_path = Static(
+    subordinate_chromium_in_android_path = Static(
       build_path.join(*chromium_in_android_subpath)),
-    slave_android_out_path = Static(build_path.join('out')),
+    subordinate_android_out_path = Static(build_path.join('out')),
   )
 
 config_ctx = config_item_context(BaseConfig)

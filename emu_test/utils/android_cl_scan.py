@@ -87,9 +87,9 @@ def generate_git_information(poller):
     The git branch and git target for the passed in poller to query AB with.
   '''
   if 'emulator_linux_poller' in poller or 'emulator_windows_poller' in poller:
-    return 'aosp-emu-master-dev', 'sdk_tools_linux'
+    return 'aosp-emu-main-dev', 'sdk_tools_linux'
   elif 'emulator_mac_poller' in poller:
-    return 'aosp-emu-master-dev', 'sdk_tools_mac'
+    return 'aosp-emu-main-dev', 'sdk_tools_mac'
   elif 'sys_image_mnc_poller' in poller:
     return 'git_mnc-emu-dev', 'sdk_google_phone_x86-sdk_addon'
   elif 'sys_image_gb_poller' in poller:
@@ -122,10 +122,10 @@ def generate_git_information(poller):
     return 'git_pi-dev', 'sdk_gphone_x86-sdk_addon'
   elif 'sys_image_pi_car_dev_poller' in poller:
     return 'git_pi-car-dev', 'aosp_car_x86_64-userdebug'
-  elif 'sys_image_master_poller' in poller:
-    return 'git_master', 'sdk_gphone_x86-sdk_addon'
+  elif 'sys_image_main_poller' in poller:
+    return 'git_main', 'sdk_gphone_x86-sdk_addon'
   elif 'sys_image_aosp_poller' in poller:
-    return 'aosp-master', 'sdk_x86-sdk'
+    return 'aosp-main', 'sdk_x86-sdk'
   elif 'emulator_2.7_linux_poller' in poller or 'emulator_2.7_windows_poller' in poller:
     return 'aosp-emu-2.7-release', 'sdk_tools_linux'
   elif 'emulator_2.7_mac_poller' in poller:
@@ -136,7 +136,7 @@ def generate_git_information(poller):
 
 
 def query_ab(poller, prevRevision, currRevision):
-  '''Entry function for master from gs_multi_poller.py to create changes.
+  '''Entry function for main from gs_multi_poller.py to create changes.
 
   Args:
     poller: The poller (such as 'emulator_linux_poller') that initiated the change.
@@ -176,7 +176,7 @@ def query_ab(poller, prevRevision, currRevision):
 if __name__ == '__main__':
   creds     = LoadCredentials()
   ab_client = getApiClient(creds)
-  req = ab_client.build().list(branch='aosp-emu-master-dev',
+  req = ab_client.build().list(branch='aosp-emu-main-dev',
                                buildType='submitted',
                                target='sdk_tools_linux',
                                startBuildId=3578761,

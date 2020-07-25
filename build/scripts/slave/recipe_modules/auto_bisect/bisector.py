@@ -33,7 +33,7 @@ class Bisector(object):
     """
     super(Bisector, self).__init__()
     self._api = api
-    self.ensure_sync_master_branch()
+    self.ensure_sync_main_branch()
     self.bisect_config = bisect_config
     self.config_step()
     self.revision_class = revision_class
@@ -239,7 +239,7 @@ class Bisector(object):
 
   def _get_rev_range(self, min_rev, max_rev):
     script = self.api.resource('resolve_range.py')
-    depot_path = self.api.m.path['slave_build'].join('src')
+    depot_path = self.api.m.path['subordinate_build'].join('src')
     step_name = ('for revisions %s:%s' %
                  (min_rev, max_rev))
     step_result = self.api.m.python(step_name, script, [min_rev, max_rev],
@@ -253,7 +253,7 @@ class Bisector(object):
                                base_revision):
     results = []
     depot = depot_config.DEPOT_DEPS_NAME[depot_name]
-    depot_path = self.api.m.path['slave_build'].join(depot['src'])
+    depot_path = self.api.m.path['subordinate_build'].join(depot['src'])
     step_name = ('Expanding revision range for revision %s on depot %s'
                  % (max_rev, depot_name))
     step_result = self.api.m.git('log', '--format=%H', min_rev + '...' +
@@ -698,15 +698,15 @@ class Bisector(object):
 
     return 'gs://chrome-perf/Linux Builder/full-build-linux_'
 
-  def ensure_sync_master_branch(self):
-    """Make sure the local master is in sync with the fetched origin/master.
+  def ensure_sync_main_branch(self):
+    """Make sure the local main is in sync with the fetched origin/main.
 
-    We have seen on several occasions that the local master branch gets reset
+    We have seen on several occasions that the local main branch gets reset
     to previous revisions and also detached head states. Running this should
     take care of either situation.
     """
     # TODO(robertocn): Investigate what causes the states mentioned in the
     # docstring in the first place.
-    self.api.m.git('update-ref', 'refs/heads/master',
-                   'refs/remotes/origin/master')
-    self.api.m.git('checkout', 'master', cwd=self.api.m.path['checkout'])
+    self.api.m.git('update-ref', 'refs/heads/main',
+                   'refs/remotes/origin/main')
+    self.api.m.git('checkout', 'main', cwd=self.api.m.path['checkout'])

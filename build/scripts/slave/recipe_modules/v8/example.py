@@ -39,8 +39,8 @@ def RunSteps(api):
   }
   api.v8.runperf(api.v8.perf_tests, perf_config, category='ia32',
                  extra_flags=['--flag1', '--flag2'])
-  output1 = api.path['slave_build'].join('test_output1.json')
-  output2 = api.path['slave_build'].join('test_output2.json')
+  output1 = api.path['subordinate_build'].join('test_output1.json')
+  output2 = api.path['subordinate_build'].join('test_output2.json')
   results = api.v8.merge_perf_results(output1, output2)
   api.step('do something with the results', ['echo', results['res']])
 
@@ -69,13 +69,13 @@ def GenTests(api):
     api.test('perf_failures') +
     api.v8(perf_failures=True) +
     api.step_data('Example1', retcode=1) +
-    api.properties.generic(mastername='Fake_Master',
+    api.properties.generic(mainname='Fake_Main',
                            buildername='Fake Builder',
                            revision='20123')
   )
   yield (
     api.test('forced_build') +
-    api.properties.generic(mastername='Fake_Master',
+    api.properties.generic(mainname='Fake_Main',
                            buildername='Fake Builder') +
     api.step_data(
       'merge perf results',

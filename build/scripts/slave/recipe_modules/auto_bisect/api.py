@@ -72,7 +72,7 @@ class AutoBisectApi(recipe_api.RecipeApi):
     Args:
       revision (str): Revision you want to gather information on; a git
         commit hash.
-      git_checkout_dir (slave.recipe_config_types.Path): A path to run git
+      git_checkout_dir (subordinate.recipe_config_types.Path): A path to run git
         from.
 
     Returns:
@@ -113,7 +113,7 @@ class AutoBisectApi(recipe_api.RecipeApi):
         'Preparing for Bisection',
         script=self.m.path['checkout'].join(
             'tools', 'prepare-bisect-perf-regression.py'),
-        args=['-w', self.m.path['slave_build']])
+        args=['-w', self.m.path['subordinate_build']])
     args = []
 
     kwargs['allow_subannotations'] = True
@@ -131,14 +131,14 @@ class AutoBisectApi(recipe_api.RecipeApi):
     ]
     self.m.chromium.runtest(
         self.m.path['checkout'].join('tools', 'run-bisect-perf-regression.py'),
-        ['-w', self.m.path['slave_build']] + args,
+        ['-w', self.m.path['subordinate_build']] + args,
         name='Running Bisection',
         xvfb=True, **kwargs)
 
-  def start_test_run_for_bisect(self, api, update_step, master_dict):
-    mastername = api.properties.get('mastername')
+  def start_test_run_for_bisect(self, api, update_step, main_dict):
+    mainname = api.properties.get('mainname')
     buildername = api.properties.get('buildername')
-    bot_config = master_dict.get('builders', {}).get(buildername)
+    bot_config = main_dict.get('builders', {}).get(buildername)
     api.bisect_tester.upload_job_url()
     if api.chromium.c.TARGET_PLATFORM == 'android':
       # The best way to ensure the old build directory is not used is to
@@ -174,10 +174,10 @@ class AutoBisectApi(recipe_api.RecipeApi):
         )
     else:
       api.chromium_tests.tests_for_builder(
-          mastername,
+          mainname,
           buildername,
           update_step,
-          master_dict,
+          main_dict,
           override_bot_type='tester')
 
     tests = [api.chromium_tests.steps.BisectTest()]
@@ -185,18 +185,18 @@ class AutoBisectApi(recipe_api.RecipeApi):
     if not tests:  # pragma: no cover
       return
     api.chromium_tests.configure_swarming(  # pragma: no cover
-        'chromium', precommit=False, mastername=mastername)
+        'chromium', precommit=False, mainname=mainname)
     test_runner = api.chromium_tests.create_test_runner(api, tests)
 
-    with api.chromium_tests.wrap_chromium_tests(mastername, tests):
+    with api.chromium_tests.wrap_chromium_tests(mainname, tests):
       if api.chromium.c.TARGET_PLATFORM == 'android':
         api.chromium_android.adb_install_apk('ChromePublic.apk')
       test_runner()
 
-  def start_try_job(self, api, update_step=None, master_dict=None, extra_src='',
+  def start_try_job(self, api, update_step=None, main_dict=None, extra_src='',
                     path_to_config='', **kwargs):
-    if master_dict is None:  # pragma: no cover
-      master_dict = {}
+    if main_dict is None:  # pragma: no cover
+      main_dict = {}
     affected_files = self.m.tryserver.get_files_affected_by_patch()
 
     # Avoid duplication of device setup steps for bisect recipe tester which
@@ -211,10 +211,10 @@ class AutoBisectApi(recipe_api.RecipeApi):
       if BISECT_CONFIG_FILE in affected_files:
         self.run_bisect_script(extra_src='', path_to_config='', **kwargs)
       elif api.properties.get('bisect_config'):
-        self.start_test_run_for_bisect(api, update_step, master_dict)
+        self.start_test_run_for_bisect(api, update_step, main_dict)
       else:
         self.m.perf_try.start_perf_try_job(
-            affected_files, update_step, master_dict)
+            affected_files, update_step, main_dict)
     finally:
       # Avoid duplication of device setup steps for bisect recipe tester, which
       # are run while running tests in chromium_tests.wrap_chromium_tests.

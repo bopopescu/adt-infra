@@ -11,41 +11,41 @@ from buildbot.schedulers.timed import Nightly
 from buildbot.status.mail import MailNotifier
 from buildbot import util
 
-from config_bootstrap import Master
+from config_bootstrap import Main
 
 from common import chromium_utils
 
-from master import gitiles_poller
-from master import master_utils
-from master import repo_poller
-from master import slaves_list
-from master.factory import annotator_factory
+from main import gitiles_poller
+from main import main_utils
+from main import repo_poller
+from main import subordinates_list
+from main.factory import annotator_factory
 from gs_multi_poller import GSMultiPoller
 from sysimage_release_psq_poller import SysimageReleasePsqPoller
 from emu_gs_scheduler import EmulatorSingleBranchScheduler
 
-def PopulateBuildmasterConfig(BuildmasterConfig, builders_path,
-                              active_master_cls):
-  """Read builders_path and populate a build master config dict."""
+def PopulateBuildmainConfig(BuildmainConfig, builders_path,
+                              active_main_cls):
+  """Read builders_path and populate a build main config dict."""
   builders = chromium_utils.ReadBuildersFile(builders_path)
-  _Populate(BuildmasterConfig, builders, active_master_cls)
+  _Populate(BuildmainConfig, builders, active_main_cls)
 
 
-def _Populate(BuildmasterConfig, builders, active_master_cls):
-  m_annotator = annotator_factory.AnnotatorFactory(active_master_cls)
+def _Populate(BuildmainConfig, builders, active_main_cls):
+  m_annotator = annotator_factory.AnnotatorFactory(active_main_cls)
 
-  c = BuildmasterConfig
+  c = BuildmainConfig
   c['logCompressionLimit'] = False
-  c['projectName'] = active_master_cls.project_name
-  c['projectURL'] = Master.project_url
-  c['buildbotURL'] = active_master_cls.buildbot_url
+  c['projectName'] = active_main_cls.project_name
+  c['projectURL'] = Main.project_url
+  c['buildbotURL'] = active_main_cls.buildbot_url
 
   # This sets c['db_url'] to the database connect string in found in
-  # the .dbconfig in the master directory, if it exists. If this is
+  # the .dbconfig in the main directory, if it exists. If this is
   # a production host, it must exist.
   chromium_utils.DatabaseSetup(
       c,
-      require_dbconfig=active_master_cls.is_production_host)
+      require_dbconfig=active_main_cls.is_production_host)
 
   c['builders'] = _ComputeBuildersWithCategory(builders, m_annotator)
 
@@ -54,34 +54,34 @@ def _Populate(BuildmasterConfig, builders, active_master_cls):
   c['change_source'], tag_comparator = _ComputeChangeSourceAndTagComparator(
       builders)
 
-  # The 'slaves' list defines the set of allowable buildslaves. List all the
-  # slaves registered to a builder. Remove dupes.
-  c['slaves'] = master_utils.AutoSetupSlaves(
+  # The 'subordinates' list defines the set of allowable buildsubordinates. List all the
+  # subordinates registered to a builder. Remove dupes.
+  c['subordinates'] = main_utils.AutoSetupSubordinates(
       c['builders'],
-      Master.GetBotPassword(),
+      Main.GetBotPassword(),
       missing_recipients=['buildbot@chromium-build-health.appspotmail.com'])
 
   # This does some sanity checks on the configuration.
-  slaves = slaves_list.BaseSlavesList(
-      chromium_utils.GetSlavesFromBuilders(builders),
-      builders['master_classname'])
-  master_utils.VerifySetup(c, slaves)
+  subordinates = subordinates_list.BaseSubordinatesList(
+      chromium_utils.GetSubordinatesFromBuilders(builders),
+      builders['main_classname'])
+  main_utils.VerifySetup(c, subordinates)
 
-  # Adds common status and tools to this master.
+  # Adds common status and tools to this main.
   # TODO: Look at the logic in this routine to see if any of the logic
   # in this routine can be moved there to simplify things.
-  master_utils.AutoSetupMaster(c, active_master_cls,
+  main_utils.AutoSetupMain(c, active_main_cls,
       public_html=os.path.join(chromium_utils.BUILD_DIR,
-                               'masters', 'master.client.adt', 'public_html'),
+                               'mains', 'main.client.adt', 'public_html'),
       templates=builders['templates'],
       tagComparator=tag_comparator,
-      enable_http_status_push=active_master_cls.is_production_host)
+      enable_http_status_push=active_main_cls.is_production_host)
 
-  # TODO: AutoSetupMaster's settings for the following are too low to be
+  # TODO: AutoSetupMain's settings for the following are too low to be
   # useful for most projects. We should fix that.
   c['buildHorizon'] = 3000
   c['logHorizon'] = 3000
-  # Must be at least 2x the number of slaves.
+  # Must be at least 2x the number of subordinates.
   c['eventHorizon'] = 200
 
 
@@ -118,7 +118,7 @@ def _ComputeBuilders(builders, m_annotator, actual_builders, cat):
 
     actual_builder_name = "%s_%s" % (builder_name, cat)
     # Use cat as directory name to avoid path being too long on Windows.
-    slavebuilddir = builder_data.get('slavebuilddir',
+    subordinatebuilddir = builder_data.get('subordinatebuilddir',
                                      util.safeTranslate(cat))
     factory = m_annotator.BaseFactory(
         recipe=builder_data['recipe'],
@@ -130,8 +130,8 @@ def _ComputeBuilders(builders, m_annotator, actual_builders, cat):
         'mergeRequests': merge_requests,
         'name': actual_builder_name,
         'factory': factory,
-        'slavebuilddir': slavebuilddir,
-        'slavenames': chromium_utils.GetSlaveNamesForBuilder(builders,
+        'subordinatebuilddir': subordinatebuilddir,
+        'subordinatenames': chromium_utils.GetSubordinateNamesForBuilder(builders,
                                                              builder_name),
         'category': "%s,%s"%(cat, builder_data["tag"]) if cat is not None else builder_data.get('category'),
         'trybot': builder_data.get('trybot'),
@@ -158,14 +158,14 @@ def _ComputeSchedulers(builders):
     if scheduler_type in ('git_poller', 'repo_poller'):
       schedulers.append(SingleBranchScheduler(
           name=scheduler_name,
-          branch='master',
+          branch='main',
           treeStableTimer=60,
           builderNames=builder_names))
 
     elif scheduler_type == 'cron':
       schedulers.append(Nightly(
           name=scheduler_name,
-          branch='master',
+          branch='main',
           minute=scheduler_values['minute'],
           hour=scheduler_values['hour'],
           builderNames=builder_names))
@@ -173,7 +173,7 @@ def _ComputeSchedulers(builders):
     elif scheduler_type == 'adb_cron':
       schedulers.append(Nightly(
           name=scheduler_name,
-          branch='master',
+          branch='main',
           hour=range(0, 24, scheduler_values['every_x_hour']),
           builderNames=builder_names))
 

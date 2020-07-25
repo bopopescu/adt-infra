@@ -32,7 +32,7 @@ GSUTIL = os.path.join(GSUTIL_DIR, 'gsutil')
 BUILD_NUMBER = 'build_number'
 
 class SysimageReleasePsqPoller(base.PollingChangeSource):
-  """Poll a Google Storage URL for a release testing request and submit to change master."""
+  """Poll a Google Storage URL for a release testing request and submit to change main."""
 
   compare_attrs = ['changeurl', 'pollInterval']
 
@@ -136,7 +136,7 @@ class SysimageReleasePsqPoller(base.PollingChangeSource):
       props={Constants.CHANGE_FILES: ','.join(file_list),
              Constants.CHANGE_ID: change[Constants.CHANGE_ID],
              Constants.CHANGE_REVISION: change[Constants.CHANGE_REVISION]}
-      self.master.addChange(who=self.name,
+      self.main.addChange(who=self.name,
                             revision=build_number,
                             files=file_list,
                             project=self.project,

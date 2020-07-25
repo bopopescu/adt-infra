@@ -130,7 +130,7 @@ if __name__ == '__main__':
 
     When testcases are finished, we manually kill the ADB server.  This ensures a couple things:
       1.  It ensures our next test is run with a fresh daemon.  We are not testing ADB in these tests.
-      2.  It ensures we do not hold up Buildbot code by holding on to a child process, blocking slave return.
+      2.  It ensures we do not hold up Buildbot code by holding on to a child process, blocking subordinate return.
     """
     os.environ["SHELL"] = "/bin/bash"
 

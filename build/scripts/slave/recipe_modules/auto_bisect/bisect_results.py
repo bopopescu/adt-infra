@@ -197,7 +197,7 @@ class BisectResults(object):
       self.culprit_cl_hash = (culprit.deps_revision or
                               culprit.commit_hash)
       if culprit.depot_name != 'chromium':  # pragma: no cover
-        repo_path = api.m.path['slave_build'].join(culprit.depot['src'])
+        repo_path = api.m.path['subordinate_build'].join(culprit.depot['src'])
       else:
         repo_path = None
       culprit_info = api.query_revision_info(self.culprit_cl_hash, repo_path)

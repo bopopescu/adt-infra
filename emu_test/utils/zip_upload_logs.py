@@ -96,7 +96,7 @@ def zip_and_upload():
       verbose_call(['ssh', remote_host, 'mkdir -p %s' % remote_path])
       ui_gs_dst = 'gs://sysimage_test_traces/%s/%s' % (builderName, args.log_dir)
       for x in os.listdir(ui_logdir):
-        # upload gradle report to the master
+        # upload gradle report to the main
         if os.path.isdir(os.path.join(ui_logdir, x)) and x.endswith("_report"):
           saved_path = os.path.abspath(os.path.curdir)
           os.chdir(os.path.join(os.path.abspath(os.path.curdir), ui_logdir))

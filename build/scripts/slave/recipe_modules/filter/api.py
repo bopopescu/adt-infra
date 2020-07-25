@@ -164,7 +164,7 @@ class FilterApi(recipe_api.RecipeApi):
           self.m.path['checkout'].join('tools', 'mb', 'mb.py'),
           args=['analyze',
                 '-m',
-                self.m.properties['mastername'],
+                self.m.properties['mainname'],
                 '-b',
                 self.m.properties['buildername'],
                 '-v',

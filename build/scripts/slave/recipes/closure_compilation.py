@@ -39,7 +39,7 @@ def GenTests(api):
   yield (
     api.test('main') +
     api.properties.generic(
-      mastername='chromium.fyi',
+      mainname='chromium.fyi',
       buildername='Closure Compilation Linux',
     )
   )

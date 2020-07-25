@@ -37,7 +37,7 @@ def build_cipd_packages(api, repo, rev):
   # Upload them, attach tags.
   tags = [
     'buildbot_build:%s/%s/%s' % (
-        api.properties['mastername'],
+        api.properties['mainname'],
         api.properties['buildername'],
         api.properties['buildnumber']),
     'git_repository:%s' % repo,
@@ -164,7 +164,7 @@ def GenTests(api):
     api.properties.git_scheduled(
         buildername='infra-continuous',
         buildnumber=123,
-        mastername='chromium.infra',
+        mainname='chromium.infra',
         repository='https://chromium.googlesource.com/infra/infra',
     ) +
     api.override_step_data(
@@ -175,7 +175,7 @@ def GenTests(api):
     api.properties.git_scheduled(
         buildername='infra-continuous',
         buildnumber=123,
-        mastername='chromium.infra',
+        mainname='chromium.infra',
         repository='https://chromium.googlesource.com/infra/infra',
     ) +
     api.platform.name('win')
@@ -185,7 +185,7 @@ def GenTests(api):
     api.properties.git_scheduled(
         buildername='infra-internal-continuous',
         buildnumber=123,
-        mastername='internal.infra',
+        mainname='internal.infra',
         repository=
             'https://chrome-internal.googlesource.com/infra/infra_internal',
     ) +
@@ -197,7 +197,7 @@ def GenTests(api):
     api.properties.git_scheduled(
         buildername='infra-continuous-64',
         buildnumber=123,
-        mastername='chromium.infra',
+        mainname='chromium.infra',
         repository='https://chromium.googlesource.com/infra/infra',
     )
   )

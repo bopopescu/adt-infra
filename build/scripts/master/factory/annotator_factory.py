@@ -9,33 +9,33 @@ Specifically creates a basic factory that will execute an arbirary annotator
 script.
 """
 
-from master.factory import annotator_commands
-from master.factory import commands
-from master.factory.build_factory import BuildFactory
+from main.factory import annotator_commands
+from main.factory import commands
+from main.factory.build_factory import BuildFactory
 
 
 class AnnotatorFactory(object):
   """Encapsulates data and methods common to all annotators."""
 
-  def __init__(self, active_master=None):
+  def __init__(self, active_main=None):
     self._factory_properties = None
-    self.active_master = active_master
+    self.active_main = active_main
 
   def BaseFactory(self, recipe=None, factory_properties=None, triggers=None,
                   timeout=3600, max_time=None):
     """The primary input for the factory is the |recipe|, which specifies the
     name of a recipe file to search for. The recipe file will fill in the rest
     of the |factory_properties|. This setup allows for major changes to factory
-    properties to occur on slave-side without master restarts.
+    properties to occur on subordinate-side without main restarts.
 
     NOTE: Please be very discerning with what |factory_properties| you pass to
     this method. Ideally, you will pass none, and that will be sufficient in the
     vast majority of cases. Think very carefully before adding any
-    |factory_properties| here, as changing them will require a master restart.
+    |factory_properties| here, as changing them will require a main restart.
 
     |recipe| is the name of the recipe to pass to annotated_run.  If omitted,
     annotated_run will attempt to look up the recipe from builders.pyl in the
-    master.
+    main.
 
     |timeout| refers to the maximum number of seconds a step should be allowed
     to run without output. After no output for |timeout| seconds, the step is
@@ -52,7 +52,7 @@ class AnnotatorFactory(object):
     factory = BuildFactory()
     factory.properties.update(self._factory_properties, 'AnnotatorFactory')
     cmd_obj = annotator_commands.AnnotatorCommands(
-        factory, active_master=self.active_master)
+        factory, active_main=self.active_main)
     cmd_obj.AddAnnotatedScript(
       factory_properties, timeout=timeout, max_time=max_time)
 

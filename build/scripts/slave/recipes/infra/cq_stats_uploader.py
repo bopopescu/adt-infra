@@ -19,7 +19,7 @@ DEPS = [
 def cq_stats_uploader(api, project, date_range):
   api.python(
       'cq_stats_uploader (%s-%s)' % (project, date_range),
-      api.path['slave_build'].join('infra', 'run.py'),
+      api.path['subordinate_build'].join('infra', 'run.py'),
       [
         'infra.tools.cq_stats_uploader',
         '--project', project,
@@ -42,9 +42,9 @@ def RunSteps(api):
 
 def GenTests(api):
   server_props = (
-    api.properties(mastername='chromium.infra.cron') +
+    api.properties(mainname='chromium.infra.cron') +
     api.properties(buildername='cq_stats_uploader') +
-    api.properties(slavename='slavename')
+    api.properties(subordinatename='subordinatename')
   )
 
   yield server_props + api.test('basic')

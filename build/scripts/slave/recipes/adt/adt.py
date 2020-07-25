@@ -9,7 +9,7 @@ import os
 import shutil
 import csv
 import collections
-from slave.email_watcher import EmailRecipeWatcher
+from subordinate.email_watcher import EmailRecipeWatcher
 
 DEPS = [
     'adt',
@@ -24,7 +24,7 @@ DEPS = [
 ]
 
 # The emulator branches we currently poll.
-EMULATOR_BRANCHES = ['emu-master-dev', 'emu-2.7-release']
+EMULATOR_BRANCHES = ['emu-main-dev', 'emu-2.7-release']
 
 MASTER_USER = 'user'
 MASTER_IP = '172.27.213.40'
@@ -33,9 +33,9 @@ MASTER_IP = '172.27.213.40'
 bootStep = collections.namedtuple('bootStep', 'description, filter')
 # Dictionary that keys between git branch and the *_cfg.csv information we will use for that build.
 BOOT_STEPS = {
-        'emu-master-dev': bootStep('public', '{"ori": "public"}'),
+        'emu-main-dev': bootStep('public', '{"ori": "public"}'),
         'emu-2.7-release': bootStep('public', '{"ori": "public"}'),
-        'master': bootStep('master', '{"ori": "master"}'),
+        'main': bootStep('main', '{"ori": "main"}'),
         'aosp': bootStep('aosp', '{"ori": "aosp"}'),
         'pi-dev': bootStep('PI', '{"ori": "pi"}'),
         "pi-car-dev": bootStep('PI_CAR', '{"ori": "pi-car"}'),
@@ -63,7 +63,7 @@ def get_android_sdk_home(api, is_cross_build, is_cts):
     are testing the emulator, we always test against the current production system-images in "_public".
 
     Args:
-        api:  Buildbot API passed to RunSteps with buildbot master data.
+        api:  Buildbot API passed to RunSteps with buildbot main data.
         is_cross_build: Boolean indicating if this is a cross_build request.
         is_cts: Boolean indicating if this is a cts request.
 
@@ -89,7 +89,7 @@ def create_env(api, android_sdk_home):
     """Populates the environment we need for the given run.  Platform dependent.
 
     Args:
-        api:  Buildbot API passed to RunSteps with buildbot master data.
+        api:  Buildbot API passed to RunSteps with buildbot main data.
         android_sdk_home:  Path to the Android SDK Folder we will use for this run.
 
     Returns:
@@ -121,7 +121,7 @@ def get_props(api, android_sdk_home, build_cache): # pragma: no cover
     """Read the build_cache file from disk and return the properties for the given build.
 
     Args:
-        api: Buildbot API passed to RunSteps with buildbot master data.
+        api: Buildbot API passed to RunSteps with buildbot main data.
         android_sdk_home: Location fo the Android SDK we are currently using.
         build_cache: File that contains written properties for reading, populated by subsequent run.
 
@@ -158,7 +158,7 @@ def set_props(api, build_cache):
     """Writes out the build_cache file to be used by a subsequent run.  Cross Builds utilize this file.
 
     Args:
-        api: Buildbot API passed to RunSteps with buildbot master data.
+        api: Buildbot API passed to RunSteps with buildbot main data.
         build_cache: File to write out properties to for reading by subsequent run.
     """
     props = {}
@@ -240,7 +240,7 @@ def RunSteps(api):
 
     try:
         api.python('Initialize Bot', init_bot_util_path,
-                   ['--build-dir', api.path['slave_build'],
+                   ['--build-dir', api.path['subordinate_build'],
                     '--props', api.json.dumps(api.properties.thaw()),
                     '--log-dir', log_dir],
                    env=env)
@@ -377,7 +377,7 @@ def RunSteps(api):
                                            True)
 
         if is_cts:
-            emulator_path = api.path.join('emu-master-dev', 'emulator', 'emulator')
+            emulator_path = api.path.join('emu-main-dev', 'emulator', 'emulator')
             api.adt.PythonTestStep('Run Emulator CTS Test',
                                    log_dir,
                                    'CTS_test',
@@ -398,7 +398,7 @@ def RunSteps(api):
                                    env,
                                    True)
 
-        logs_dir = '/home/user/buildbot/external/adt-infra/build/masters/master.client.adt/slave_logs/'
+        logs_dir = '/home/user/buildbot/external/adt-infra/build/mains/main.client.adt/slave_logs/'
         upload_log_args = ['--dir', log_dir,
                            '--name', 'build_%s-rev_%s.zip' % (buildnum, rev),
                            '--ip', MASTER_IP,
@@ -437,86 +437,86 @@ def GenTests(api):
         return api.properties(**properties)
 
     yield (
-            api.test('linux-emu-master-dev') +
+            api.test('linux-emu-main-dev') +
             api.platform.name('linux') +
             api.platform.bits(32) +
             props({
                     'blamelist': ['emulator_linux_poller'],
                     'branch': 'Ubuntu',
                     'buildbotURL': 'http://chromeos1-row3-rack2-host1.cros.corp.google.com:8200/',
-                    'buildername': 'Linux emu-master-dev',
+                    'buildername': 'Linux emu-main-dev',
                     'buildnumber': '1090',
-                    'file_list': 'gs://android-build-emu/builds/aosp-emu-master-dev-linux-sdk_tools_linux/4696395/7e4b04c674e12fb492b0834b0b6b1f769629d234103b3703c3e74aa17ffe8e19/sdk-repo-linux-emulator-4696395.zip',
+                    'file_list': 'gs://android-build-emu/builds/aosp-emu-main-dev-linux-sdk_tools_linux/4696395/7e4b04c674e12fb492b0834b0b6b1f769629d234103b3703c3e74aa17ffe8e19/sdk-repo-linux-emulator-4696395.zip',
                     'got_revision': '4696395',
-                    'logs_dir': '/home/user/buildbot/external/adt-infra/build/masters/master.client.adt/slave_logs/',
-                    'mastername': 'client.adt',
+                    'logs_dir': '/home/user/buildbot/external/adt-infra/build/mains/main.client.adt/slave_logs/',
+                    'mainname': 'client.adt',
                     'prev_build': '4696278',
-                    'project': 'emu-master-dev',
+                    'project': 'emu-main-dev',
                     'recipe': 'adt/adt',
                     'repository': '',
                     'requestedAt': 1522746361,
                     'revision': '4696395',
-                    'scheduler': 'emu_master_dev_scheduler',
-                    'slavename': 'chromeos1-row3-rack3-host1',
-                    'workdir': '/home/adt_build/Buildbot/adt-infra/build/slave/emu-master-dev',
+                    'scheduler': 'emu_main_dev_scheduler',
+                    'subordinatename': 'chromeos1-row3-rack3-host1',
+                    'workdir': '/home/adt_build/Buildbot/adt-infra/build/subordinate/emu-main-dev',
                     'TESTING': True,
-                    'emu-master-dev': '4696395',
+                    'emu-main-dev': '4696395',
             })
     )
 
     yield (
-            api.test('mac-emu-master-dev') +
+            api.test('mac-emu-main-dev') +
             api.platform.name('mac') +
             api.platform.bits(32) +
             props({
                 'blamelist': ['emulator_mac_poller'],
                 'branch': 'Mac',
                 'buildbotURL': 'http://chromeos1-row3-rack2-host1.cros.corp.google.com:8200/',
-                'buildername': 'Mac emu-master-dev',
+                'buildername': 'Mac emu-main-dev',
                 'buildnumber': '1090',
-                'file_list': 'gs://android-build-emu/builds/aosp-emu-master-dev-mac-sdk_tools_mac/4696395/ce060f3f471e3aa5da1b29425381514a1dc07e8cca1343dff2b4d93cbc7a3efc/sdk-repo-darwin-emulator-4696395.zip',
+                'file_list': 'gs://android-build-emu/builds/aosp-emu-main-dev-mac-sdk_tools_mac/4696395/ce060f3f471e3aa5da1b29425381514a1dc07e8cca1343dff2b4d93cbc7a3efc/sdk-repo-darwin-emulator-4696395.zip',
                 'got_revision': '4696395',
-                'logs_dir': '/home/user/buildbot/external/adt-infra/build/masters/master.client.adt/slave_logs/',
-                'mastername': 'client.adt',
+                'logs_dir': '/home/user/buildbot/external/adt-infra/build/mains/main.client.adt/slave_logs/',
+                'mainname': 'client.adt',
                 'prev_build': '4696278',
-                'project': 'emu-master-dev',
+                'project': 'emu-main-dev',
                 'recipe': 'adt/adt',
                 'repository': '',
                 'requestedAt': 1522746361,
                 'revision': '4696395',
-                'scheduler': 'emu_master_dev_scheduler',
-                'slavename': 'chromeos1-row3-rack3-host1',
-                'workdir': '/home/adt_build/Buildbot/adt-infra/build/slave/emu-master-dev',
+                'scheduler': 'emu_main_dev_scheduler',
+                'subordinatename': 'chromeos1-row3-rack3-host1',
+                'workdir': '/home/adt_build/Buildbot/adt-infra/build/subordinate/emu-main-dev',
                 'TESTING': True,
-                'emu-master-dev': '4696395',
+                'emu-main-dev': '4696395',
             })
     )
 
     yield (
-            api.test('win64-emu-master-dev') +
+            api.test('win64-emu-main-dev') +
             api.platform.name('win') +
             api.platform.bits(64) +
             props({
                 'blamelist': ['emulator_windows_poller'],
                 'branch': 'Win',
                 'buildbotURL': 'http://chromeos1-row3-rack2-host1.cros.corp.google.com:8200/',
-                'buildername': 'Win64 emu-master-dev',
+                'buildername': 'Win64 emu-main-dev',
                 'buildnumber': '1090',
-                'file_list': 'gs://android-build-emu/builds/aosp-emu-master-dev-linux-sdk_tools_linux/4696395/7e4b04c674e12fb492b0834b0b6b1f769629d234103b3703c3e74aa17ffe8e19/sdk-repo-windows-emulator-4696395.zip',
+                'file_list': 'gs://android-build-emu/builds/aosp-emu-main-dev-linux-sdk_tools_linux/4696395/7e4b04c674e12fb492b0834b0b6b1f769629d234103b3703c3e74aa17ffe8e19/sdk-repo-windows-emulator-4696395.zip',
                 'got_revision': '4696395',
-                'logs_dir': '/home/user/buildbot/external/adt-infra/build/masters/master.client.adt/slave_logs/',
-                'mastername': 'client.adt',
+                'logs_dir': '/home/user/buildbot/external/adt-infra/build/mains/main.client.adt/slave_logs/',
+                'mainname': 'client.adt',
                 'prev_build': '4696278',
-                'project': 'emu-master-dev',
+                'project': 'emu-main-dev',
                 'recipe': 'adt/adt',
                 'repository': '',
                 'requestedAt': 1522746361,
                 'revision': '4696395',
-                'scheduler': 'emu_master_dev_scheduler',
-                'slavename': 'chromeos1-row3-rack3-host1',
-                'workdir': '/home/adt_build/Buildbot/adt-infra/build/slave/emu-master-dev',
+                'scheduler': 'emu_main_dev_scheduler',
+                'subordinatename': 'chromeos1-row3-rack3-host1',
+                'workdir': '/home/adt_build/Buildbot/adt-infra/build/subordinate/emu-main-dev',
                 'TESTING': True,
-                'emu-master-dev': '4696395',
+                'emu-main-dev': '4696395',
             })
     )
 
@@ -526,29 +526,29 @@ def GenTests(api):
             api.platform.bits(64) +
             props({
                 'aosp': '4696395',
-                'aosp_file': 'gs://android-build-emu-sysimage/builds/aosp-master-linux-sdk_x86_64-sdk/4686993/b056c89ab4797b9b869396ed45a83fb658244dce1c4df5f0b558341e999e1dc8/sdk-repo-linux-system-images-4686993.zip,gs://android-build-emu-sysimage/builds/aosp-master-linux-sdk_x86-sdk/4686993/5c360765bdd9949f14cd395d9e2eb4f71bc52a7b16c1ce4ed1fb8ef2d1a39002/sdk-repo-linux-system-images-4686993.zip',
+                'aosp_file': 'gs://android-build-emu-sysimage/builds/aosp-main-linux-sdk_x86_64-sdk/4686993/b056c89ab4797b9b869396ed45a83fb658244dce1c4df5f0b558341e999e1dc8/sdk-repo-linux-system-images-4686993.zip,gs://android-build-emu-sysimage/builds/aosp-main-linux-sdk_x86-sdk/4686993/5c360765bdd9949f14cd395d9e2eb4f71bc52a7b16c1ce4ed1fb8ef2d1a39002/sdk-repo-linux-system-images-4686993.zip',
                 'blamelist': ['emulator_linux_poller'],
                 'branch': 'Ubuntu',
                 'buildbotURL': 'http://chromeos1-row3-rack2-host1.cros.corp.google.com:8200/',
                 'buildername': 'Ubuntu cross-builds',
                 'buildnumber': '1090',
-                'file_list': 'gs://android-build-emu/builds/aosp-emu-master-dev-linux-sdk_tools_linux/4696395/7e4b04c674e12fb492b0834b0b6b1f769629d234103b3703c3e74aa17ffe8e19/sdk-repo-linux-emulator-4696395.zip,',
+                'file_list': 'gs://android-build-emu/builds/aosp-emu-main-dev-linux-sdk_tools_linux/4696395/7e4b04c674e12fb492b0834b0b6b1f769629d234103b3703c3e74aa17ffe8e19/sdk-repo-linux-emulator-4696395.zip,',
                 'got_revision': '4696395',
-                'logs_dir': '/home/user/buildbot/external/adt-infra/build/masters/master.client.adt/slave_logs/',
-                'mastername': 'client.adt',
+                'logs_dir': '/home/user/buildbot/external/adt-infra/build/mains/main.client.adt/slave_logs/',
+                'mainname': 'client.adt',
                 'parent_buildername': 'Ubuntu 14.04 HD 4400_sysimg-aosp',
                 'parent_buildnumber': '516',
                 'prev_build': '4696278',
-                'project': 'emu-master-dev',
+                'project': 'emu-main-dev',
                 'recipe': 'adt/adt',
                 'repository': '',
                 'requestedAt': 1522746361,
                 'revision': '4696395',
                 'triggered': True,
-                'slavename': 'chromeos1-row3-rack3-host1',
-                'workdir': '/home/adt_build/Buildbot/adt-infra/build/slave/cross-builds',
+                'subordinatename': 'chromeos1-row3-rack3-host1',
+                'workdir': '/home/adt_build/Buildbot/adt-infra/build/subordinate/cross-builds',
                 'TESTING': True,
-                'emu-master-dev': '4696395',
+                'emu-main-dev': '4696395',
                 'mnc-emu-dev_file': 'gs://android-build-emu-sysimage/builds/git_mnc-emu-dev-linux-sdk_google_phone_x86_64-sdk_addon/4666753/56c19893abc142ca533e77022e5828c13da3bb0d62faf5bbad5c2a9b0a3ac680/sdk-repo-linux-system-images-4666753.zip,gs://android-build-emu-sysimage/builds/git_mnc-emu-dev-linux-sdk_google_phone_x86-sdk_addon/4666753/78c88231a3e01959fa0097cc0a972eb1c48768357f91b65010d0c2e0f69a8a62/sdk-repo-linux-system-images-4666753.zip',
             })
     )
@@ -559,16 +559,16 @@ def GenTests(api):
             api.platform.bits(64) +
             props({
                 'aosp' : '4696395',
-                'aosp_file': 'gs://android-build-emu-sysimage/builds/aosp-master-linux-sdk_x86_64-sdk/4695504/bd9ef7aa641e91405b331552397f104be3e68d15475528e086b12372247e5b79/sdk-repo-linux-system-images-4695504.zip,gs://android-build-emu-sysimage/builds/aosp-master-linux-sdk_x86-sdk/4695504/9f61883fcb96811a5c6bde8bdf65987f6b3a9ec2a89ec2dba0903e68e77c9b9c/sdk-repo-linux-system-images-4695504.zip',
+                'aosp_file': 'gs://android-build-emu-sysimage/builds/aosp-main-linux-sdk_x86_64-sdk/4695504/bd9ef7aa641e91405b331552397f104be3e68d15475528e086b12372247e5b79/sdk-repo-linux-system-images-4695504.zip,gs://android-build-emu-sysimage/builds/aosp-main-linux-sdk_x86-sdk/4695504/9f61883fcb96811a5c6bde8bdf65987f6b3a9ec2a89ec2dba0903e68e77c9b9c/sdk-repo-linux-system-images-4695504.zip',
                 'blamelist': ['sys_image_aosp_poller'],
                 'branch': 'all',
                 'buildbotURL': 'http://chromeos1-row3-rack2-host1.cros.corp.google.com:8200/',
                 'buildername': 'Ubuntu cross-builds',
                 'buildnumber': '1090',
-                'file_list': 'gs://android-build-emu/builds/aosp-emu-master-dev-linux-sdk_tools_linux/4696395/7e4b04c674e12fb492b0834b0b6b1f769629d234103b3703c3e74aa17ffe8e19/sdk-repo-linux-emulator-4696395.zip,',
+                'file_list': 'gs://android-build-emu/builds/aosp-emu-main-dev-linux-sdk_tools_linux/4696395/7e4b04c674e12fb492b0834b0b6b1f769629d234103b3703c3e74aa17ffe8e19/sdk-repo-linux-emulator-4696395.zip,',
                 'got_revision': '4696395',
-                'logs_dir': '/home/user/buildbot/external/adt-infra/build/masters/master.client.adt/slave_logs/',
-                'mastername': 'client.adt',
+                'logs_dir': '/home/user/buildbot/external/adt-infra/build/mains/main.client.adt/slave_logs/',
+                'mainname': 'client.adt',
                 'parent_buildername': 'Ubuntu 14.04 HD 4400_sysimg-aosp',
                 'parent_buildnumber': '516',
                 'prev_build': '4696278',
@@ -578,10 +578,10 @@ def GenTests(api):
                 'requestedAt': 1522746361,
                 'revision': '4696395',
                 'triggered': True,
-                'slavename': 'chromeos1-row3-rack3-host1',
-                'workdir': '/home/adt_build/Buildbot/adt-infra/build/slave/cross-builds',
+                'subordinatename': 'chromeos1-row3-rack3-host1',
+                'workdir': '/home/adt_build/Buildbot/adt-infra/build/subordinate/cross-builds',
                 'TESTING': True,
-                'emu-master-dev': '4696395',
+                'emu-main-dev': '4696395',
             })
     )
 
@@ -597,17 +597,17 @@ def GenTests(api):
                 'buildnumber': '1090',
                 'file_list': 'gs://android-build-emu-sysimage/builds/git_oc-emu-dev-linux-sdk_gphone_x86-sdk_addon/4695513/c79ac27430405771fe8249079eb3be15e8944f27ad07f68aea3b2974e29be7c0/sdk-repo-linux-system-images-4695513.zip,gs://android-build-emu-sysimage/builds/git_oc-emu-dev-linux-sdk_google_atv_x86-sdk/4695513/31a293ea4bb784ec7e768811687523475bfd9107695d52068f86a665b78e8ace/sdk-repo-linux-system-images-4695513.zip,',
                 'got_revision': '4696395',
-                'logs_dir': '/home/user/buildbot/external/adt-infra/build/masters/master.client.adt/slave_logs/',
-                'mastername': 'client.adt',
+                'logs_dir': '/home/user/buildbot/external/adt-infra/build/mains/main.client.adt/slave_logs/',
+                'mainname': 'client.adt',
                 'prev_build': '4696278',
                 'project': 'oc-emu-dev',
                 'recipe': 'adt/adt',
                 'repository': '',
                 'requestedAt': 1522746361,
                 'revision': '4695513',
-                'slavename': 'chromeos1-row3-rack3-host1',
+                'subordinatename': 'chromeos1-row3-rack3-host1',
                 'scheduler': 'sysimg-oc',
-                'workdir': '/home/adt_build/Buildbot/adt-infra/build/slave/sysimg-oc',
+                'workdir': '/home/adt_build/Buildbot/adt-infra/build/subordinate/sysimg-oc',
                 'TESTING': True,
                 'oc-emu-dev': '4695513',
             })
@@ -625,17 +625,17 @@ def GenTests(api):
                 'buildnumber': '1090',
                 'file_list': 'gs://android-build-emu-sysimage/builds/git_oc-emu-dev-linux-sdk_gphone_x86-sdk_addon/4695513/c79ac27430405771fe8249079eb3be15e8944f27ad07f68aea3b2974e29be7c0/sdk-repo-linux-system-images-4695513.zip,gs://android-build-emu-sysimage/builds/git_oc-emu-dev-linux-sdk_google_atv_x86-sdk/4695513/31a293ea4bb784ec7e768811687523475bfd9107695d52068f86a665b78e8ace/sdk-repo-linux-system-images-4695513.zip,',
                 'got_revision': '4696395',
-                'logs_dir': '/home/user/buildbot/external/adt-infra/build/masters/master.client.adt/slave_logs/',
-                'mastername': 'client.adt',
+                'logs_dir': '/home/user/buildbot/external/adt-infra/build/mains/main.client.adt/slave_logs/',
+                'mainname': 'client.adt',
                 'prev_build': '4696278',
                 'project': 'oc-emu-dev',
                 'recipe': 'adt/adt',
                 'repository': '',
                 'requestedAt': 1522746361,
                 'revision': '4695513',
-                'slavename': 'chromeos1-row3-rack3-host1',
+                'subordinatename': 'chromeos1-row3-rack3-host1',
                 'scheduler': 'sysimg-oc',
-                'workdir': '/home/adt_build/Buildbot/adt-infra/build/slave/sys_image_oc_dev_poller',
+                'workdir': '/home/adt_build/Buildbot/adt-infra/build/subordinate/sys_image_oc_dev_poller',
                 'TESTING': True,
                 'oc-emu-dev': '4695513',
             })
@@ -653,17 +653,17 @@ def GenTests(api):
                 'buildnumber': '1090',
                 'file_list': 'gs://android-build-emu-sysimage/builds/git_oc-emu-dev-linux-sdk_gphone_x86-sdk_addon/4695513/c79ac27430405771fe8249079eb3be15e8944f27ad07f68aea3b2974e29be7c0/sdk-repo-linux-system-images-4695513.zip,gs://android-build-emu-sysimage/builds/git_oc-emu-dev-linux-sdk_google_atv_x86-sdk/4695513/31a293ea4bb784ec7e768811687523475bfd9107695d52068f86a665b78e8ace/sdk-repo-linux-system-images-4695513.zip,',
                 'got_revision': '4696395',
-                'logs_dir': '/home/user/buildbot/external/adt-infra/build/masters/master.client.adt/slave_logs/',
-                'mastername': 'client.adt',
+                'logs_dir': '/home/user/buildbot/external/adt-infra/build/mains/main.client.adt/slave_logs/',
+                'mainname': 'client.adt',
                 'prev_build': '4696278',
                 'project': 'oc-emu-dev',
                 'recipe': 'adt/adt',
                 'repository': '',
                 'requestedAt': 1522746361,
                 'revision': '4695513',
-                'slavename': 'chromeos1-row3-rack3-host1',
+                'subordinatename': 'chromeos1-row3-rack3-host1',
                 'scheduler': 'sysimg-oc',
-                'workdir': '/home/adt_build/Buildbot/adt-infra/build/slave/sys_image_oc_dev_poller',
+                'workdir': '/home/adt_build/Buildbot/adt-infra/build/subordinate/sys_image_oc_dev_poller',
                 'TESTING': True,
                 'oc-emu-dev': '4695513',
             })
@@ -681,17 +681,17 @@ def GenTests(api):
                 'buildnumber': '1090',
                 'file_list': 'gs://android-build-emu-sysimage/builds/git_oc-emu-dev-linux-sdk_gphone_x86-sdk_addon/4695513/c79ac27430405771fe8249079eb3be15e8944f27ad07f68aea3b2974e29be7c0/sdk-repo-linux-system-images-4695513.zip,gs://android-build-emu-sysimage/builds/git_oc-emu-dev-linux-sdk_google_atv_x86-sdk/4695513/31a293ea4bb784ec7e768811687523475bfd9107695d52068f86a665b78e8ace/sdk-repo-linux-system-images-4695513.zip,',
                 'got_revision': '4696395',
-                'logs_dir': '/home/user/buildbot/external/adt-infra/build/masters/master.client.adt/slave_logs/',
-                'mastername': 'client.adt',
+                'logs_dir': '/home/user/buildbot/external/adt-infra/build/mains/main.client.adt/slave_logs/',
+                'mainname': 'client.adt',
                 'prev_build': '4696278',
                 'project': 'oc-emu-dev',
                 'recipe': 'adt/adt',
                 'repository': '',
                 'requestedAt': 1522746361,
                 'revision': '4695513',
-                'slavename': 'chromeos1-row3-rack3-host1',
+                'subordinatename': 'chromeos1-row3-rack3-host1',
                 'scheduler': 'sysimg-oc',
-                'workdir': '/home/adt_build/Buildbot/adt-infra/build/slave/sys_image_oc_dev_poller',
+                'workdir': '/home/adt_build/Buildbot/adt-infra/build/subordinate/sys_image_oc_dev_poller',
                 'TESTING': True,
                 'oc-emu-dev': '4695513',
             })
@@ -705,22 +705,22 @@ def GenTests(api):
                 'blamelist': ['emulator_linux_poller'],
                 'branch': 'Ubuntu',
                 'buildbotURL': 'http://chromeos1-row3-rack2-host1.cros.corp.google.com:8200/',
-                'buildername': 'Ubuntu Console_emu-master-dev',
+                'buildername': 'Ubuntu Console_emu-main-dev',
                 'buildnumber': '516',
                 'got_revision': '4696395',
-                'emu-master-dev': '4696395',
-                'file_list': 'gs://android-build-emu/builds/aosp-emu-master-dev-linux-sdk_tools_linux/4697226/141118a3891867ada68e8b6add4fd4a54bed001bb8a6d90a619bfc0b7feffafe/sdk-repo-linux-emulator-4697226.zip',
+                'emu-main-dev': '4696395',
+                'file_list': 'gs://android-build-emu/builds/aosp-emu-main-dev-linux-sdk_tools_linux/4697226/141118a3891867ada68e8b6add4fd4a54bed001bb8a6d90a619bfc0b7feffafe/sdk-repo-linux-emulator-4697226.zip',
                 'got_revision': '4696395',
-                'logs_dir': '/home/user/buildbot/external/adt-infra/build/masters/master.client.adt/slave_logs/',
-                'mastername': 'client.adt',
-                'project': 'emu-master-dev',
+                'logs_dir': '/home/user/buildbot/external/adt-infra/build/mains/main.client.adt/slave_logs/',
+                'mainname': 'client.adt',
+                'project': 'emu-main-dev',
                 'recipe': 'adt/adt',
                 'repository': '',
                 'requestedAt': 1522746361,
                 'revision': '4696395',
-                'scheduler': 'console_emu-master-dev-scheduler',
-                'slavename': 'chromeos1-row3-rack3-host1',
-                'workdir': '/home/adt_build/Buildbot/adt-infra/build/slave/Console_emu-master-dev',
+                'scheduler': 'console_emu-main-dev-scheduler',
+                'subordinatename': 'chromeos1-row3-rack3-host1',
+                'workdir': '/home/adt_build/Buildbot/adt-infra/build/subordinate/Console_emu-main-dev',
                 'TESTING': True,
             })
     )
@@ -733,22 +733,22 @@ def GenTests(api):
                 'blamelist': ['emulator_mac_poller'],
                 'branch': 'Mac',
                 'buildbotURL': 'http://chromeos1-row3-rack2-host1.cros.corp.google.com:8200/',
-                'buildername': 'Mac Console_emu-master-dev',
+                'buildername': 'Mac Console_emu-main-dev',
                 'buildnumber': '516',
                 'got_revision': '4696395',
-                'emu-master-dev': '4696395',
-                'file_list': 'gs://android-build-emu/builds/aosp-emu-master-dev-mac-sdk_tools_mac/4697226/141118a3891867ada68e8b6add4fd4a54bed001bb8a6d90a619bfc0b7feffafe/sdk-repo-mac-emulator-4697226.zip',
+                'emu-main-dev': '4696395',
+                'file_list': 'gs://android-build-emu/builds/aosp-emu-main-dev-mac-sdk_tools_mac/4697226/141118a3891867ada68e8b6add4fd4a54bed001bb8a6d90a619bfc0b7feffafe/sdk-repo-mac-emulator-4697226.zip',
                 'got_revision': '4696395',
-                'logs_dir': '/home/user/buildbot/external/adt-infra/build/masters/master.client.adt/slave_logs/',
-                'mastername': 'client.adt',
-                'project': 'emu-master-dev',
+                'logs_dir': '/home/user/buildbot/external/adt-infra/build/mains/main.client.adt/slave_logs/',
+                'mainname': 'client.adt',
+                'project': 'emu-main-dev',
                 'recipe': 'adt/adt',
                 'repository': '',
                 'requestedAt': 1522746361,
                 'revision': '4696395',
-                'scheduler': 'console_emu-master-dev-scheduler',
-                'slavename': 'chromeos1-row3-rack3-host1',
-                'workdir': '/home/adt_build/Buildbot/adt-infra/build/slave/Console_emu-master-dev',
+                'scheduler': 'console_emu-main-dev-scheduler',
+                'subordinatename': 'chromeos1-row3-rack3-host1',
+                'workdir': '/home/adt_build/Buildbot/adt-infra/build/subordinate/Console_emu-main-dev',
                 'TESTING': True,
             })
     )
@@ -761,22 +761,22 @@ def GenTests(api):
                 'blamelist': ['emulator_win_poller'],
                 'branch': 'Win',
                 'buildbotURL': 'http://chromeos1-row3-rack2-host1.cros.corp.google.com:8200/',
-                'buildername': 'Win Console_emu-master-dev',
+                'buildername': 'Win Console_emu-main-dev',
                 'buildnumber': '516',
                 'got_revision': '4696395',
-                'emu-master-dev': '4696395',
-                'file_list': 'gs://android-build-emu/builds/aosp-emu-master-dev-win-sdk_tools_win/4697226/141118a3891867ada68e8b6add4fd4a54bed001bb8a6d90a619bfc0b7feffafe/sdk-repo-win-emulator-4697226.zip',
+                'emu-main-dev': '4696395',
+                'file_list': 'gs://android-build-emu/builds/aosp-emu-main-dev-win-sdk_tools_win/4697226/141118a3891867ada68e8b6add4fd4a54bed001bb8a6d90a619bfc0b7feffafe/sdk-repo-win-emulator-4697226.zip',
                 'got_revision': '4696395',
-                'logs_dir': '/home/user/buildbot/external/adt-infra/build/masters/master.client.adt/slave_logs/',
-                'mastername': 'client.adt',
-                'project': 'emu-master-dev',
+                'logs_dir': '/home/user/buildbot/external/adt-infra/build/mains/main.client.adt/slave_logs/',
+                'mainname': 'client.adt',
+                'project': 'emu-main-dev',
                 'recipe': 'adt/adt',
                 'repository': '',
                 'requestedAt': 1522746361,
                 'revision': '4696395',
-                'scheduler': 'console_emu-master-dev-scheduler',
-                'slavename': 'chromeos1-row3-rack3-host1',
-                'workdir': '/home/adt_build/Buildbot/adt-infra/build/slave/Console_emu-master-dev',
+                'scheduler': 'console_emu-main-dev-scheduler',
+                'subordinatename': 'chromeos1-row3-rack3-host1',
+                'workdir': '/home/adt_build/Buildbot/adt-infra/build/subordinate/Console_emu-main-dev',
                 'TESTING': True,
             })
     )
@@ -792,14 +792,14 @@ def GenTests(api):
                 'buildername': 'Ubuntu CTS',
                 'buildnumber': '7640',
                 'got_revision': 'LATEST',
-                'mastername': 'client.adt',
+                'mainname': 'client.adt',
                 'project': '',
                 'recipe': 'adt/adt',
                 'repository': '',
                 'requestedAt': 1522746361,
                 'revision': 'LATEST',
-                'slavename': 'chromeos1-row3-rack3-host1',
-                'workdir': '/home/adt_build/Buildbot/adt-infra/build/slave/CTS',
+                'subordinatename': 'chromeos1-row3-rack3-host1',
+                'workdir': '/home/adt_build/Buildbot/adt-infra/build/subordinate/CTS',
                 'TESTING': True,
             })
     )
@@ -815,19 +815,19 @@ def GenTests(api):
                 'buildername': 'Ubuntu AVD',
                 'buildnumber': '516',
                 'got_revision': 'LATEST',
-                'emu-master-dev': '4696395',
-                'file_list': 'gs://android-build-emu/builds/aosp-emu-master-dev-linux-sdk_tools_linux/4696395/7e4b04c674e12fb492b0834b0b6b1f769629d234103b3703c3e74aa17ffe8e19/sdk-repo-linux-emulator-4696395.zip',
+                'emu-main-dev': '4696395',
+                'file_list': 'gs://android-build-emu/builds/aosp-emu-main-dev-linux-sdk_tools_linux/4696395/7e4b04c674e12fb492b0834b0b6b1f769629d234103b3703c3e74aa17ffe8e19/sdk-repo-linux-emulator-4696395.zip',
                 'got_revision': '4696395',
-                'logs_dir': '/home/user/buildbot/external/adt-infra/build/masters/master.client.adt/slave_logs/',
-                'mastername': 'client.adt',
-                'project': 'emu-master-dev',
+                'logs_dir': '/home/user/buildbot/external/adt-infra/build/mains/main.client.adt/slave_logs/',
+                'mainname': 'client.adt',
+                'project': 'emu-main-dev',
                 'recipe': 'adt/adt',
                 'repository': '',
                 'requestedAt': 1522746361,
                 'revision': '4696395',
                 'scheduler': 'avd_test_scheduler',
-                'slavename': 'chromeos1-row3-rack3-host1',
-                'workdir': '/home/adt_build/Buildbot/adt-infra/build/slave/AVD',
+                'subordinatename': 'chromeos1-row3-rack3-host1',
+                'workdir': '/home/adt_build/Buildbot/adt-infra/build/subordinate/AVD',
                 'TESTING': True,
             })
     )

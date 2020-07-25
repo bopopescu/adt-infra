@@ -28,7 +28,7 @@ DEPS = [
 # by git cl. Note that coverage of a 100% of the statements in the recipe and
 # the recipe_modules themselves is required.
 #
-# More information is available in scripts/slave/README.recipes.md
+# More information is available in scripts/subordinate/README.recipes.md
 def RunSteps(api):
   fake_checkout_path = api.path.mkdtemp('fake_checkout')
   api.path['checkout'] = fake_checkout_path
@@ -64,13 +64,13 @@ def RunSteps(api):
   # Test runner for classic bisect script.
   # Calls bisect script in recipe wrapper with extra_src and path_to_config,
   # to override default behavior.
-  if api.properties.get('mastername'):
+  if api.properties.get('mainname'):
     # TODO(akuegel): Load the config explicitly instead of relying on the
     # builders.py entries in chromium_tests.
-    mastername = api.properties.get('mastername')
+    mainname = api.properties.get('mainname')
     buildername = api.properties.get('buildername')
-    api.chromium_tests.configure_build(mastername, buildername)
-    api.chromium_tests.prepare_checkout(mastername, buildername)
+    api.chromium_tests.configure_build(mainname, buildername)
+    api.chromium_tests.prepare_checkout(mainname, buildername)
     api.auto_bisect.run_bisect_script('dummy_extra_src', '/dummy/path/')
 
 
@@ -103,7 +103,7 @@ def GenTests(api):
           {
               'builder': 'linux_perf_tester',
               'job_name': 'a6298e4afedbf2cd461755ea6f45b0ad64222222-test',
-              'master': 'tryserver.chromium.perf',
+              'main': 'tryserver.chromium.perf',
               'type': 'buildbot',
               'job_url': 'http://tempuri.org/log',
           }
@@ -201,9 +201,9 @@ def GenTests(api):
       'Waiting for revision 314015 and 1 other revision(s). (2)',
       stdout=api.json.output(wait_for_any_output))
 
-  bisect_script_test += api.properties(mastername='tryserver.chromium.perf',
+  bisect_script_test += api.properties(mainname='tryserver.chromium.perf',
                                        buildername='linux_perf_bisect',
-                                       slavename='dummyslave')
+                                       subordinatename='dummysubordinate')
   yield bisect_script_test
 
 
@@ -407,7 +407,7 @@ def _get_config(params={}):
       'max_time_minutes': '5',
       'bug_id': '',
       'gs_bucket': 'chrome-perf',
-      'builder_host': 'master4.golo.chromium.org',
+      'builder_host': 'main4.golo.chromium.org',
       'builder_port': '8341',
       'dummy_builds': 'True',
       'skip_gclient_ops': 'True',
@@ -430,7 +430,7 @@ def _get_step_data_for_revision(api, revision_data, include_build_steps=True):
                                                             commit_hash))
 
     step_name = parent_step + 'resolving hash ' + commit_hash
-    commit_pos_str = 'refs/heads/master@{#%s}' % commit_pos
+    commit_pos_str = 'refs/heads/main@{#%s}' % commit_pos
     yield api.step_data(step_name, stdout=api.raw_io.output(commit_pos_str))
 
   if include_build_steps:

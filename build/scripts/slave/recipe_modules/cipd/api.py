@@ -11,7 +11,7 @@ class CIPDApi(recipe_api.RecipeApi):
     self.bin_path = None
 
   def install_client(self, step_name):
-    bin_path = self.m.path['slave_build'].join('cipd')
+    bin_path = self.m.path['subordinate_build'].join('cipd')
     script_input = {
       'platform': self.platform_tag(),
       'bin_path': bin_path,
@@ -77,7 +77,7 @@ class CIPDApi(recipe_api.RecipeApi):
       pkg_list.append('%s %s' % (pkg_name, pkg_spec['version']))
 
     list_data = self.m.raw_io.input('\n'.join(pkg_list))
-    bin_path = self.m.path['slave_build'].join('cipd')
+    bin_path = self.m.path['subordinate_build'].join('cipd')
     cmd = [bin_path.join('cipd'), 'ensure',
           '--root', root, '--list', list_data]
     if service_account_credentials:

@@ -71,7 +71,7 @@ def RunSteps(api):
   # Install WebView
   api.chromium_android.adb_install_apk(WEBVIEW_APK)
 
-  cts_dir = api.path['slave_build'].join('tmp', 'cts')
+  cts_dir = api.path['subordinate_build'].join('tmp', 'cts')
   cts_zip_path = cts_dir.join(CTS_FILE_NAME)
 
   # Step 1 Download cts to build bot dir to tmp/cts.
@@ -83,7 +83,7 @@ def RunSteps(api):
       cwd=cts_dir)
 
   # Step 3 Run cts tests
-  adb_path = api.path['slave_build'].join('src', 'third_party', 'android_tools',
+  adb_path = api.path['subordinate_build'].join('src', 'third_party', 'android_tools',
       'sdk', 'platform-tools')
   env = {'PATH': api.path.pathsep.join([str(adb_path), '%(PATH)s'])}
   result = api.step('Run Cts', [cts_dir.join('android-cts', 'tools',
@@ -142,7 +142,7 @@ def GenTests(api):
           stream='stdout')) + \
       api.override_step_data('Read test result and report failures',
           api.raw_io.output(result_xml_with_unexecuted_tests)) + \
-      api.properties.generic(mastername='chromium.android')
+      api.properties.generic(mainname='chromium.android')
 
   result_xml_with_expected_failure = """<TestResult>
                           <TestPackage>
@@ -166,7 +166,7 @@ def GenTests(api):
           stream='stdout')) + \
       api.override_step_data('Read test result and report failures',
           api.raw_io.output(result_xml_with_expected_failure)) + \
-      api.properties.generic(mastername='chromium.android')
+      api.properties.generic(mainname='chromium.android')
 
   result_xml_with_unexpected_failure_class= """<TestResult>
                           <TestPackage>
@@ -190,7 +190,7 @@ def GenTests(api):
           stream='stdout')) + \
       api.override_step_data('Read test result and report failures',
           api.raw_io.output(result_xml_with_unexpected_failure_class)) + \
-      api.properties.generic(mastername='chromium.android')
+      api.properties.generic(mainname='chromium.android')
 
   result_xml_with_unexpected_failure_method = """<TestResult>
                           <TestPackage>
@@ -214,11 +214,11 @@ def GenTests(api):
           stream='stdout')) + \
       api.override_step_data('Read test result and report failures',
           api.raw_io.output(result_xml_with_unexpected_failure_method)) + \
-      api.properties.generic(mastername='chromium.android')
+      api.properties.generic(mainname='chromium.android')
 
   yield api.test('Test_parsing_invalid_cts_output') + \
       api.override_step_data('Run Cts', api.raw_io.stream_output(
           'Invalid CTS output here...',
           stream='stdout')) + \
-      api.properties.generic(mastername='chromium.android') + \
+      api.properties.generic(mainname='chromium.android') + \
       api.expect_exception('Exception')

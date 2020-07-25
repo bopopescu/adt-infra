@@ -157,7 +157,7 @@ def RunSteps(api):
     api.chromium.set_config('codesearch', BUILD_CONFIG='Debug')
     result = GenerateCompilationDatabase(api, debug_path, targets, 'linux')
     api.python('Filter out duplicate compilation units',
-               api.path['build'].join('scripts', 'slave', 'chromium',
+               api.path['build'].join('scripts', 'subordinate', 'chromium',
                                       'filter_compilations.py'),
                ['--compdb-input', debug_path.join('compile_commands.json'),
                 '--compdb-filter', api.raw_io.input(data=result.stdout),
@@ -193,7 +193,7 @@ def RunSteps(api):
   index_pack_name_with_revision = 'index_pack_%s_%s.zip' % (
       platform, commit_position)
   api.python('create index pack',
-             api.path['build'].join('scripts', 'slave', 'chromium',
+             api.path['build'].join('scripts', 'subordinate', 'chromium',
                                     'package_index.py'),
              ['--path-to-compdb', debug_path.join('compile_commands.json'),
               '--path-to-archive-output', debug_path.join(index_pack_name)])
@@ -211,7 +211,7 @@ def RunSteps(api):
   tarball_name_with_revision = 'chromium_src_%s_%s.tar.bz2' % (
       platform,commit_position)
   api.python('archive source',
-             api.path['build'].join('scripts','slave',
+             api.path['build'].join('scripts','subordinate',
                                     'archive_source_codesearch.py'),
              ['src', 'build', 'infra', 'tools', '/usr/include', '-f',
               tarball_name])
@@ -219,7 +219,7 @@ def RunSteps(api):
   # Upload the source code.
   api.gsutil.upload(
       name='upload source tarball',
-      source=api.path['slave_build'].join(tarball_name),
+      source=api.path['subordinate_build'].join(tarball_name),
       bucket=BUCKET_NAME,
       dest='%s/%s' % (environment, tarball_name_with_revision)
   )
@@ -238,7 +238,7 @@ def GenTests(api):
       test += api.step_data('generate compilation database for linux',
                             stdout=api.raw_io.output('some compilation data'))
     test += api.properties.generic(buildername=buildername,
-                                   mastername='chromium.infra.cron')
+                                   mainname='chromium.infra.cron')
 
     yield test
 
@@ -251,5 +251,5 @@ def GenTests(api):
                   stdout=api.raw_io.output('some compilation data')) +
     api.step_data('run translation_unit clang tool', retcode=2) +
     api.properties.generic(buildername='ChromiumOS Codesearch',
-                           mastername='chromium.infra.cron')
+                           mainname='chromium.infra.cron')
   )

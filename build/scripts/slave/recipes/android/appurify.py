@@ -114,13 +114,13 @@ from recipe_engine.recipe_api import Property
 
 PROPERTIES = {
   'buildername': Property(),
-  'mastername': Property(),
+  'mainname': Property(),
 }
 
 
-def RunSteps(api, mastername, buildername):
+def RunSteps(api, mainname, buildername):
   api.amp.setup()
-  builder = BUILDERS[mastername][buildername]
+  builder = BUILDERS[mainname][buildername]
   api.chromium_android.configure_from_properties(
       builder['config'],
       REPO_NAME='src',
@@ -282,18 +282,18 @@ def RunSteps(api, mastername, buildername):
 def GenTests(api):
   sanitize = lambda s: ''.join(c if c.isalnum() else '_' for c in s)
 
-  for mastername in BUILDERS:
-    master = BUILDERS[mastername]
-    for buildername in master:
-      builder = master[buildername]
+  for mainname in BUILDERS:
+    main = BUILDERS[mainname]
+    for buildername in main:
+      builder = main[buildername]
 
       test_props = (
           api.test('%s_basic' % sanitize(buildername)) +
           api.properties.generic(
               revision='4f4b02f6b7fa20a3a25682c457bbc8ad589c8a00',
               buildername=buildername,
-              slavename='slavename',
-              mastername=mastername))
+              subordinatename='subordinatename',
+              mainname=mainname))
       if builder.get('try'):
         test_props += api.override_step_data(
             'analyze',
@@ -319,8 +319,8 @@ def GenTests(api):
           api.properties.generic(
               revision='4f4b02f6b7fa20a3a25682c457bbc8ad589c8a00',
               buildername=buildername,
-              slavename='slavename',
-              mastername=mastername) +
+              subordinatename='subordinatename',
+              mainname=mainname) +
           api.override_step_data(
               'analyze',
               api.json.output({
@@ -350,9 +350,9 @@ def GenTests(api):
     api.test('instrumentation_test_trigger_failure') +
     api.properties.generic(
         revision='4f4b02f6b7fa20a3a25682c457bbc8ad589c8a00',
-        mastername='tryserver.chromium.linux',
+        mainname='tryserver.chromium.linux',
         buildername='android_amp_rel_tests_recipe',
-        slavename='slavename',
+        subordinatename='subordinatename',
         parent_build_archive_url='gs://test-domain/test-archive.zip') +
     api.override_step_data(
         'analyze',
@@ -366,9 +366,9 @@ def GenTests(api):
     api.test('instrumentation_test_collect_failure') +
     api.properties.generic(
         revision='4f4b02f6b7fa20a3a25682c457bbc8ad589c8a00',
-        mastername='tryserver.chromium.linux',
+        mainname='tryserver.chromium.linux',
         buildername='android_amp_rel_tests_recipe',
-        slavename='slavename',
+        subordinatename='subordinatename',
         parent_build_archive_url='gs://test-domain/test-archive.zip') +
     api.override_step_data(
         'analyze',
@@ -381,18 +381,18 @@ def GenTests(api):
   yield (
       api.test('analyze_no_compilation') +
       api.properties.generic(
-          mastername='tryserver.chromium.linux',
+          mainname='tryserver.chromium.linux',
           buildername='android_amp_rel_tests_recipe',
-          slavename='slavename') +
+          subordinatename='subordinatename') +
       api.override_step_data(
           'analyze', api.json.output({'status': 'No compile necessary'})))
 
   yield (
       api.test('analyze_no_tests') +
       api.properties.generic(
-          mastername='tryserver.chromium.linux',
+          mainname='tryserver.chromium.linux',
           buildername='android_amp_rel_tests_recipe',
-          slavename='slavename') +
+          subordinatename='subordinatename') +
       api.override_step_data(
           'analyze',
           api.json.output({

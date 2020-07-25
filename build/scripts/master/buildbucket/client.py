@@ -8,9 +8,9 @@ import json
 import logging
 import sys
 
-from master import auth
-from master.buildbucket import common
-from master.deferred_resource import DeferredResource
+from main import auth
+from main.buildbucket import common
+from main.deferred_resource import DeferredResource
 
 from oauth2client.client import SignedJwtAssertionCredentials
 import httplib2
@@ -26,24 +26,24 @@ def buildbucket_api_discovery_url(hostname=None):
       'https://%s/_ah/api/discovery/v1/apis/{api}/{apiVersion}/rest' % hostname)
 
 
-def get_default_buildbucket_hostname(master):
+def get_default_buildbucket_hostname(main):
   return (
-      BUILDBUCKET_HOSTNAME_PRODUCTION if master.is_production_host
+      BUILDBUCKET_HOSTNAME_PRODUCTION if main.is_production_host
       else BUILDBUCKET_HOSTNAME_TESTING)
 
 
 def create_buildbucket_service(
-    master, hostname=None, verbose=None):
+    main, hostname=None, verbose=None):
   """Asynchronously creates buildbucket API resource.
 
   Returns:
     A DeferredResource as Deferred.
   """
-  hostname = hostname or get_default_buildbucket_hostname(master)
+  hostname = hostname or get_default_buildbucket_hostname(main)
   return DeferredResource.build(
       'buildbucket',
       'v1',
-      credentials=auth.create_credentials_for_master(master),
+      credentials=auth.create_credentials_for_main(main),
       max_concurrent_requests=10,
       discoveryServiceUrl=buildbucket_api_discovery_url(hostname),
       verbose=verbose or False,

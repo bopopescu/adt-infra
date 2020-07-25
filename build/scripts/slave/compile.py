@@ -29,8 +29,8 @@ import tempfile
 import time
 
 from common import chromium_utils
-from slave import build_directory
-from slave import slave_utils
+from subordinate import build_directory
+from subordinate import subordinate_utils
 
 # Define a bunch of directory paths (same as bot_update.py)
 CURRENT_DIR = os.path.abspath(os.getcwd())
@@ -39,11 +39,11 @@ SLAVE_DIR = os.path.dirname(BUILDER_DIR)
 # GOMA_CACHE_DIR used for caching long-term data.
 GOMA_CACHE_DIR = os.path.join(SLAVE_DIR, 'goma_cache')
 
-# Path of the scripts/slave/ checkout on the slave, found by looking at the
+# Path of the scripts/subordinate/ checkout on the subordinate, found by looking at the
 # current compile.py script's path's dirname().
 SLAVE_SCRIPTS_DIR = os.path.dirname(os.path.abspath(__file__))
-# Path of the build/ checkout on the slave, found relative to the
-# scripts/slave/ directory.
+# Path of the build/ checkout on the subordinate, found relative to the
+# scripts/subordinate/ directory.
 BUILD_DIR = os.path.dirname(os.path.dirname(SLAVE_SCRIPTS_DIR))
 # The Google Cloud Storage bucket to store logs related to goma.
 GOMA_LOG_GS_BUCKET = 'chrome-goma-log'
@@ -124,7 +124,7 @@ def goma_setup(options, env):
   # HACK(shinyak, yyanagisawa, goma): Windows NO_NACL_GOMA (crbug.com/390764)
   # Building NaCl untrusted code using goma brings large performance
   # improvement but it sometimes cause build failure by race condition.
-  # Let me enable goma build on goma canary buildslaves to confirm the issue
+  # Let me enable goma build on goma canary buildsubordinates to confirm the issue
   # has been fixed by a workaround.
   # vm*-m4 are trybots. build*-m1 and vm*-m1 are all goma canary bots.
   if hostname in ['build28-m1', 'build58-m1', 'vm191-m1', 'vm480-m1',
@@ -246,7 +246,7 @@ def UploadToGomaLogGS(file_path, gs_filename, text_to_append=None):
           shutil.copyfileobj(f_in, gzipf_out)
         if text_to_append:
           gzipf_out.write(text_to_append)
-    slave_utils.GSUtilCopy(temp.name, gs_path)
+    subordinate_utils.GSUtilCopy(temp.name, gs_path)
     print "Copied log file to %s" % gs_path
   finally:
     os.remove(temp.name)
@@ -599,11 +599,11 @@ def main_xcode(options, args):
   # If the project isn't in args, add all.xcodeproj to simplify configuration.
   command = ['xcodebuild', '-configuration', options.target]
 
-  # TODO(mmoss) Support the old 'args' usage until we're confident the master is
+  # TODO(mmoss) Support the old 'args' usage until we're confident the main is
   # switched to passing '--solution' everywhere.
   if not '-project' in args:
     # TODO(mmoss) Temporary hack to ignore the Windows --solution flag that is
-    # passed to all builders. This can be taken out once the master scripts are
+    # passed to all builders. This can be taken out once the main scripts are
     # updated to only pass platform-appropriate --solution values.
     if (not options.solution or
         os.path.splitext(options.solution)[1] != '.xcodeproj'):
@@ -623,7 +623,7 @@ def main_xcode(options, args):
     # Moreover clobbering should run before runhooks (which creates
     # .ninja files). For now, only delete all non-.ninja files.
     # TODO(thakis): Make "clobber" a step that runs before "runhooks". Once the
-    # master has been restarted, remove all clobber handling from compile.py.
+    # main has been restarted, remove all clobber handling from compile.py.
     build_directory.RmtreeExceptNinjaOrGomaFiles(clobber_dir)
 
   common_xcode_settings(command, options, env, options.compiler)
@@ -882,7 +882,7 @@ def UpdateWindowsEnvironment(envfile_dir, env):
   """
   # envvars_to_save come from _ExtractImportantEnvironment in
   # https://chromium.googlesource.com/external/gyp/+/\
-  # master/pylib/gyp/msvs_emuation.py
+  # main/pylib/gyp/msvs_emuation.py
   # You must update this when the original code is updated.
   envvars_to_save = (
       'goma_.*', # TODO(scottmg): This is ugly, but needed for goma.
@@ -961,7 +961,7 @@ def main_ninja(options, args):
       # build. Clobbering should run before runhooks (which creates .ninja
       # files). For now, only delete all non-.ninja files.
       # TODO(thakis): Make "clobber" a step that runs before "runhooks".
-      # Once the master has been restarted, remove all clobber handling
+      # Once the main has been restarted, remove all clobber handling
       # from compile.py.
       build_directory.RmtreeExceptNinjaOrGomaFiles(options.target_output_dir)
 
@@ -1001,7 +1001,7 @@ def main_ninja(options, args):
         # For linux, let me keep the current value 50. It's fast enough
         # compared to the other platforms.
         #
-        # Note that currently most try-bot build slaves have 8 processors.
+        # Note that currently most try-bot build subordinates have 8 processors.
         if chromium_utils.IsMac() or chromium_utils.IsWindows():
           return min(10 * number_of_processors, 200)
         return 50
@@ -1129,16 +1129,16 @@ def main_win(options, args):
   #
   # ---
   #
-  # Warning: Could not delete file "c:\b\slave\win\build\src\build\Debug\
+  # Warning: Could not delete file "c:\b\subordinate\win\build\src\build\Debug\
   #    chrome.dll" : Access is denied
   # --------------------Build System Warning--------------------------------
   #    -------
   # Could not delete file:
-  #     Could not delete file "c:\b\slave\win\build\src\build\Debug\
+  #     Could not delete file "c:\b\subordinate\win\build\src\build\Debug\
   #        chrome.dll" : Access is denied
   #     (Automatically running xgHandle on first 10 files that could not be
   #        deleted)
-  #     Searching for '\Device\HarddiskVolume1\b\slave\win\build\src\build\
+  #     Searching for '\Device\HarddiskVolume1\b\subordinate\win\build\src\build\
   #        Debug\chrome.dll':
   #     No handles found.
   #     (xgHandle utility returned code: 0x00000000)
@@ -1166,7 +1166,7 @@ def main_win(options, args):
   # --------------------Build System Error (Agent 'Ib1 (CPU 1)')----------------
   # Fatalerror:
   #     Failed to execute command: extension_function_registry (ID 1591)
-  #     Failed to update directory: E:\b\build\slave\win\build\src\build\Release
+  #     Failed to update directory: E:\b\build\subordinate\win\build\src\build\Release
   #     File table management has failed.
   #     Shared stream group lock abandoned, marking as corrupt
   #     --------
@@ -1356,7 +1356,7 @@ def real_main():
         # There is no standard way to pass a build target (such as 'base') to
         # compile.py. --target specifies Debug or Release. --project could do
         # that, but it's only supported by the msvs build tool at the moment.
-        # Because of that, most build masters pass additional options to the
+        # Because of that, most build mains pass additional options to the
         # build tool to specify the build target. For xcode, these are in the
         # form of '-project blah.xcodeproj -target buildtarget'. Translate these
         # into ninja options, if needed.

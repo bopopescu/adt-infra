@@ -17,12 +17,12 @@ DEPS = [
 from recipe_engine.recipe_api import Property
 
 PROPERTIES = {
-  'mastername': Property(),
+  'mainname': Property(),
   'buildername': Property(),
 }
 
 
-def RunSteps(api, mastername, buildername):
+def RunSteps(api, mainname, buildername):
   config = 'Debug' if '_dbg' in buildername else 'Release'
   kwargs = {
     'TARGET_PLATFORM': 'android',
@@ -48,27 +48,27 @@ def RunSteps(api, mastername, buildername):
     try:
       api.gclient.checkout(revert=True)
     except api.step.StepFailure:
-      api.file.rmcontents('slave build directory',
-                                api.path['slave_build'])
+      api.file.rmcontents('subordinate build directory',
+                                api.path['subordinate_build'])
       api.gclient.checkout(revert=False)
     api.tryserver.maybe_apply_issue()
 
   api.chromium.runhooks()
 
-  api.chromium.run_mb(mastername, buildername)
+  api.chromium.run_mb(mainname, buildername)
 
   step_result = None
   try:
     step_result = api.chromium.compile()
   except api.step.StepFailure:
-    api.file.rmcontents('slave build directory', api.path['slave_build'])
+    api.file.rmcontents('subordinate build directory', api.path['subordinate_build'])
     if bot_update_mode:
       api.bot_update.ensure_checkout(suffix='clean')
     else:
       api.gclient.checkout(revert=False)
       api.tryserver.maybe_apply_issue()
     api.chromium.runhooks()
-    api.chromium.run_mb(mastername, buildername)
+    api.chromium.run_mb(mainname, buildername)
     api.chromium.compile()
 
 
@@ -100,6 +100,6 @@ def GenTests(api):
   yield (
       api.test('bot_update_on') +
       api.properties.tryserver(buildername='fake_trybot_buildername',
-                               mastername='bot_update.always_on') +
+                               mainname='bot_update.always_on') +
       api.step_data('compile', retcode=1)
   )

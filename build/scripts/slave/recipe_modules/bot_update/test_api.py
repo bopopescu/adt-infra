@@ -9,22 +9,22 @@ import sys
 
 sys.path.append(
   os.path.dirname( # scripts
-    os.path.dirname( # slave
+    os.path.dirname( # subordinate
       os.path.dirname( # recipe_modules
         os.path.dirname(__file__))))) # bot_update
 
-from slave import bot_update
+from subordinate import bot_update
 from recipe_engine import recipe_test_api
 
 
 class BotUpdateTestApi(recipe_test_api.RecipeTestApi):
-  def output_json(self, master, builder, slave, root, first_sln,
+  def output_json(self, main, builder, subordinate, root, first_sln,
                   revision_mapping, git_mode, force=False, fail_patch=False,
                   output_manifest=False):
     """Deterministically synthesize json.output test data for gclient's
     --output-json option.
     """
-    active = bot_update.check_valid_host(master, builder, slave) or force
+    active = bot_update.check_valid_host(main, builder, subordinate) or force
 
     output = {
         'did_run': active,
@@ -38,7 +38,7 @@ class BotUpdateTestApi(recipe_test_api.RecipeTestApi):
           for project_name, property_name in revision_mapping.iteritems()
       }
       properties.update({
-          '%s_cp' % property_name: ('refs/heads/master@{#%s}' %
+          '%s_cp' % property_name: ('refs/heads/main@{#%s}' %
                                     self.gen_revision(project_name, False))
           for project_name, property_name in revision_mapping.iteritems()
       })

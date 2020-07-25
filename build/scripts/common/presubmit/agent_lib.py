@@ -14,7 +14,7 @@ class AgentLib:
     @param base_url: str, format expected: "https://googleplex-android-review.git.corp.google.com", url to gerrit REST api.
     @param cookie_filename: str, format expected: "/a/b/.gitcookies", path to a nestscape cookie file.
     @param projects: [str], format expected: ["platform/tools/base", ...], project names to monitor
-    @param branch: str, format expected: studio-master-dev, branch name to monitor
+    @param branch: str, format expected: studio-main-dev, branch name to monitor
     @param path: str, format expected: regex, all files in change (C) MUST match the path to be a valid (C).
     @return:
     """

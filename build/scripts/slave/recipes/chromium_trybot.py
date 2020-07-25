@@ -36,99 +36,99 @@ BUILDERS = freeze({
     'builders': {
       # TODO(joelo): Remove this builder.
       'linux_blink_rel_ng': {
-        'mastername': 'chromium.webkit',
+        'mainname': 'chromium.webkit',
         'buildername': 'WebKit Linux',
       },
       'linux_blink_dbg': {
-        'mastername': 'chromium.webkit',
+        'mainname': 'chromium.webkit',
         'buildername': 'WebKit Linux (dbg)',
       },
       'linux_blink_rel': {
-        'mastername': 'chromium.webkit',
+        'mainname': 'chromium.webkit',
         'buildername': 'WebKit Linux',
       },
       'linux_blink_compile_dbg': {
-        'mastername': 'chromium.webkit',
+        'mainname': 'chromium.webkit',
         'buildername': 'WebKit Linux (dbg)',
         'analyze_mode': 'compile',
       },
       'linux_blink_compile_rel': {
-        'mastername': 'chromium.webkit',
+        'mainname': 'chromium.webkit',
         'buildername': 'WebKit Linux',
         'analyze_mode': 'compile',
       },
       'linux_blink_oilpan_dbg': {
-        'mastername': 'chromium.webkit',
+        'mainname': 'chromium.webkit',
         'buildername': 'WebKit Linux Oilpan (dbg)',
       },
       'linux_blink_oilpan_rel': {
-        'mastername': 'chromium.webkit',
+        'mainname': 'chromium.webkit',
         'buildername': 'WebKit Linux Oilpan',
       },
       'linux_blink_oilpan_compile_rel': {
-        'mastername': 'chromium.webkit',
+        'mainname': 'chromium.webkit',
         'buildername': 'WebKit Linux Oilpan',
         'analyze_mode': 'compile',
       },
       'mac_blink_dbg': {
-        'mastername': 'chromium.webkit',
+        'mainname': 'chromium.webkit',
         'buildername': 'WebKit Mac10.7 (dbg)',
       },
       'mac_blink_rel': {
-        'mastername': 'chromium.webkit',
+        'mainname': 'chromium.webkit',
         'buildername': 'WebKit Mac10.9',
       },
       'mac_blink_compile_dbg': {
-        'mastername': 'chromium.webkit',
+        'mainname': 'chromium.webkit',
         'buildername': 'WebKit Mac10.7 (dbg)',
         'analyze_mode': 'compile',
       },
       'mac_blink_compile_rel': {
-        'mastername': 'chromium.webkit',
+        'mainname': 'chromium.webkit',
         'buildername': 'WebKit Mac10.9',
         'analyze_mode': 'compile',
       },
       'mac_blink_oilpan_dbg': {
-        'mastername': 'chromium.webkit',
+        'mainname': 'chromium.webkit',
         'buildername': 'WebKit Mac Oilpan (dbg)',
       },
       'mac_blink_oilpan_rel': {
-        'mastername': 'chromium.webkit',
+        'mainname': 'chromium.webkit',
         'buildername': 'WebKit Mac Oilpan',
       },
       'mac_blink_oilpan_compile_rel': {
-        'mastername': 'chromium.webkit',
+        'mainname': 'chromium.webkit',
         'buildername': 'WebKit Mac Oilpan',
         'analyze_mode': 'compile',
       },
       'win_blink_dbg': {
-        'mastername': 'chromium.webkit',
+        'mainname': 'chromium.webkit',
         'buildername': 'WebKit Win7 (dbg)',
       },
       'win_blink_rel': {
-        'mastername': 'chromium.webkit',
+        'mainname': 'chromium.webkit',
         'buildername': 'WebKit Win7',
       },
       'win_blink_compile_dbg': {
-        'mastername': 'chromium.webkit',
+        'mainname': 'chromium.webkit',
         'buildername': 'WebKit Win7 (dbg)',
         'analyze_mode': 'compile',
       },
       'win_blink_compile_rel': {
-        'mastername': 'chromium.webkit',
+        'mainname': 'chromium.webkit',
         'buildername': 'WebKit Win7',
         'analyze_mode': 'compile',
       },
       'win_blink_oilpan_dbg': {
-        'mastername': 'chromium.webkit',
+        'mainname': 'chromium.webkit',
         'buildername': 'WebKit Win Oilpan (dbg)',
       },
       'win_blink_oilpan_rel': {
-        'mastername': 'chromium.webkit',
+        'mainname': 'chromium.webkit',
         'buildername': 'WebKit Win Oilpan',
       },
       'win_blink_oilpan_compile_rel': {
-        'mastername': 'chromium.webkit',
+        'mainname': 'chromium.webkit',
         'buildername': 'WebKit Win Oilpan',
         'analyze_mode': 'compile',
       },
@@ -137,42 +137,42 @@ BUILDERS = freeze({
   'tryserver.chromium.angle': {
     'builders': {
       'linux_angle_rel_ng': {
-        'mastername': 'chromium.angle',
+        'mainname': 'chromium.angle',
         'buildername': 'Linux Builder (ANGLE)',
         'tester': 'Linux Tests (ANGLE)',
       },
       'linux_angle_dbg_ng': {
-        'mastername': 'chromium.angle',
+        'mainname': 'chromium.angle',
         'buildername': 'Linux Builder (dbg) (ANGLE)',
         'tester': 'Linux Tests (dbg) (ANGLE)',
       },
       'mac_angle_rel_ng': {
-        'mastername': 'chromium.angle',
+        'mainname': 'chromium.angle',
         'buildername': 'Mac Builder (ANGLE)',
         'tester': 'Mac10.8 Tests (ANGLE)',
       },
       'mac_angle_dbg_ng': {
-        'mastername': 'chromium.angle',
+        'mainname': 'chromium.angle',
         'buildername': 'Mac Builder (dbg) (ANGLE)',
         'tester': 'Mac10.8 Tests (dbg) (ANGLE)',
       },
       'win_angle_rel_ng': {
-        'mastername': 'chromium.angle',
+        'mainname': 'chromium.angle',
         'buildername': 'Win Builder (ANGLE)',
         'tester': 'Win7 Tests (ANGLE)',
       },
       'win_angle_dbg_ng': {
-        'mastername': 'chromium.angle',
+        'mainname': 'chromium.angle',
         'buildername': 'Win Builder (dbg) (ANGLE)',
         'tester': 'Win7 Tests (dbg) (ANGLE)',
       },
       'win_angle_x64_rel_ng': {
-        'mastername': 'chromium.angle',
+        'mainname': 'chromium.angle',
         'buildername': 'Win x64 Builder (ANGLE)',
         'tester': 'Win7 Tests x64 (ANGLE)',
       },
       'win_angle_x64_dbg_ng': {
-        'mastername': 'chromium.angle',
+        'mainname': 'chromium.angle',
         'buildername': 'Win x64 Builder (dbg) (ANGLE)',
         'tester': 'Win7 Tests x64 (dbg) (ANGLE)',
       },
@@ -181,184 +181,184 @@ BUILDERS = freeze({
   'tryserver.chromium.linux': {
     'builders': {
       'android_amp': {
-        'mastername': 'chromium.fyi',
+        'mainname': 'chromium.fyi',
         'buildername': 'Android Tests (amp split)',
       },
       'android_arm64_dbg_recipe': {
-        'mastername': 'chromium.linux',
+        'mainname': 'chromium.linux',
         'buildername': 'Android Arm64 Builder (dbg)',
         'analyze_mode': 'compile',
       },
       'android_clang_dbg_recipe': {
-        'mastername': 'chromium.linux',
+        'mainname': 'chromium.linux',
         'buildername': 'Android Clang Builder (dbg)',
         'analyze_mode': 'compile',
       },
       'android_chromium_gn_compile_dbg': {
-        'mastername': 'chromium.linux',
+        'mainname': 'chromium.linux',
         'buildername': 'Android GN (dbg)',
         'analyze_mode': 'compile',
       },
       'android_chromium_gn_compile_rel': {
-        'mastername': 'chromium.linux',
+        'mainname': 'chromium.linux',
         'buildername': 'Android GN',
         'analyze_mode': 'compile',
       },
       'android_compile_dbg': {
-        'mastername': 'chromium.linux',
+        'mainname': 'chromium.linux',
         'buildername': 'Android Builder (dbg)',
         'analyze_mode': 'compile',
       },
       'android_compile_rel': {
-        'mastername': 'chromium.linux',
+        'mainname': 'chromium.linux',
         'buildername': 'Android Builder',
         'analyze_mode': 'compile',
       },
       'android_coverage': {
-        'mastername': 'chromium.fyi',
+        'mainname': 'chromium.fyi',
         'buildername': 'Android Coverage (dbg)'
       },
       'cast_shell_linux': {
-        'mastername': 'chromium.linux',
+        'mainname': 'chromium.linux',
         'buildername': 'Cast Linux',
       },
       'cast_shell_android': {
-        'mastername': 'chromium.linux',
+        'mainname': 'chromium.linux',
         'buildername': 'Cast Android (dbg)',
       },
       'linux_android_dbg_ng': {
-        'mastername': 'chromium.linux',
+        'mainname': 'chromium.linux',
         'buildername': 'Android Builder (dbg)',
         'tester': 'Android Tests (dbg)',
       },
       'linux_android_rel_ng': {
-        'mastername': 'chromium.linux',
+        'mainname': 'chromium.linux',
         'buildername': 'Android Builder',
         'tester': 'Android Tests',
       },
       'linux_arm_compile': {
-        'mastername': 'chromium.fyi',
+        'mainname': 'chromium.fyi',
         'buildername': 'Linux ARM',
         'analyze_mode': 'compile',
       },
       'linux_chromium_dbg_32_ng': {
-        'mastername': 'chromium.linux',
+        'mainname': 'chromium.linux',
         'buildername': 'Linux Builder (dbg)(32)',
         'tester': 'Linux Tests (dbg)(1)(32)',
       },
       'linux_chromium_dbg_ng': {
-        'mastername': 'chromium.linux',
+        'mainname': 'chromium.linux',
         'buildername': 'Linux Builder (dbg)',
         'tester': 'Linux Tests (dbg)(1)',
       },
       'linux_chromium_gn_chromeos_dbg': {
-        'mastername': 'chromium.chromiumos',
+        'mainname': 'chromium.chromiumos',
         'buildername': 'Linux ChromiumOS GN (dbg)',
       },
       'linux_chromium_gn_chromeos_rel': {
-        'mastername': 'chromium.chromiumos',
+        'mainname': 'chromium.chromiumos',
         'buildername': 'Linux ChromiumOS GN',
       },
       'linux_chromium_rel_ng': {
-        'mastername': 'chromium.linux',
+        'mainname': 'chromium.linux',
         'buildername': 'Linux Builder',
         'tester': 'Linux Tests',
       },
       'linux_chromium_asan_rel_ng': {
-        'mastername': 'chromium.memory',
+        'mainname': 'chromium.memory',
         'buildername': 'Linux ASan LSan Builder',
         'tester': 'Linux ASan LSan Tests (1)',
       },
       'linux_chromium_compile_dbg_ng': {
-        'mastername': 'chromium.linux',
+        'mainname': 'chromium.linux',
         'buildername': 'Linux Builder (dbg)',
         'analyze_mode': 'compile',
       },
       'linux_chromium_compile_rel_ng': {
-        'mastername': 'chromium.linux',
+        'mainname': 'chromium.linux',
         'buildername': 'Linux Builder',
         'analyze_mode': 'compile',
       },
       'linux_chromium_clobber_rel_ng': {
-        'mastername': 'chromium.fyi',
+        'mainname': 'chromium.fyi',
         'buildername': 'Linux Builder (clobber)',
         'analyze_mode': 'compile',
       },
       'linux_chromium_chromeos_dbg_ng': {
-        'mastername': 'chromium.chromiumos',
+        'mainname': 'chromium.chromiumos',
         'buildername': 'Linux ChromiumOS Builder (dbg)',
         'tester': 'Linux ChromiumOS Tests (dbg)(1)',
       },
       'linux_chromium_chromeos_compile_dbg_ng': {
-        'mastername': 'chromium.chromiumos',
+        'mainname': 'chromium.chromiumos',
         'buildername': 'Linux ChromiumOS Builder (dbg)',
         'analyze_mode': 'compile',
       },
       'linux_chromium_chromeos_rel_ng': {
-        'mastername': 'chromium.chromiumos',
+        'mainname': 'chromium.chromiumos',
         'buildername': 'Linux ChromiumOS Builder',
         'tester': 'Linux ChromiumOS Tests (1)',
       },
       'linux_chromium_chromeos_asan_rel_ng': {
-        'mastername': 'chromium.memory',
+        'mainname': 'chromium.memory',
         'buildername': 'Linux Chromium OS ASan LSan Builder',
         'tester': 'Linux Chromium OS ASan LSan Tests (1)',
       },
       'chromeos_x86-generic_chromium_compile_only_ng': {
-        'mastername': 'chromium.chromiumos',
+        'mainname': 'chromium.chromiumos',
         'buildername': 'ChromiumOS x86-generic Compile',
         'analyze_mode': 'compile',
       },
       'chromeos_amd64-generic_chromium_compile_only_ng': {
-        'mastername': 'chromium.chromiumos',
+        'mainname': 'chromium.chromiumos',
         'buildername': 'ChromiumOS amd64-generic Compile',
         'analyze_mode': 'compile',
       },
       'chromeos_daisy_chromium_compile_only_ng': {
-        'mastername': 'chromium.chromiumos',
+        'mainname': 'chromium.chromiumos',
         'buildername': 'ChromiumOS daisy Compile',
         'analyze_mode': 'compile',
       },
       'linux_chromium_chromeos_compile_rel_ng': {
-        'mastername': 'chromium.chromiumos',
+        'mainname': 'chromium.chromiumos',
         'buildername': 'Linux ChromiumOS Builder',
         'analyze_mode': 'compile',
       },
       'linux_chromium_chromeos_msan_rel_ng': {
-        'mastername': 'chromium.memory.fyi',
+        'mainname': 'chromium.memory.fyi',
         'buildername': 'Chromium Linux ChromeOS MSan Builder',
         'tester': 'Linux ChromeOS MSan Tests',
       },
       'linux_chromium_chromeos_ozone_rel_ng': {
-        'mastername': 'chromium.chromiumos',
+        'mainname': 'chromium.chromiumos',
         'buildername': 'Linux ChromiumOS Ozone Builder',
         'tester': 'Linux ChromiumOS Ozone Tests (1)',
       },
       'linux_chromium_compile_dbg_32_ng': {
-        'mastername': 'chromium.linux',
+        'mainname': 'chromium.linux',
         'buildername': 'Linux Builder (dbg)(32)',
         'analyze_mode': 'compile',
       },
       'linux_chromium_msan_rel_ng': {
-        'mastername': 'chromium.memory.fyi',
+        'mainname': 'chromium.memory.fyi',
         'buildername': 'Chromium Linux MSan Builder',
         'tester': 'Linux MSan Tests',
       },
       'linux_chromium_tsan_rel_ng': {
-        'mastername': 'chromium.memory.fyi',
+        'mainname': 'chromium.memory.fyi',
         'buildername': 'Chromium Linux TSan Builder',
         'tester': 'Linux TSan Tests',
       },
       'linux_chromium_cfi_rel_ng': {
-        'mastername': 'chromium.fyi',
+        'mainname': 'chromium.fyi',
         'buildername': 'CFI Linux',
       },
       'linux_site_isolation': {
-        'mastername': 'chromium.fyi',
+        'mainname': 'chromium.fyi',
         'buildername': 'Site Isolation Linux',
       },
       'linux_chromium_practice_rel_ng': {
-        'mastername': 'chromium.fyi',
+        'mainname': 'chromium.fyi',
         'buildername': 'ChromiumPracticeFullTester',
       },
     },
@@ -366,45 +366,45 @@ BUILDERS = freeze({
   'tryserver.chromium.mac': {
     'builders': {
       'mac_chromium_dbg_ng': {
-        'mastername': 'chromium.mac',
+        'mainname': 'chromium.mac',
         'buildername': 'Mac Builder (dbg)',
         'tester': 'Mac10.9 Tests (dbg)',
       },
       'mac_chromium_gn_dbg': {
-        'mastername': 'chromium.mac',
+        'mainname': 'chromium.mac',
         'buildername': 'Mac GN (dbg)',
       },
       'mac_chromium_gn_rel': {
-        'mastername': 'chromium.mac',
+        'mainname': 'chromium.mac',
         'buildername': 'Mac GN',
       },
       'mac_chromium_rel_ng': {
-        'mastername': 'chromium.mac',
+        'mainname': 'chromium.mac',
         'buildername': 'Mac Builder',
         'tester': 'Mac10.8 Tests',
       },
       'mac_chromium_10.6_rel_ng': {
-        'mastername': 'chromium.mac',
+        'mainname': 'chromium.mac',
         'buildername': 'Mac Builder',
         'tester': 'Mac10.6 Tests',
       },
       'mac_chromium_10.10_rel_ng': {
-        'mastername': 'chromium.mac',
+        'mainname': 'chromium.mac',
         'buildername': 'Mac Builder',
         'tester': 'Mac10.10 Tests',
       },
       'mac_chromium_compile_dbg_ng': {
-        'mastername': 'chromium.mac',
+        'mainname': 'chromium.mac',
         'buildername': 'Mac Builder (dbg)',
         'analyze_mode': 'compile',
       },
       'mac_chromium_compile_rel_ng': {
-        'mastername': 'chromium.mac',
+        'mainname': 'chromium.mac',
         'buildername': 'Mac Builder',
         'analyze_mode': 'compile',
       },
       'mac_chromium_asan_rel_ng': {
-        'mastername': 'chromium.memory',
+        'mainname': 'chromium.memory',
         'buildername': 'Mac ASan 64 Builder',
         'tester': 'Mac ASan 64 Tests (1)',
       },
@@ -413,86 +413,86 @@ BUILDERS = freeze({
   'tryserver.chromium.win': {
     'builders': {
       'win_chromium_dbg_ng': {
-        'mastername': 'chromium.win',
+        'mainname': 'chromium.win',
         'buildername': 'Win Builder (dbg)',
         'tester': 'Win7 Tests (dbg)(1)',
       },
       'win_chromium_gn_x64_dbg': {
-        'mastername': 'chromium.win',
+        'mainname': 'chromium.win',
         'buildername': 'Win x64 GN (dbg)',
       },
       'win_chromium_gn_x64_rel': {
-        'mastername': 'chromium.win',
+        'mainname': 'chromium.win',
         'buildername': 'Win x64 GN',
       },
       'win_chromium_rel_ng': {
-        'mastername': 'chromium.win',
+        'mainname': 'chromium.win',
         'buildername': 'Win Builder',
         'tester': 'Win7 Tests (1)',
       },
       'win_chromium_rel_ng_exp': {
-        'mastername': 'chromium.win',
+        'mainname': 'chromium.win',
         'buildername': 'Win Builder',
         'tester': 'Win7 Tests (1)',
       },
       'win_chromium_xp_rel_ng': {
-        'mastername': 'chromium.win',
+        'mainname': 'chromium.win',
         'buildername': 'Win Builder',
         'tester': 'XP Tests (1)',
       },
       'win_chromium_vista_rel_ng': {
-        'mastername': 'chromium.win',
+        'mainname': 'chromium.win',
         'buildername': 'Win Builder',
         'tester': 'Vista Tests (1)',
       },
       'win_chromium_compile_dbg_ng': {
-        'mastername': 'chromium.win',
+        'mainname': 'chromium.win',
         'buildername': 'Win Builder (dbg)',
         'analyze_mode': 'compile',
       },
       'win_chromium_compile_dbg_ng_exp': {
-        'mastername': 'chromium.win',
+        'mainname': 'chromium.win',
         'buildername': 'Win Builder (dbg)',
         'analyze_mode': 'compile',
       },
       'win_chromium_compile_rel_ng': {
-        'mastername': 'chromium.win',
+        'mainname': 'chromium.win',
         'buildername': 'Win Builder',
         'analyze_mode': 'compile',
       },
       'win_chromium_x64_rel_ng': {
-        'mastername': 'chromium.win',
+        'mainname': 'chromium.win',
         'buildername': 'Win x64 Builder',
         'tester': 'Win 7 Tests x64 (1)',
       },
       'win_chromium_x64_rel_ng_exp': {
-        'mastername': 'chromium.win',
+        'mainname': 'chromium.win',
         'buildername': 'Win x64 Builder',
         'tester': 'Win 7 Tests x64 (1)',
       },
       'win8_chromium_ng': {
-        'mastername': 'chromium.win',
+        'mainname': 'chromium.win',
         'buildername': 'Win8 Aura',
       },
       'win8_chromium_gn_dbg': {
-        'mastername': 'chromium.win',
+        'mainname': 'chromium.win',
         'buildername': 'Win8 GN (dbg)',
       },
       # Experimental clang/win bots.
       'win_clang_dbg': {
-        'mastername': 'chromium.fyi',
+        'mainname': 'chromium.fyi',
         'buildername': 'CrWinClang(dbg)',
       },
       'win_clang_rel': {
-        'mastername': 'chromium.fyi',
+        'mainname': 'chromium.fyi',
         'buildername': 'CrWinClang',
       },
       'win_clang_x64_dbg': {
-        'mastername': 'chromium.fyi',
+        'mainname': 'chromium.fyi',
         'buildername': 'CrWinClang64(dbg)',
       },
       'win_clang_x64_rel': {
-        'mastername': 'chromium.fyi',
+        'mainname': 'chromium.fyi',
         'buildername': 'CrWinClang64',
       },
     },
@@ -647,24 +647,24 @@ def is_source_file(api, filepath):
   return ext in ['.c', '.cc', '.cpp', '.h', '.java', '.mm']
 
 def _RunStepsInternal(api):
-  def get_bot_config(mastername, buildername):
-    master_dict = BUILDERS.get(mastername, {})
-    return master_dict.get('builders', {}).get(buildername)
+  def get_bot_config(mainname, buildername):
+    main_dict = BUILDERS.get(mainname, {})
+    return main_dict.get('builders', {}).get(buildername)
 
-  mastername = api.properties.get('mastername')
+  mainname = api.properties.get('mainname')
   buildername = api.properties.get('buildername')
-  bot_config = get_bot_config(mastername, buildername)
+  bot_config = get_bot_config(mainname, buildername)
   api.chromium_tests.configure_swarming('chromium', precommit=True)
 
   # TODO(sergiyb): This is a temporary hack to run GPU tests on tryserver
   # only. This should be removed when we will convert chromium.gpu waterfall
   # to swarming and be able to replicate the tests to tryserver automatically.
-  master = api.properties['mastername']
+  main = api.properties['mainname']
   builder = api.properties['buildername']
-  enable_gpu_tests = builder in CHROMIUM_GPU_DIMENSION_SETS.get(master, {})
+  enable_gpu_tests = builder in CHROMIUM_GPU_DIMENSION_SETS.get(main, {})
 
   api.chromium_tests.configure_build(
-      bot_config['mastername'],
+      bot_config['mainname'],
       bot_config['buildername'],
       override_bot_type='builder_tester')
 
@@ -677,27 +677,27 @@ def _RunStepsInternal(api):
                     'Please re-create the CL using fresh checkout after '
                     'the blink merge.')
 
-  bot_update_step, master_dict, test_spec = \
+  bot_update_step, main_dict, test_spec = \
       api.chromium_tests.prepare_checkout(
-          bot_config['mastername'],
+          bot_config['mainname'],
           bot_config['buildername'])
 
   tests = list(api.chromium_tests.tests_for_builder(
-      bot_config['mastername'],
+      bot_config['mainname'],
       bot_config['buildername'],
       bot_update_step,
-      master_dict,
+      main_dict,
       override_bot_type='builder_tester'))
   tester = bot_config.get('tester', '')
   if tester:
-    test_config = master_dict.get('builders', {}).get(tester)
+    test_config = main_dict.get('builders', {}).get(tester)
     for key, value in test_config.get('swarming_dimensions', {}).iteritems():
       api.swarming.set_default_dimension(key, value)
     tests.extend(api.chromium_tests.tests_for_builder(
-        bot_config['mastername'],
+        bot_config['mainname'],
         tester,
         bot_update_step,
-        master_dict,
+        main_dict,
         override_bot_type='builder_tester'))
 
   if enable_gpu_tests:
@@ -705,7 +705,7 @@ def _RunStepsInternal(api):
         bot_update_step.presentation.properties['got_revision'],
         bot_update_step.presentation.properties['got_revision'],
         enable_swarming=True,
-        swarming_dimension_sets=CHROMIUM_GPU_DIMENSION_SETS[master][builder]))
+        swarming_dimension_sets=CHROMIUM_GPU_DIMENSION_SETS[main][builder]))
 
   affected_files = api.tryserver.get_files_affected_by_patch()
 
@@ -727,9 +727,9 @@ def _RunStepsInternal(api):
 
   compile_targets, tests_including_triggered = \
       api.chromium_tests.get_compile_targets_and_tests(
-          bot_config['mastername'],
+          bot_config['mainname'],
           bot_config['buildername'],
-          master_dict,
+          main_dict,
           test_spec,
           override_bot_type='builder_tester',
           override_tests=tests)
@@ -793,10 +793,10 @@ def _RunStepsInternal(api):
       compile_targets = sorted(set(compile_targets))
 
     api.chromium_tests.compile_specific_targets(
-        bot_config['mastername'],
+        bot_config['mainname'],
         bot_config['buildername'],
         bot_update_step,
-        master_dict,
+        main_dict,
         compile_targets,
         tests_including_triggered,
         override_bot_type='builder_tester')
@@ -812,12 +812,12 @@ def _RunStepsInternal(api):
   if not tests:
     return
 
-  api.chromium_tests.run_tests_and_deapply_as_needed(mastername, api, tests,
+  api.chromium_tests.run_tests_and_deapply_as_needed(mainname, api, tests,
                                                      bot_update_step)
 
 
 def RunSteps(api):
-  # build/tests/masters_recipes_tests.py needs to manipulate the BUILDERS
+  # build/tests/mains_recipes_tests.py needs to manipulate the BUILDERS
   # dict, so we provide an API to dump it here.
   if api.properties.get('dump_builders'):  # pragma: no cover
     api.file.copy('Dump BUILDERS dict',
@@ -835,17 +835,17 @@ def _sanitize_nonalpha(text):
 def GenTests(api):
   canned_test = api.test_utils.canned_gtest_output
 
-  def props(config='Release', mastername='tryserver.chromium.linux',
+  def props(config='Release', mainname='tryserver.chromium.linux',
             buildername='linux_chromium_rel_ng', extra_swarmed_tests=None,
             **kwargs):
     kwargs.setdefault('revision', None)
-    swarm_hashes = api.gpu.get_dummy_swarm_hashes_for_trybot(mastername)
+    swarm_hashes = api.gpu.get_dummy_swarm_hashes_for_trybot(mainname)
     if extra_swarmed_tests:
       for test in extra_swarmed_tests:
         swarm_hashes[test] = '[dummy hash for %s]' % test
     return api.properties.tryserver(
       build_config=config,
-      mastername=mastername,
+      mainname=mainname,
       buildername=buildername,
       swarm_hashes=swarm_hashes,
       **kwargs
@@ -867,18 +867,18 @@ def GenTests(api):
 
   # While not strictly required for coverage, record expectations for each
   # of the configs so we can see when and how they change.
-  for mastername, master_config in BUILDERS.iteritems():
-    for buildername, bot_config in master_config['builders'].iteritems():
+  for mainname, main_config in BUILDERS.iteritems():
+    for buildername, bot_config in main_config['builders'].iteritems():
       for analyze in ['', '_analyze']:
-        test_name = 'full_%s_%s%s' % (_sanitize_nonalpha(mastername),
+        test_name = 'full_%s_%s%s' % (_sanitize_nonalpha(mainname),
                                       _sanitize_nonalpha(buildername),
                                       analyze)
         yield (
           api.test(test_name) +
           api.chromium_tests.platform(
-              bot_config['mastername'], bot_config['buildername']) +
+              bot_config['mainname'], bot_config['buildername']) +
           (api.empty_test_data() if analyze else suppress_analyze()) +
-          props(mastername=mastername, buildername=buildername)
+          props(mainname=mainname, buildername=buildername)
         )
 
   # Additional tests for blink trybots.
@@ -893,10 +893,10 @@ def GenTests(api):
                                      'pass' if pass_first else 'fail')
       test = (api.test(test_name) +
               suppress_analyze() +
-              props(mastername='tryserver.blink',
+              props(mainname='tryserver.blink',
                     buildername=buildername) +
               api.chromium_tests.platform(
-                  bot_config['mastername'], bot_config['buildername']) +
+                  bot_config['mainname'], bot_config['buildername']) +
               api.override_step_data('webkit_tests (with patch)',
                   api.test_utils.canned_test_output(passing=pass_first)))
       if not pass_first:
@@ -919,7 +919,7 @@ def GenTests(api):
   # http://crbug.com/520660
   yield (
     api.test('process_dumps_failure') +
-    props(mastername='tryserver.chromium.win',
+    props(mainname='tryserver.chromium.win',
           buildername='win_chromium_rel_ng') +
     api.platform.name('win') +
     api.override_step_data('read test spec', api.json.output({
@@ -984,7 +984,7 @@ def GenTests(api):
   yield (
     api.test('amp_test_failure') +
     props(buildername='android_amp',
-          mastername='tryserver.chromium.linux') +
+          mainname='tryserver.chromium.linux') +
     api.platform.name('linux') +
     suppress_analyze() +
     api.override_step_data('[collect] base_unittests (with patch)',
@@ -994,7 +994,7 @@ def GenTests(api):
   yield (
     api.test('amp_test_local_fallback') +
     props(buildername='android_amp',
-          mastername='tryserver.chromium.linux') +
+          mainname='tryserver.chromium.linux') +
     api.platform.name('linux') +
     suppress_analyze() +
     api.override_step_data('[trigger] base_unittests (with patch)',
@@ -1004,7 +1004,7 @@ def GenTests(api):
   yield (
     api.test('amp_test_local_fallback_failure') +
     props(buildername='android_amp',
-          mastername='tryserver.chromium.linux') +
+          mainname='tryserver.chromium.linux') +
     api.platform.name('linux') +
     suppress_analyze() +
     api.override_step_data('[trigger] base_unittests (with patch)',
@@ -1040,7 +1040,7 @@ def GenTests(api):
   yield (
     api.test('runhooks_failure') +
     props(buildername='win_chromium_rel_ng',
-          mastername='tryserver.chromium.win') +
+          mainname='tryserver.chromium.win') +
     api.platform.name('win') +
     api.step_data('gclient runhooks (with patch)', retcode=1) +
     api.step_data('gclient runhooks (without patch)', retcode=1)
@@ -1049,7 +1049,7 @@ def GenTests(api):
   yield (
     api.test('runhooks_failure_ng') +
     api.platform('linux', 64) +
-    props(mastername='tryserver.chromium.linux',
+    props(mainname='tryserver.chromium.linux',
           buildername='linux_chromium_rel_ng') +
     api.step_data('gclient runhooks (with patch)', retcode=1)
   )
@@ -1057,7 +1057,7 @@ def GenTests(api):
   yield (
     api.test('compile_failure_ng') +
     api.platform('linux', 64) +
-    props(mastername='tryserver.chromium.linux',
+    props(mainname='tryserver.chromium.linux',
           buildername='linux_chromium_rel_ng') +
     suppress_analyze() +
     api.step_data('compile (with patch)', retcode=1)
@@ -1066,7 +1066,7 @@ def GenTests(api):
   yield (
     api.test('compile_failure_without_patch_ng') +
     api.platform('linux', 64) +
-    props(mastername='tryserver.chromium.linux',
+    props(mainname='tryserver.chromium.linux',
           buildername='linux_chromium_rel_ng') +
     suppress_analyze() +
     api.step_data('compile (with patch)', retcode=1) +
@@ -1326,7 +1326,7 @@ def GenTests(api):
   yield (
     api.test('gpu_tests') +
     props(
-      mastername='tryserver.chromium.mac',
+      mainname='tryserver.chromium.mac',
       buildername='mac_chromium_rel_ng',
     ) +
     api.platform.name('mac') +
@@ -1347,7 +1347,7 @@ def GenTests(api):
   yield (
     api.test('telemetry_gpu_no_summary') +
     props(
-      mastername='tryserver.chromium.mac',
+      mainname='tryserver.chromium.mac',
       buildername='mac_chromium_rel_ng',
     ) +
     api.platform.name('mac') +
@@ -1362,7 +1362,7 @@ def GenTests(api):
   yield (
     api.test('telemetry_gpu_harness_failure') +
     props(
-      mastername='tryserver.chromium.linux',
+      mainname='tryserver.chromium.linux',
       buildername='linux_chromium_rel_ng',
     ) +
     api.platform.name('linux') +
@@ -1381,7 +1381,7 @@ def GenTests(api):
   yield (
     api.test('telemetry_gpu_swarming_error') +
     props(
-      mastername='tryserver.chromium.mac',
+      mainname='tryserver.chromium.mac',
       buildername='mac_chromium_rel_ng',
     ) +
     api.platform.name('mac') +
@@ -1400,7 +1400,7 @@ def GenTests(api):
   yield (
     api.test('telemetry_gpu_no_results') +
     props(
-      mastername='tryserver.chromium.mac',
+      mainname='tryserver.chromium.mac',
       buildername='mac_chromium_rel_ng',
     ) +
     api.platform.name('mac') +
@@ -1419,7 +1419,7 @@ def GenTests(api):
   yield (
     api.test('telemetry_gpu_with_results_but_bad_exit_code') +
     props(
-      mastername='tryserver.chromium.mac',
+      mainname='tryserver.chromium.mac',
       buildername='mac_chromium_rel_ng',
     ) +
     api.platform.name('mac') +
@@ -1440,7 +1440,7 @@ def GenTests(api):
   yield (
     api.test('use_v8_patch_on_chromium_trybot') +
     props(buildername='win_chromium_rel_ng',
-          mastername='tryserver.chromium.win',
+          mainname='tryserver.chromium.win',
           patch_project='v8') +
     api.platform.name('win')
   )
@@ -1453,7 +1453,7 @@ def GenTests(api):
   yield (
     api.test('analyze_runs_only_angle_unittests') +
     api.properties.tryserver(
-      mastername='tryserver.chromium.win',
+      mainname='tryserver.chromium.win',
       buildername='win_chromium_rel_ng',
       swarm_hashes=angle_unittests_hash
     ) +
@@ -1464,7 +1464,7 @@ def GenTests(api):
   yield (
     api.test('swarming_time_out_is_handled_correctly') +
     api.properties.tryserver(
-      mastername='tryserver.chromium.win',
+      mainname='tryserver.chromium.win',
       buildername='win_chromium_rel_ng'
     ) +
     api.platform.name('win') +
@@ -1477,7 +1477,7 @@ def GenTests(api):
   yield (
     api.test('analyze_runs_nothing') +
     api.properties.tryserver(
-      mastername='tryserver.chromium.win',
+      mainname='tryserver.chromium.win',
       buildername='win_chromium_rel_ng',
       swarm_hashes={}
     ) +
@@ -1490,7 +1490,7 @@ def GenTests(api):
   yield (
     api.test('analyze_runs_nothing_with_no_source_file_changes') +
     api.properties.tryserver(
-      mastername='tryserver.chromium.win',
+      mainname='tryserver.chromium.win',
       buildername='win_chromium_rel_ng',
       swarm_hashes={}
     ) +
@@ -1505,7 +1505,7 @@ def GenTests(api):
   yield (
     api.test('analyze_webkit') +
     api.properties.tryserver(
-      mastername='tryserver.chromium.win',
+      mainname='tryserver.chromium.win',
       buildername='win_chromium_rel_ng',
       swarm_hashes={}
     ) +
@@ -1520,7 +1520,7 @@ def GenTests(api):
   yield (
     api.test('swarming_paths') +
     api.properties.tryserver(
-      mastername='tryserver.chromium.linux',
+      mainname='tryserver.chromium.linux',
       buildername='linux_chromium_rel_ng',
       path_config='swarming',
     ) +
@@ -1531,7 +1531,7 @@ def GenTests(api):
   # that we fail the whole build.
   yield (
     api.test('blink_minimal_pass_continues') +
-    props(mastername='tryserver.blink',
+    props(mainname='tryserver.blink',
           buildername='linux_blink_rel') +
     suppress_analyze() +
     api.platform.name('linux') +
@@ -1548,7 +1548,7 @@ def GenTests(api):
   # 255 == test_run_results.UNEXPECTED_ERROR_EXIT_STATUS in run-webkit-tests.
   yield (
     api.test('webkit_tests_unexpected_error') +
-    props(mastername='tryserver.blink',
+    props(mainname='tryserver.blink',
           buildername='linux_blink_rel') +
     suppress_analyze() +
     api.platform.name('linux') +
@@ -1563,7 +1563,7 @@ def GenTests(api):
   # 130 == test_run_results.INTERRUPTED_EXIT_STATUS in run-webkit-tests.
   yield (
     api.test('webkit_tests_interrupted') +
-    props(mastername='tryserver.blink',
+    props(mainname='tryserver.blink',
           buildername='linux_blink_rel') +
     suppress_analyze() +
     api.platform.name('linux') +
@@ -1577,7 +1577,7 @@ def GenTests(api):
   # and compare the lists of failing tests).
   yield (
     api.test('too_many_failures_for_retcode') +
-    props(mastername='tryserver.blink',
+    props(mainname='tryserver.blink',
           buildername='linux_blink_rel') +
     suppress_analyze() +
     api.platform.name('linux') +
@@ -1590,7 +1590,7 @@ def GenTests(api):
 
   yield (
     api.test('non_cq_blink_tryjob') +
-    props(mastername='tryserver.blink',
+    props(mainname='tryserver.blink',
           buildername='win_blink_rel',
           requester='someone@chromium.org') +
     suppress_analyze() +
@@ -1601,7 +1601,7 @@ def GenTests(api):
 
   yield (
     api.test('use_v8_patch_on_blink_trybot') +
-    props(mastername='tryserver.blink',
+    props(mainname='tryserver.blink',
           buildername='mac_blink_rel',
           patch_project='v8') +
     api.platform.name('mac')

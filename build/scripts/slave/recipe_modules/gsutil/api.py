@@ -138,7 +138,7 @@ class GSUtilApi(recipe_api.RecipeApi):
       name: The name of the step.
     """
     gsutil_download_path = self.m.path['build'].join(
-        'scripts', 'slave', 'gsutil_download.py')
+        'scripts', 'subordinate', 'gsutil_download.py')
     args = ['--poll',
             '--url', url,
             '--dst', destination,
@@ -147,7 +147,7 @@ class GSUtilApi(recipe_api.RecipeApi):
     return self.m.python(name,
                          gsutil_download_path,
                          args,
-                         cwd=self.m.path['slave_build'])
+                         cwd=self.m.path['subordinate_build'])
 
   def _generate_metadata_args(self, metadata):
     result = []

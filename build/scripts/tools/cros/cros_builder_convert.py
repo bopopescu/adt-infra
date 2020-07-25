@@ -15,16 +15,16 @@ This presents problems because the build target are fundamentally driven by
 their underlying 'cbuildbot' target, but the composition scheme is extremely
 arbitrary.
 
-Consequently, BuildBot masters are being migrated to a new, deterministic,
+Consequently, BuildBot mains are being migrated to a new, deterministic,
 'cbuildbot'-driven naming scheme. A builder building 'cbuildbot' target
 <target> and checking Chromite/'cbuildbot' from branch <branch> will use the
 builder name: <target>-<branch>. This is universally sustainable across all
 waterfalls and ensures that 'cbuildbot' builds are tracked and numbered based
 on their underlying 'cbuildbot' target.
 
-This script is intended to be run on a stopped BuildBot master during build
+This script is intended to be run on a stopped BuildBot main during build
 directory migration. It will iterate through each build directory in the current
-master naming scheme and rename the classic directories into their new
+main naming scheme and rename the classic directories into their new
 'cbuildbot'-driven namespace.
 """
 
@@ -45,7 +45,7 @@ class UpdateInfo(collections.namedtuple(
   """Information about a single directory update action."""
 
   _STATIC_PERMUTATIONS = {
-      'Canary master': 'master-canary',
+      'Canary main': 'main-canary',
   }
 
   _TRANSFORMATIONS = (
@@ -144,8 +144,8 @@ class UpdateInfo(collections.namedtuple(
       return None
 
     if not branch:
-      # We need to do an update to add the branch. Default to 'master'.
-      branch = 'master'
+      # We need to do an update to add the branch. Default to 'main'.
+      branch = 'main'
 
     candidates = sorted(candidates)
     for candidate in candidates:
@@ -162,7 +162,7 @@ def main(args):
   """
   parser = argparse.ArgumentParser()
   parser.add_argument('path', nargs='+', metavar='PATH',
-      help='The path to the master directory to process.')
+      help='The path to the main directory to process.')
   parser.add_argument('-v', '--verbose', action='count', default=0,
       help='Increase verbosity. Can be specified multiple times.')
   parser.add_argument('-d', '--dry-run', action='store_true',
@@ -210,7 +210,7 @@ def main(args):
   updates = []
   for path in args.path:
     if not os.path.isdir(path):
-      raise ValueError("Supplied master directory is not valid: %s" % (path,))
+      raise ValueError("Supplied main directory is not valid: %s" % (path,))
 
     seen = set()
     for f in os.listdir(path):
@@ -247,12 +247,12 @@ def main(args):
 
   # Execute the updates.
   logging.info("Executing %d updates.", len(updates))
-  for master_dir, update_info in updates:
-    logging.info("Updating [%s]: [%s] => [%s]", master_dir, update_info.src,
+  for main_dir, update_info in updates:
+    logging.info("Updating [%s]: [%s] => [%s]", main_dir, update_info.src,
                  update_info.dst)
     if not args.dry_run:
-      shutil.move(os.path.join(master_dir, update_info.src),
-                  os.path.join(master_dir, update_info.dst))
+      shutil.move(os.path.join(main_dir, update_info.src),
+                  os.path.join(main_dir, update_info.dst))
   logging.info("Updated %d directories.", len(updates))
   if logging.getLogger().isEnabledFor(logging.DEBUG):
     logging.debug("%d directories already matching: %s",

@@ -71,7 +71,7 @@ def RunSteps(api):
   api.isolate.set_isolate_environment(api.chromium.c)
 
   api.chromium.cleanup_temp()
-  # Checkout chromium + deps (including 'master' of swarming_client).
+  # Checkout chromium + deps (including 'main' of swarming_client).
   step_result = api.bot_update.ensure_checkout()
   if not step_result.json.output['did_run']:
     api.gclient.checkout()

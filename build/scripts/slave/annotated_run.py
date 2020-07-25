@@ -18,11 +18,11 @@ sys.path.append(os.path.join(BUILD_ROOT, 'third_party'))
 
 from common import annotator
 from common import chromium_utils
-from common import master_cfg_utils
+from common import main_cfg_utils
 
 SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 BUILD_LIMITED_ROOT = os.path.join(
-    os.path.dirname(BUILD_ROOT), 'build_internal', 'scripts', 'slave')
+    os.path.dirname(BUILD_ROOT), 'build_internal', 'scripts', 'subordinate')
 
 PACKAGE_CFG = os.path.join(
     os.path.dirname(os.path.dirname(SCRIPT_PATH)),
@@ -41,89 +41,89 @@ def namedTempFile():
       print >> sys.stderr, "LEAK: %s: %s" % (name, e)
 
 def get_recipe_properties(factory_properties, build_properties,
-                          master_overrides_slave):
+                          main_overrides_subordinate):
   """Constructs the recipe's properties from buildbot's properties.
 
-  This retrieves the current factory properties from the master_config
-  in the slave's checkout (the factory properties handed to us from the
-  master might be out of date), and merges in the build properties.
+  This retrieves the current factory properties from the main_config
+  in the subordinate's checkout (the factory properties handed to us from the
+  main might be out of date), and merges in the build properties.
 
   Using the values from the checkout allows us to do things like change
   the recipe and other factory properties for a builder without needing
-  a master restart.
+  a main restart.
   """
-  master_properties = factory_properties.copy()
-  master_properties.update(build_properties)
+  main_properties = factory_properties.copy()
+  main_properties.update(build_properties)
 
-  mastername = master_properties.get('mastername')
-  buildername = master_properties.get('buildername')
-  slave_properties = {}
-  if mastername and buildername:
+  mainname = main_properties.get('mainname')
+  buildername = main_properties.get('buildername')
+  subordinate_properties = {}
+  if mainname and buildername:
     try:
-      slave_properties = get_factory_properties_from_disk(
-          mastername, buildername)
+      subordinate_properties = get_factory_properties_from_disk(
+          mainname, buildername)
     except LookupError as e:
-      if master_overrides_slave:
+      if main_overrides_subordinate:
         print 'WARNING in annotated_run.py (non-fatal): %s' % e
       else:
         raise e
 
-  properties = master_properties.copy()
+  properties = main_properties.copy()
   conflicting_properties = {}
-  for name in slave_properties:
-    if master_properties.get(name) != slave_properties[name]:
-      conflicting_properties[name] = (master_properties.get(name),
-                                   slave_properties[name])
+  for name in subordinate_properties:
+    if main_properties.get(name) != subordinate_properties[name]:
+      conflicting_properties[name] = (main_properties.get(name),
+                                   subordinate_properties[name])
 
   if conflicting_properties:
-    print 'The following build properties differ between master and slave:'
-    for name, (master_value, slave_value) in conflicting_properties.items():
-      print ('  "%s": master: "%s", slave: "%s"' % (
+    print 'The following build properties differ between main and subordinate:'
+    for name, (main_value, subordinate_value) in conflicting_properties.items():
+      print ('  "%s": main: "%s", subordinate: "%s"' % (
           name,
-          "<unset>" if (master_value is None) else master_value,
-          slave_value))
+          "<unset>" if (main_value is None) else main_value,
+          subordinate_value))
     print ("Using the values from the %s." %
-           ("master" if master_overrides_slave else "slave"))
+           ("main" if main_overrides_subordinate else "subordinate"))
 
-  if not master_overrides_slave:
-    for name, (_, slave_value) in conflicting_properties.items():
-      properties[name] = slave_value
+  if not main_overrides_subordinate:
+    for name, (_, subordinate_value) in conflicting_properties.items():
+      properties[name] = subordinate_value
 
   return properties
 
 
-def get_factory_properties_from_disk(mastername, buildername):
-  master_list = master_cfg_utils.GetMasters()
-  master_path = None
-  for name, path in master_list:
-    if name == mastername:
-      master_path = path
+def get_factory_properties_from_disk(mainname, buildername):
+  main_list = main_cfg_utils.GetMains()
+  main_path = None
+  for name, path in main_list:
+    if name == mainname:
+      main_path = path
 
-  if not master_path:
-    raise LookupError('master "%s" not found.' % mastername)
+  if not main_path:
+    raise LookupError('main "%s" not found.' % mainname)
 
   script_path = os.path.join(BUILD_ROOT, 'scripts', 'tools',
-                             'dump_master_cfg.py')
+                             'dump_main_cfg.py')
 
   with namedTempFile() as fname:
     dump_cmd = [sys.executable,
                 script_path,
-                master_path, fname]
+                main_path, fname]
     proc = subprocess.Popen(dump_cmd, cwd=BUILD_ROOT, stdout=subprocess.PIPE,
                             stderr=subprocess.PIPE)
     out, err = proc.communicate()
     exit_code = proc.returncode
 
     if exit_code:
-      raise LookupError('Failed to get the master config; dump_master_cfg %s'
+      raise LookupError('Failed to get the main config; dump_main_cfg %s'
                         'returned %d):\n%s\n%s\n'% (
-                        mastername, exit_code, out, err))
+                        mainname, exit_code, out, err))
 
     with open(fname, 'rU') as f:
       config = json.load(f)
 
   # Now extract just the factory properties for the requested builder
-  # from the master config.
+  # from the main config.
   props = {}
   found = False
   for builder_dict in config['builders']:
@@ -134,12 +134,12 @@ def get_factory_properties_from_disk(mastername, buildername):
         props[name] = value
 
   if not found:
-    raise LookupError('builder "%s" not found on in master "%s"' %
-                      (buildername, mastername))
+    raise LookupError('builder "%s" not found on in main "%s"' %
+                      (buildername, mainname))
 
   if 'recipe' not in props:
     raise LookupError('Cannot find recipe for %s on %s' %
-                      (buildername, mastername))
+                      (buildername, mainname))
 
   return props
 
@@ -167,9 +167,9 @@ def get_args(argv):
                     help='factory properties in b64 gz JSON format')
   parser.add_option('--keep-stdin', action='store_true', default=False,
                     help='don\'t close stdin when running recipe steps')
-  parser.add_option('--master-overrides-slave', action='store_true',
+  parser.add_option('--main-overrides-subordinate', action='store_true',
                     help='use the property values given on the command line '
-                         'from the master, not the ones looked up on the slave')
+                         'from the main, not the ones looked up on the subordinate')
   return parser.parse_args(argv)
 
 
@@ -182,7 +182,7 @@ def update_scripts():
   git_cmd = 'git.bat' if os.name == "nt" else 'git'
   with stream.step('update_scripts') as s:
     fetch_cmd = [git_cmd, 'fetch', '--all']
-    reset_cmd = [git_cmd, 'reset', '--hard', 'origin/emu-master-dev']
+    reset_cmd = [git_cmd, 'reset', '--hard', 'origin/emu-main-dev']
     if subprocess.call(fetch_cmd) != 0 or subprocess.call(reset_cmd) != 0:
       s.step_text('git update source failed!')
       s.step_warnings()
@@ -215,7 +215,7 @@ def main(argv):
   opts, _ = get_args(argv)
   properties = get_recipe_properties(
       opts.factory_properties, opts.build_properties,
-      opts.master_overrides_slave)
+      opts.main_overrides_subordinate)
 
   clean_old_recipe_engine()
 

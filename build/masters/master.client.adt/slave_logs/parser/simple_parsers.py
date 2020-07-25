@@ -139,7 +139,7 @@ def find_and_parse_build_prop(log_dir):
 _LOG_TIMESTAMP_RE = re.compile('([0-9]+)-([0-9]+)-([0-9]+) '
                                '([0-9]+):([0-9]+):([0-9]+),([0-9]+)')
 def parse_log_timestamp(ts):
-    """Parses the timestamp |ts| dropped by buildbot slave.
+    """Parses the timestamp |ts| dropped by buildbot subordinate.
 
     Returns: datetime.datetime.
     """

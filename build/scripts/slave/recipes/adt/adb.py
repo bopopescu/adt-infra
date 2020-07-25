@@ -51,7 +51,7 @@ def RunSteps(api):
   platform_tools_dir = api.path.join(android_sdk_home, 'platform-tools')
   env_path = ['%(PATH)s', platform_tools_dir]
   env = {'PATH': api.path.pathsep.join(env_path),
-         'PYTHONPATH': api.path['slave_build'].join('development', 'python-packages')}
+         'PYTHONPATH': api.path['subordinate_build'].join('development', 'python-packages')}
 
   if not api.platform.is_win:
     api.repo.init('https://android.googlesource.com/platform/manifest', '--depth=1')
@@ -64,7 +64,7 @@ def RunSteps(api):
   init_bot_util_path = api.path.join(script_root, 'utils', 'emu_bot_init.py')
   try:
       api.python('Initialize Bot', init_bot_util_path,
-                 ['--build-dir', api.path['slave_build'],
+                 ['--build-dir', api.path['subordinate_build'],
                   '--props', api.json.dumps(api.properties.thaw()),
                   '--log-dir', log_dir],
                  env=env)
@@ -91,7 +91,7 @@ def RunSteps(api):
     # Upload logs to GCS (gs://adb_test_traces/)
     script_root = api.path.join(build_dir, os.pardir, 'emu_test')
     log_util_path = api.path.join(script_root, 'utils', 'zip_upload_logs.py')
-    logs_dir = '/home/user/buildbot/external/adt-infra/build/masters/master.client.adt/slave_logs/'
+    logs_dir = '/home/user/buildbot/external/adt-infra/build/mains/main.client.adt/slave_logs/'
     upload_log_args = ['--dir', log_dir,
                        '--name', 'build_%s.zip' % buildnum,
                        '--ip', MASTER_IP,
@@ -112,8 +112,8 @@ def GenTests(api):
     api.test('adb-linux') +
     api.platform.name('linux') +
     api.properties(
-      mastername='client.adt',
-      project='master',
+      mainname='client.adt',
+      project='main',
       buildername='Ubuntu 14.04 Intel HD 520',
       buildnumber='12',
     )
@@ -122,8 +122,8 @@ def GenTests(api):
     api.test('adb-mac') +
     api.platform.name('mac') +
     api.properties(
-        mastername='client.adt',
-        project='master',
+        mainname='client.adt',
+        project='main',
         buildername='Mac 10.12.1 Intel HD 5000',
         buildnumber='12',
     )
@@ -132,8 +132,8 @@ def GenTests(api):
       api.test('adb-win') +
       api.platform.name('win') +
       api.properties(
-          mastername='client.adt',
-          project='master',
+          mainname='client.adt',
+          project='main',
           buildername='Win 10 Intel HD 5000',
           buildnumber='12',
       )

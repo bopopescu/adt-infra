@@ -33,7 +33,7 @@ def RunSteps(api):
   if not api.properties.get('skip_checkout', False):
     api.gpu.checkout_steps()
   else:
-    api.path['checkout'] = api.path['slave_build'].join('src')
+    api.path['checkout'] = api.path['subordinate_build'].join('src')
 
   # For local testing: pass 'skip_compile=True' to run_recipe to skip the
   # runhooks and compile steps. A checkout and build via the recipe must have
@@ -119,7 +119,7 @@ def GenTests(api):
     api.test('win_release_fyi') +
     api.properties.scheduled(
       build_config='Release',
-      mastername='chromium.gpu.fyi',
+      mainname='chromium.gpu.fyi',
     ) +
     api.platform.name('win')
   )
@@ -129,7 +129,7 @@ def GenTests(api):
     api.test('linux_release_fyi') +
     api.properties.scheduled(
       build_config='Release',
-      mastername='chromium.gpu.fyi',
+      mainname='chromium.gpu.fyi',
     ) +
     api.platform.name('linux')
   )
@@ -138,7 +138,7 @@ def GenTests(api):
     api.test('killall_gnome_keyring_failure') +
     api.properties.scheduled(
       build_config='Release',
-      mastername='chromium.gpu.fyi',
+      mainname='chromium.gpu.fyi',
     ) +
     api.platform.name('linux') +
     api.step_data('killall gnome-keyring-daemon', retcode=1)

@@ -73,7 +73,7 @@ def GenTests(api):
   yield (
     api.test('basic') +
     api.properties.tryserver(
-        mastername='tryserver.chromium.linux',
+        mainname='tryserver.chromium.linux',
         buildername='infra_tester',
         patch_project='infra') +
     diff('infra/stuff.py', 'go/src/infra/stuff.go')
@@ -82,7 +82,7 @@ def GenTests(api):
   yield (
     api.test('only_go') +
     api.properties.tryserver(
-        mastername='tryserver.chromium.linux',
+        mainname='tryserver.chromium.linux',
         buildername='infra_tester',
         patch_project='infra') +
     diff('go/src/infra/stuff.go')
@@ -91,7 +91,7 @@ def GenTests(api):
   yield (
     api.test('only_python') +
     api.properties.tryserver(
-        mastername='tryserver.chromium.linux',
+        mainname='tryserver.chromium.linux',
         buildername='infra_tester',
         patch_project='infra') +
     diff('infra/stuff.py')
@@ -100,7 +100,7 @@ def GenTests(api):
   yield (
     api.test('only_glyco_python') +
     api.properties.tryserver(
-        mastername='tryserver.chromium.linux',
+        mainname='tryserver.chromium.linux',
         buildername='infra_tester',
         patch_project='infra') +
     diff('infra/glyco/stuff.py')
@@ -109,7 +109,7 @@ def GenTests(api):
   yield (
     api.test('infra_internal') +
     api.properties.tryserver(
-        mastername='internal.infra',
+        mainname='internal.infra',
         buildername='infra-internal-tester',
         patch_project='infra_internal') +
     diff('infra/stuff.py', 'go/src/infra/stuff.go')
@@ -118,7 +118,7 @@ def GenTests(api):
   yield (
     api.test('rietveld_tests') +
     api.properties.tryserver(
-        mastername='tryserver.chromium.linux',
+        mainname='tryserver.chromium.linux',
         buildername='infra_tester',
         patch_project='infra') +
     diff('appengine/chromium_rietveld/codereview/views.py')
@@ -127,7 +127,7 @@ def GenTests(api):
   yield (
     api.test('rietveld_tests_on_win') +
     api.properties.tryserver(
-        mastername='tryserver.chromium.linux',
+        mainname='tryserver.chromium.linux',
         buildername='infra_tester',
         patch_project='infra') +
     diff('appengine/chromium_rietveld/codereview/views.py') +
@@ -137,7 +137,7 @@ def GenTests(api):
   yield (
     api.test('only_DEPS') +
     api.properties.tryserver(
-        mastername='tryserver.chromium.linux',
+        mainname='tryserver.chromium.linux',
         buildername='infra_tester',
         patch_project='infra') +
     diff('DEPS')

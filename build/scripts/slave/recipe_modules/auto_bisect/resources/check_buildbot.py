@@ -13,9 +13,9 @@ import sys
 import time
 import urllib2
 
-BASE_URL = ('https://build.chromium.org/p/%(master)s/json/builders/%(builder)s/'
+BASE_URL = ('https://build.chromium.org/p/%(main)s/json/builders/%(builder)s/'
             'builds/_all?as_text=1&filter=0')
-LINK_URL = ('https://build.chromium.org/p/%(master)s/builders/%(builder)s/'
+LINK_URL = ('https://build.chromium.org/p/%(main)s/builders/%(builder)s/'
             'builds/%(build_num)s')
 
 
@@ -32,7 +32,7 @@ def main(config):
     config (dict): a configuration in the following format.
 
   {
-    "master": "tryserver.chromium.perf",
+    "main": "tryserver.chromium.perf",
     "builder": "linux_perf_bisect",
     "job_names": [ "abc1234", "deadbeef000", "f00ba12"]
   }
@@ -47,7 +47,7 @@ def main(config):
      "failed_job_urls": {"deadbeef000":"https://build....org/p/tryserver..."}
     }
   """
-  master = config['master']
+  main = config['main']
   builder = config['builder']
   job_names = config['job_names']
   results = {}
@@ -62,7 +62,7 @@ def main(config):
                'builder': builder,
             }
   else:
-    url = BASE_URL % {'master': master, 'builder': builder}
+    url = BASE_URL % {'main': main, 'builder': builder}
   sys.stderr.write('Using the following url to check builds:' + url)
   sys.stderr.flush()
   builds_info = json.load(urllib2.urlopen(url))
@@ -73,13 +73,13 @@ def main(config):
       if builds_info[build_num]['results'] in [2,3,4]:
         failed_jobs.append(build_name)
         job_urls[build_name] = LINK_URL % {
-            'master': master,
+            'main': main,
             'builder': builder,
             'build_num': str(build_num),
         }
       elif builds_info[build_num]['results'] in [0, 1]:
         job_urls[build_name] = LINK_URL % {
-            'master': master,
+            'main': main,
             'builder': builder,
             'build_num': str(build_num),
         }

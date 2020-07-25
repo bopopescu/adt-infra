@@ -337,7 +337,7 @@ class LocalGTestTest(Test):
     return self._test_runs[suffix].test_utils.gtest_results.failures
 
 
-def generate_gtest(api, mastername, buildername, test_spec,
+def generate_gtest(api, mainname, buildername, test_spec,
                    enable_swarming=False, scripts_compile_targets=None):
   def canonicalize_test(test):
     if isinstance(test, basestring):
@@ -370,7 +370,7 @@ def generate_gtest(api, mastername, buildername, test_spec,
                     swarming_shards=swarming_shards)
 
 
-def generate_script(api, mastername, buildername, test_spec,
+def generate_script(api, mainname, buildername, test_spec,
                     enable_swarming=False, scripts_compile_targets=None):
   for script_spec in test_spec.get(buildername, {}).get('scripts', []):
     yield ScriptTest(
@@ -965,7 +965,7 @@ class IsolatedScriptTest(Test):
     return self._test_runs[suffix].json.output['failures']
 
 
-def generate_isolated_script(api, mastername, buildername, test_spec,
+def generate_isolated_script(api, mainname, buildername, test_spec,
                              enable_swarming=False,
                              scripts_compile_targets=None):
   for spec in test_spec.get(buildername, {}).get(
@@ -1492,7 +1492,7 @@ class BlinkTest(Test):
     return True
 
   def run(self, api, suffix):
-    results_dir = api.path['slave_build'].join('layout-test-results')
+    results_dir = api.path['subordinate_build'].join('layout-test-results')
 
     args = [
         '--target', api.chromium.c.BUILD_CONFIG,
@@ -1514,7 +1514,7 @@ class BlinkTest(Test):
 
     try:
       step_result = api.chromium.runtest(
-          api.path['build'].join('scripts', 'slave', 'chromium',
+          api.path['build'].join('scripts', 'subordinate', 'chromium',
                                  'layout_test_wrapper.py'),
           args, name=self._step_name(suffix),
           # TODO(phajdan.jr): Clean up the runtest.py mess.
@@ -1547,7 +1547,7 @@ class BlinkTest(Test):
         buildnumber = api.properties['buildnumber']
 
         archive_layout_test_results = api.path['build'].join(
-            'scripts', 'slave', 'chromium', 'archive_layout_test_results.py')
+            'scripts', 'subordinate', 'chromium', 'archive_layout_test_results.py')
 
         archive_layout_test_args = [
           '--results-dir', results_dir,

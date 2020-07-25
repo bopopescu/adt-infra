@@ -10,9 +10,9 @@ DEPS = [
     'step',
     ]
 
-VALID_CP = 'refs/heads/master@{#12345}'
+VALID_CP = 'refs/heads/main@{#12345}'
 INVALID_CP_BAD_FORMAT = 'foo/var@{missing-hash}'
-INVALID_CP_NON_NUMERIC = 'refs/heads/master@{#foo}'
+INVALID_CP_NON_NUMERIC = 'refs/heads/main@{#foo}'
 
 def RunSteps(api):
   # Try to resolve a commit position to a hash
@@ -55,7 +55,7 @@ def GenTests(api):
       api.properties(
         cp=VALID_CP,
         revision=12345,
-        branch='refs/heads/master',))
+        branch='refs/heads/main',))
 
   yield (
       api.test('invalid_bad_format') +

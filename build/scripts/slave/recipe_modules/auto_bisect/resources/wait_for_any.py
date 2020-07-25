@@ -63,7 +63,7 @@ def _check_buildbot_jobs(jobs_to_check):
   entries = {}
   job_urls = {}
   for entry in jobs_to_check:
-    master = entry['master']
+    main = entry['main']
     builder = entry['builder']
     job_name = entry['job_name']
     # The entries in this list may have multiple jobs for a single builder, and
@@ -71,20 +71,20 @@ def _check_buildbot_jobs(jobs_to_check):
     # information for all builds each time.
     #
     # To prevent this we are taking this:
-    # [{'master': 'M', 'builder': 'B', 'job_name': 'J1'},
-    #  {'master': 'M', 'builder': 'B', 'job_name': 'J2'},
-    #  {'master': 'M', 'builder': 'C', 'job_name': 'J3'},
+    # [{'main': 'M', 'builder': 'B', 'job_name': 'J1'},
+    #  {'main': 'M', 'builder': 'B', 'job_name': 'J2'},
+    #  {'main': 'M', 'builder': 'C', 'job_name': 'J3'},
     # ]
     # And building this in the jobs variable:
     # {'M': { 'B': ['J1', 'J2'], 'C': ['J3']}}
-    jobs.setdefault(master, {}).setdefault(builder, []).append(job_name)
+    jobs.setdefault(main, {}).setdefault(builder, []).append(job_name)
     entries[job_name] = entry
-  for master in jobs.keys():
-    for builder in jobs[master].keys():
+  for main in jobs.keys():
+    for builder in jobs[main].keys():
       config = {
-        'master': master,
+        'main': main,
         'builder': builder,
-        'job_names': jobs[master][builder],
+        'job_names': jobs[main][builder],
       }
       builder_results = check_buildbot.main(config)
       completed_results += builder_results.get('completed', [])
@@ -115,7 +115,7 @@ def main(argv):
         object to check.
     - Buildbot job, which must at least contain:
       - The "type" key set to the "buildbot" value.
-      - The "master" key containing the name of the appropriate master, e.g.
+      - The "main" key containing the name of the appropriate main, e.g.
         "tryserver.chromium.perf".
       - The "builder" key set to the name of the builder performing the job.
       - The "job_name" key containing the name of the job to check. i.e.
@@ -145,7 +145,7 @@ def main(argv):
     },
     {
      "type": "buildbot",
-     "master": "tryserver.chromium.perf",
+     "main": "tryserver.chromium.perf",
      "builder": "linux_perf_bisect",
      "job_name": "f74fb8e0418d47bfb7d01fad0dd4df06"
     }
@@ -159,7 +159,7 @@ def main(argv):
    "completed": [
     {
      "type": "buildbot",
-     "master": "tryserver.chromium.perf",
+     "main": "tryserver.chromium.perf",
      "builder": "linux_perf_bisect",
      "job_name": "f74fb8e0418d47bfb7d01fad0dd4df06"
     }
@@ -172,7 +172,7 @@ def main(argv):
    "failed": [
     {
      "type": "buildbot",
-     "master": "tryserver.chromium.perf",
+     "main": "tryserver.chromium.perf",
      "builder": "linux_perf_bisect",
      "job_name": "f74fb8e0418d47bfb7d01fad0dd4df06"
     }

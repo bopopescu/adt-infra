@@ -76,7 +76,7 @@ class Gitiles(recipe_api.RecipeApi):
     step_result = self._fetch(commit_url, step_name, attempts=attempts)
     return step_result.json.output
 
-  def download_file(self, repository_url, file_path, branch='master',
+  def download_file(self, repository_url, file_path, branch='main',
                     step_name=None, attempts=None):
     """Downloads raw file content from a Gitiles repository.
 

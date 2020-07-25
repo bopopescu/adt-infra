@@ -3,20 +3,20 @@
 # found in the LICENSE file.
 
 # This file was generated from
-# scripts/tools/buildbot_tool_templates/master_site_config.py
+# scripts/tools/buildbot_tool_templates/main_site_config.py
 # by "../../build/scripts/tools/buildbot-tool gen .".
 # DO NOT EDIT BY HAND!
 
 
-"""ActiveMaster definition."""
+"""ActiveMain definition."""
 
-from config_bootstrap import Master
+from config_bootstrap import Main
 
-class ClientAdt(Master.Master3):
+class ClientAdt(Main.Main3):
   project_name = 'ClientAdt'
-  master_port = 8200
-  slave_port = 8300
-  master_port_alt = 8400
+  main_port = 8200
+  subordinate_port = 8300
+  main_port_alt = 8400
   buildbot_url = 'http://chromeos1-row3-rack2-host1.cros.corp.google.com:8200/'
   buildbucket_bucket = None
   service_account_file = None

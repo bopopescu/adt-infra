@@ -45,7 +45,7 @@ def GenTests(api):
   all_hashes = api.gpu.dummy_swarm_hashes
 
   named_props = lambda plat, flavor, name, hashes: api.properties.scheduled(
-    mastername='chromium.gpu.testing',
+    mainname='chromium.gpu.testing',
     buildnumber=776,
     parent_buildnumber=571,
     parent_got_revision=160000,
@@ -55,7 +55,7 @@ def GenTests(api):
     # via build properties to the tester.
     swarm_hashes=hashes,
     # This is needed to achieve 100% coverage.
-    master_class_name_for_testing='ChromiumGPUTesting',
+    main_class_name_for_testing='ChromiumGPUTesting',
 
     build_config=flavor,
     buildername=name,

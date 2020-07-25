@@ -16,7 +16,7 @@ args = parser.parse_args()
 
 def get_dst_dir(remote_path):
   file_name = os.path.basename(remote_path)
-  emulator_branches = ["emu-master-dev", "emu-2.7-release"]
+  emulator_branches = ["emu-main-dev", "emu-2.7-release"]
   # sdk_google_phone contains the playstore system images.
   if file_name.startswith('sdk-repo-linux-system-images') or file_name.startswith('sdk-repo-linux-addon') \
       or file_name.startswith('sdk-repo-darwin-system-images') or file_name.startswith('sdk_google_phone'):
@@ -65,9 +65,9 @@ def get_dst_dir(remote_path):
       api = '18'
     elif 'pi' in branch_name:
       api = 'P'
-    elif 'aosp-master' in branch_name:
+    elif 'aosp-main' in branch_name:
       api = 'P'
-    elif 'master' in branch_name:
+    elif 'main' in branch_name:
       api = 'P'
 
     else:
@@ -116,7 +116,7 @@ def unzip_addon_dir(file_name, dst_dir):
 gsutil_path = os.path.join(args.build_dir, 'third_party', 'gsutil', 'gsutil.py')
 def get_file_list_cts():
     branches = [
-        'gs://android-build-emu/builds/aosp-emu-master-dev-linux-sdk_tools_linux/',
+        'gs://android-build-emu/builds/aosp-emu-main-dev-linux-sdk_tools_linux/',
         'gs://android-build-emu-sysimage/builds/git_mnc-emu-dev-linux-sdk_google_phone_x86-sdk_addon/',
                       ]
     file_list = []

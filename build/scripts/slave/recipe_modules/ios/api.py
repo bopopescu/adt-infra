@@ -17,7 +17,7 @@ class iOSApi(recipe_api.RecipeApi):
     step_result = self.m.step('host and tools info', [
       self.m.path['build'].join(
         'scripts',
-        'slave',
+        'subordinate',
         'ios',
         'host_info.py',
       ),
@@ -37,7 +37,7 @@ class iOSApi(recipe_api.RecipeApi):
     kwargs.setdefault('force', True)
     self.m.gclient.set_config('ios')
     update_step = self.m.bot_update.ensure_checkout(**kwargs)
-    self.m.path['checkout'] = self.m.path['slave_build'].join('src')
+    self.m.path['checkout'] = self.m.path['subordinate_build'].join('src')
     return update_step
 
   @property
@@ -60,14 +60,14 @@ class iOSApi(recipe_api.RecipeApi):
 
   def read_build_config(
     self,
-    master_name=None,
+    main_name=None,
     build_config_dir=None,
     include_dir=None,
   ):
     """Reads the iOS build config for this bot.
 
     Args:
-      master_name: Name of a master to read the build config from, or None
+      main_name: Name of a main to read the build config from, or None
         to read from buildbot properties at run-time.
       build_config_dir: Directory to read the build config from, or None
         to read from the default directory.
@@ -78,7 +78,7 @@ class iOSApi(recipe_api.RecipeApi):
       'ios',
       'build',
       'bots',
-      master_name or self.m.properties['mastername'],
+      main_name or self.m.properties['mainname'],
     )
     include_dir = include_dir or self.m.path['checkout'].join(
       'ios',
@@ -195,7 +195,7 @@ class iOSApi(recipe_api.RecipeApi):
       'find xcode', [
       self.m.path['build'].join(
         'scripts',
-        'slave',
+        'subordinate',
         'ios',
         'find_xcode.py',
       ),
@@ -300,11 +300,11 @@ class iOSApi(recipe_api.RecipeApi):
       cmd = [
         self.m.path['build'].join(
           'scripts',
-          'slave',
+          'subordinate',
           'ios',
           'run.py',
         ),
-        '--app', self.m.path['slave_build'].join(
+        '--app', self.m.path['subordinate_build'].join(
           self.most_recent_app_dir,
           '%s.app' % test['app'],
         ),
@@ -315,7 +315,7 @@ class iOSApi(recipe_api.RecipeApi):
 
       if self.platform == 'simulator':
         cmd.extend([
-          '--iossim', self.m.path['slave_build'].join(self.most_recent_iossim),
+          '--iossim', self.m.path['subordinate_build'].join(self.most_recent_iossim),
           '--platform', test['device type'],
           '--version', test['os'],
         ])

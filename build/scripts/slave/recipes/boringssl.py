@@ -179,8 +179,8 @@ def GenTests(api):
     yield (
       api.test(buildername) +
       host_platform +
-      api.properties.generic(mastername='client.boringssl',
-                             buildername=buildername, slavename='slavename') +
+      api.properties.generic(mainname='client.boringssl',
+                             buildername=buildername, subordinatename='subordinatename') +
       api.override_step_data('unit tests',
                              api.test_utils.canned_test_output(True)) +
       api.override_step_data('ssl tests',
@@ -190,8 +190,8 @@ def GenTests(api):
   yield (
     api.test('failed_unit_tests') +
     api.platform('linux', 64) +
-    api.properties.generic(mastername='client.boringssl', buildername='linux',
-                           slavename='slavename') +
+    api.properties.generic(mainname='client.boringssl', buildername='linux',
+                           subordinatename='subordinatename') +
     api.override_step_data('unit tests',
                            api.test_utils.canned_test_output(False)) +
     api.override_step_data('ssl tests',
@@ -201,8 +201,8 @@ def GenTests(api):
   yield (
     api.test('failed_ssl_tests') +
     api.platform('linux', 64) +
-    api.properties.generic(mastername='client.boringssl', buildername='linux',
-                           slavename='slavename') +
+    api.properties.generic(mainname='client.boringssl', buildername='linux',
+                           subordinatename='subordinatename') +
     api.override_step_data('unit tests',
                            api.test_utils.canned_test_output(True)) +
     api.override_step_data('ssl tests',

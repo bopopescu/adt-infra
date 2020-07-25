@@ -57,8 +57,8 @@ ORI_TO_API = {
 HOST = "https://googleplex-android-review.googlesource.com/"
 # TODO: Assign platform-dependent value once Windows and Mac presubmit bots are up
 COOKIE_PATH = os.path.join(os.path.expanduser('~'), '.gitcookies')
-PROJECTS = [] # Intentionally empty since slave only calls verify() (i.e. does not query).
-BRANCH = "studio-master-dev"
+PROJECTS = [] # Intentionally empty since subordinate only calls verify() (i.e. does not query).
+BRANCH = "studio-main-dev"
 PATH = ".*"
 agentLib = None
 TESTING = "TESTING"
@@ -113,7 +113,7 @@ def RunSteps(api):
   # Initialize bot
   try:
     api.python('Initialize Bot', init_bot_util_path,
-               ['--build-dir', api.path['slave_build'],
+               ['--build-dir', api.path['subordinate_build'],
                 '--props', api.json.dumps(api.properties.thaw()),
                 '--log-dir', log_dir],
                env=env)
@@ -202,7 +202,7 @@ def RunSteps(api):
     api.file.remove(name='Remove Test Configuration', path=config_file)
 
     log_util_path = api.path.join(script_root, 'utils', 'zip_upload_logs.py')
-    logs_dir = '/home/user/buildbot/external/adt-infra/build/masters/master.client.adt/slave_logs/'
+    logs_dir = '/home/user/buildbot/external/adt-infra/build/mains/main.client.adt/slave_logs/'
     upload_log_args = ['--dir', log_dir,
                        '--name', 'build_%s-rev_%s.zip' % (buildnum, rev),
                        '--ip', MASTER_IP,
@@ -226,7 +226,7 @@ def GenTests(api):
             api.platform.bits(64) +
             props({
                 'CHANGE_FILES': 'gs://android-build-emu-sysimage/builds/git_klp-emu-release-linux-sdk_x86-sdk/2872501/c9298a8eafceed3b8fa11071ba63a3d18e17fd8e/sdk-repo-linux-system-images-2872501.zip,gs://android-build-emu-sysimage/builds/git_lmp-emu-release-linux-sdk_phone_x86-sdk/2781484/3b78ad294aa1cdefa4be663d4af6c80d920ec49e/sdk-repo-linux-system-images-2781484.zip',
-                'CHANGE_ID': 'platform%2Ftools%2Fvendor%2Fgoogle~studio-master-dev~Ic16536ac454fba1a3a31277010ba38a48b16ab0f',
+                'CHANGE_ID': 'platform%2Ftools%2Fvendor%2Fgoogle~studio-main-dev~Ic16536ac454fba1a3a31277010ba38a48b16ab0f',
                 'CHANGE_REVISION': 'd2d143b1b04f39eb9b3154f3ad6f076c6b2add01',
                 'blamelist': [],
                 'branch': 'all',
@@ -235,16 +235,16 @@ def GenTests(api):
                 'buildnumber': '516',
                 'sysimage-release-psq': '4696395',
                 'got_revision': '4696395',
-                'logs_dir': '/home/user/buildbot/external/adt-infra/build/masters/master.client.adt/slave_logs/',
-                'mastername': 'client.adt',
+                'logs_dir': '/home/user/buildbot/external/adt-infra/build/mains/main.client.adt/slave_logs/',
+                'mainname': 'client.adt',
                 'project': 'sysimage-release-psq',
                 'recipe': 'adt/sysimage_release_psq',
                 'repository': '',
                 'requestedAt': 1522746361,
                 'revision': '4696395',
                 'scheduler': 'sysimage_release_psq_scheduler',
-                'slavename': 'chromeos1-row3-rack3-host1',
-                'workdir': '/home/adt_build/Buildbot/adt-infra/build/slave/Console_emu-master-dev',
+                'subordinatename': 'chromeos1-row3-rack3-host1',
+                'workdir': '/home/adt_build/Buildbot/adt-infra/build/subordinate/Console_emu-main-dev',
                 'TESTING': True,
             })
     )

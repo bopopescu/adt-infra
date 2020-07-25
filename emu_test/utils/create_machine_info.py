@@ -19,19 +19,19 @@ def main():
     print 'Cannot file builders.pyl file.  Aborting.'
     return 1
   builders_dict = ast.literal_eval(content)
-  master_info = {}
+  main_info = {}
   for builder in builders_dict['builders'].keys():
     current_builder = builders_dict['builders'][builder]
-    if current_builder['tag'] not in master_info.keys():
-      master_info[current_builder['tag']] = {}
+    if current_builder['tag'] not in main_info.keys():
+      main_info[current_builder['tag']] = {}
     for category in current_builder['categories']:
-      if category in master_info[current_builder['tag']].keys():
-        master_info[current_builder['tag']][category].append(builder)
+      if category in main_info[current_builder['tag']].keys():
+        main_info[current_builder['tag']][category].append(builder)
       else:
-        master_info[current_builder['tag']][category] = [builder,]
+        main_info[current_builder['tag']][category] = [builder,]
   try:
     with open('machine_info.json', 'w') as outfile:
-      json.dump(master_info, outfile, indent=4)
+      json.dump(main_info, outfile, indent=4)
   except IOError as e:
     print 'Error writing JSON information ot machine_info.json file.  Aborting.'
     return 1

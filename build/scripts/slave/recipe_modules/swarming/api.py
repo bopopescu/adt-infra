@@ -387,9 +387,9 @@ class SwarmingApi(recipe_api.RecipeApi):
     tags.update(self._default_tags)
     tags.add('data:' + task.isolated_hash)
     tags.add('name:' + task.title)
-    mastername = self.m.properties.get('mastername')
-    if mastername:
-      tags.add('master:' + mastername)
+    mainname = self.m.properties.get('mainname')
+    if mainname:
+      tags.add('main:' + mainname)
     if task.buildername:
       tags.add('buildername:' + task.buildername)
     if task.buildnumber:
@@ -760,7 +760,7 @@ class SwarmingTask(object):
           run the task as well as command line to launch. See 'isolate' recipe
           module.
       dimensions: key-value mapping with swarming dimensions that specify
-          on what Swarming slaves task can run. One important dimension is 'os',
+          on what Swarming subordinates task can run. One important dimension is 'os',
           which defines platform flavor to run the task on. See Swarming doc.
       env: key-value mapping with additional environment variables to add to
           environment before launching the task executable.

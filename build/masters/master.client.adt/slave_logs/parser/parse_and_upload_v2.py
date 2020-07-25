@@ -41,7 +41,7 @@ import uuid
 
 # TODO(pprabhu) Clean this up. Include the image/revision specific information
 # completely build.props file
-_EMULATOR_BRANCHES = ["emu-master-dev", "emu-2.7-release"]
+_EMULATOR_BRANCHES = ["emu-main-dev", "emu-2.7-release"]
 _API_TO_IMAGE_BRANCH = {
         '10': 'gb-emu-dev',
         '15': 'ics-mr1-emu-dev',
@@ -169,7 +169,7 @@ def _process_cts_test_logs(zip_path, bqt_cts_run, bqt_cts_results):
 
         build_row = {}
         build_prop = sp.find_and_parse_build_prop(log_dir)
-        build_row['buildbotSlaveName'] = (build_prop.get('buildername')
+        build_row['buildbotSubordinateName'] = (build_prop.get('buildername')
                                     .replace(' ', '_'))
         build_row['buildbotRunId'] = build_prop.get('buildnumber')
 
@@ -195,7 +195,7 @@ def _process_cts_test_logs(zip_path, bqt_cts_run, bqt_cts_results):
                         sp.CTS_NUM_TESTS_NOT_EXECUTED)
 
                 emu_branch, image_branch = _get_branches(
-                        build_row['buildbotSlaveName'], log_file,
+                        build_row['buildbotSubordinateName'], log_file,
                         cts_row['systemImageApi'])
                 assert emu_branch is not None
                 assert image_branch is not None
@@ -245,8 +245,8 @@ def _process_cts_test_logs(zip_path, bqt_cts_run, bqt_cts_results):
 def _gs_offloader(zip_path, is_prod):
     with zipfile.ZipFile(zip_path) as log_dir:
         build_prop = sp.find_and_parse_build_prop(log_dir)
-    slave = build_prop['buildername'].replace(' ', '_')
-    dst_path = 'gs://emu_test_traces/%s/' % slave
+    subordinate = build_prop['buildername'].replace(' ', '_')
+    dst_path = 'gs://emu_test_traces/%s/' % subordinate
     logging.debug('Uploading file to Google Storage - %s to %s ',
                   zip_path, dst_path)
     cmd = ['/home/user/bin/gsutil', 'mv', zip_path, dst_path]
@@ -257,22 +257,22 @@ def _gs_offloader(zip_path, is_prod):
 
 
 _LOG_DIR_RE = re.compile('build_(\d+)-rev_(.*).zip')
-def _for_each_slave_run(root_dir, steps):
-    """Run each processing step on each of the zipped logs from the slaves.
+def _for_each_subordinate_run(root_dir, steps):
+    """Run each processing step on each of the zipped logs from the subordinates.
 
     Args:
-        root_dir: Directory containing the slave specific logs.
+        root_dir: Directory containing the subordinate specific logs.
         steps: A list of steps to perform in order. Each step is a functor
                 taking a single argument for the root directory of logs for a
                 given run.
     """
-    for slave in os.listdir(root_dir):
-        logging.info('Processing logs from slave: %s' % slave)
-        slave_dir = os.path.join(root_dir, slave)
-        if os.path.isdir(slave_dir):
-            runs = [x for x in os.listdir(slave_dir) if _LOG_DIR_RE.match(x)]
+    for subordinate in os.listdir(root_dir):
+        logging.info('Processing logs from subordinate: %s' % subordinate)
+        subordinate_dir = os.path.join(root_dir, subordinate)
+        if os.path.isdir(subordinate_dir):
+            runs = [x for x in os.listdir(subordinate_dir) if _LOG_DIR_RE.match(x)]
             for run in runs:
-                zip_path = os.path.join(slave_dir, run)
+                zip_path = os.path.join(subordinate_dir, run)
                 for step in steps:
                     step(zip_path)
 
@@ -301,7 +301,7 @@ def main(args):
     config = site_config.setup(cwd)
 
     # All logs are found inside this directory
-    slave_logs_dir = os.path.join(cwd, '..')
+    subordinate_logs_dir = os.path.join(cwd, '..')
     # Any local files you write must be inside this directory.
     # Avoids polluting current directory, and allows easy backup.
     workdir = os.path.join(cwd, 'workdir')
@@ -350,7 +350,7 @@ def main(args):
 
 
     try:
-        _for_each_slave_run(slave_logs_dir,
+        _for_each_subordinate_run(subordinate_logs_dir,
                             [(lambda x: _process_boot_test_logs(
                                     x, bqt_boot_pass, bqt_boot_fail,
                                     bqt_adb_speed)),

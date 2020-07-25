@@ -123,7 +123,7 @@ PATCH=1
       The generated python step.
     """
     gsutil_cp_dir_py = self.m.path['build'].join(
-        'scripts', 'slave', 'syzygy', 'gsutil_cp_dir.py')
+        'scripts', 'subordinate', 'syzygy', 'gsutil_cp_dir.py')
     dst_dir = '%s/%s' % (self._SYZYGY_GS, dst_rel_path)
     args = ['--public-read', src_dir, dst_dir]
     return self.m.python(step_name, gsutil_cp_dir_py, args)
@@ -142,7 +142,7 @@ PATCH=1
       The generated python step.
     """
     gsutil_bat = self.m.path['build'].join(
-        'scripts', 'slave', 'gsutil.bat')
+        'scripts', 'subordinate', 'gsutil.bat')
     dst_dir = '%s/%s' % (self._SYZYGY_GS, dst_rel_path)
     args = ['cp', '-t', '-a', 'public-read', src_path, dst_dir]
     return self.m.step(step_name, [gsutil_bat] + list(args or []))
@@ -150,10 +150,10 @@ PATCH=1
   def taskkill(self):
     """Run chromium.taskkill.
 
-    This invokes a dummy step on the test slave as killing all instances of
+    This invokes a dummy step on the test subordinate as killing all instances of
     Chrome seriously impairs development.
     """
-    if self.m.properties['slavename'] == 'fake_slave':
+    if self.m.properties['subordinatename'] == 'fake_subordinate':
       return self.m.python.inline('taskkill', 'print "dummy taskkill"')
     return self.m.chromium.taskkill()
 
@@ -243,7 +243,7 @@ PATCH=1
     assert self.m.chromium.c.BUILD_CONFIG == 'Coverage'
     cov_dir = self.output_dir.join('cov')
     archive_path = 'builds/coverage/%s' % self.revision
-    if self.m.properties['slavename'] == 'fake_slave':
+    if self.m.properties['subordinatename'] == 'fake_subordinate':
       archive_path = 'test/' + archive_path
     report_url = '%s/%s/index.html' % (self._SYZYGY_ARCHIVE_URL, archive_path)
     step = self._gen_step_gs_util_cp_dir(
@@ -259,7 +259,7 @@ PATCH=1
     assert self.m.chromium.c.BUILD_CONFIG == 'Release' and self.c.official_build
     bin_dir = self.output_dir.join('archive')
     archive_path = 'builds/official/%s' % self.revision
-    if self.m.properties['slavename'] == 'fake_slave':
+    if self.m.properties['subordinatename'] == 'fake_subordinate':
       archive_path = 'test/' + archive_path
     bin_url = '%s/index.html?path=%s/' % (
         self._SYZYGY_ARCHIVE_URL, archive_path)

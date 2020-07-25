@@ -71,17 +71,17 @@ class V8Api(recipe_api.RecipeApi):
   def apply_bot_config(self, builders):
     """Entry method for using the v8 api.
 
-    Requires the presence of a bot_config dict for any master/builder pair.
+    Requires the presence of a bot_config dict for any main/builder pair.
     This bot_config will be used to refine other api methods.
     """
 
-    mastername = self.m.properties.get('mastername')
+    mainname = self.m.properties.get('mainname')
     buildername = self.m.properties.get('buildername')
-    master_dict = builders.get(mastername, {})
-    self.bot_config = master_dict.get('builders', {}).get(buildername)
+    main_dict = builders.get(mainname, {})
+    self.bot_config = main_dict.get('builders', {}).get(buildername)
     assert self.bot_config, (
-        'Unrecognized builder name %r for master %r.' % (
-            buildername, mastername))
+        'Unrecognized builder name %r for main %r.' % (
+            buildername, mainname))
 
     kwargs = self.bot_config.get('v8_config_kwargs', {})
     self.set_config('v8', optional=True, **kwargs)
@@ -117,7 +117,7 @@ class V8Api(recipe_api.RecipeApi):
     revision = revision or self.m.properties.get(
         'parent_got_revision', self.m.properties.get('revision', 'HEAD'))
     solution = self.m.gclient.c.solutions[0]
-    branch = self.m.properties.get('branch', 'master')
+    branch = self.m.properties.get('branch', 'main')
     needs_branch_heads = False
     if RELEASE_BRANCH_RE.match(branch):
       revision = 'refs/branch-heads/%s:%s' % (branch, revision)
@@ -169,15 +169,15 @@ class V8Api(recipe_api.RecipeApi):
     self.m.chromium.runhooks(env=env, **kwargs)
 
   def setup_mips_toolchain(self):
-    mips_dir = self.m.path['slave_build'].join(MIPS_DIR, 'bin')
+    mips_dir = self.m.path['subordinate_build'].join(MIPS_DIR, 'bin')
     if not self.m.path.exists(mips_dir):
       self.m.gsutil.download_url(
           'gs://chromium-v8/%s' % MIPS_TOOLCHAIN,
-          self.m.path['slave_build'],
+          self.m.path['subordinate_build'],
           name='bootstrapping mips toolchain')
       self.m.step('unzipping',
                ['tar', 'xf', MIPS_TOOLCHAIN],
-               cwd=self.m.path['slave_build'])
+               cwd=self.m.path['subordinate_build'])
 
     self.c.gyp_env.CC = self.m.path.join(mips_dir, 'mips-linux-gnu-gcc')
     self.c.gyp_env.CXX = self.m.path.join(mips_dir, 'mips-linux-gnu-g++')
@@ -244,16 +244,16 @@ class V8Api(recipe_api.RecipeApi):
   def dr_compile(self):
     self.m.file.makedirs(
       'Create Build Dir',
-      self.m.path['slave_build'].join('dynamorio', 'build'))
+      self.m.path['subordinate_build'].join('dynamorio', 'build'))
     self.m.step(
       'Configure Release x64 DynamoRIO',
       ['cmake', '..', '-DDEBUG=OFF'],
-      cwd=self.m.path['slave_build'].join('dynamorio', 'build'),
+      cwd=self.m.path['subordinate_build'].join('dynamorio', 'build'),
     )
     self.m.step(
       'Compile Release x64 DynamoRIO',
       ['make', '-j5'],
-      cwd=self.m.path['slave_build'].join('dynamorio', 'build'),
+      cwd=self.m.path['subordinate_build'].join('dynamorio', 'build'),
     )
 
   @property
@@ -349,7 +349,7 @@ class V8Api(recipe_api.RecipeApi):
   def maybe_bisect(self, test_results):
     """Build-local bisection for one failure."""
     # Don't activate for branch or fyi bots.
-    if self.m.properties['mastername'] != 'client.v8':
+    if self.m.properties['mainname'] != 'client.v8':
       return
 
     # Only bisect over failures not flakes. Rerun only the fastest test.
@@ -635,7 +635,7 @@ class V8Api(recipe_api.RecipeApi):
     full_args = self._with_extra_flags(full_args)
 
     if self.run_dynamorio:
-      drrun = self.m.path['slave_build'].join(
+      drrun = self.m.path['subordinate_build'].join(
           'dynamorio', 'build', 'bin64', 'drrun')
       full_args += [
         '--command_prefix',

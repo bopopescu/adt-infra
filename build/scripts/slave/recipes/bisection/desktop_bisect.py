@@ -17,21 +17,21 @@ DEPS = [
 ]
 
 def RunSteps(api):
-  mastername = api.properties.get('mastername')
+  mainname = api.properties.get('mainname')
   buildername = api.properties.get('buildername')
   # TODO(akuegel): Explicitly load the builder configs instead of relying on
   # builder.py from chromium_tests recipe module.
-  api.chromium_tests.configure_build(mastername, buildername)
+  api.chromium_tests.configure_build(mainname, buildername)
   api.gclient.apply_config('perf')
-  update_step, master_dict, _ = \
-      api.chromium_tests.prepare_checkout(mastername, buildername)
+  update_step, main_dict, _ = \
+      api.chromium_tests.prepare_checkout(mainname, buildername)
   api.auto_bisect.start_try_job(api, update_step=update_step,
-                                master_dict=master_dict)
+                                main_dict=main_dict)
 
 def GenTests(api):
   yield (api.test('basic')
   +api.properties.tryserver(
-      mastername='tryserver.chromium.perf',
+      mainname='tryserver.chromium.perf',
       buildername='linux_perf_bisect')
   + api.override_step_data(
       'git diff to analyze patch',
@@ -66,7 +66,7 @@ results-without_patch
 """
   yield (api.test('basic_perf_tryjob')
   + api.properties.tryserver(
-      mastername='tryserver.chromium.perf',
+      mainname='tryserver.chromium.perf',
       buildername='linux_perf_bisect')
   + api.override_step_data(
       'git diff to analyze patch',
@@ -85,7 +85,7 @@ results-without_patch
 
   yield (api.test('basic_perf_tryjob_with_metric')
   +api.properties.tryserver(
-      mastername='tryserver.chromium.perf',
+      mainname='tryserver.chromium.perf',
       buildername='linux_perf_bisect')
   + api.override_step_data(
       'git diff to analyze patch',
@@ -101,7 +101,7 @@ results-without_patch
 
   yield (api.test('perf_tryjob_failed_test')
   +api.properties.tryserver(
-      mastername='tryserver.chromium.perf',
+      mainname='tryserver.chromium.perf',
       buildername='linux_perf_bisect')
   + api.override_step_data(
       'git diff to analyze patch',
@@ -117,7 +117,7 @@ results-without_patch
 
   yield (api.test('basic_perf_tryjob_with_revisions')
   +api.properties.tryserver(
-      mastername='tryserver.chromium.perf',
+      mainname='tryserver.chromium.perf',
       buildername='linux_perf_bisect')
   + api.override_step_data(
       'git diff to analyze patch',
@@ -146,7 +146,7 @@ results-without_patch
 
   yield (api.test('perf_tryjob_config_error')
   + api.properties.tryserver(
-      mastername='tryserver.chromium.perf',
+      mainname='tryserver.chromium.perf',
       buildername='linux_perf_bisect')
   + api.properties(requester='abcdxyz@chromium.org')
   + api.override_step_data(
@@ -159,7 +159,7 @@ results-without_patch
 
   yield (api.test('perf_cq_run_benchmark')
   + api.properties.tryserver(
-      mastername='tryserver.chromium.perf',
+      mainname='tryserver.chromium.perf',
       buildername='linux_perf_bisect')
   + api.properties(requester='commit-bot@chromium.org')
   + api.override_step_data(
@@ -169,7 +169,7 @@ results-without_patch
 
   yield (api.test('perf_cq_no_changes')
   + api.properties.tryserver(
-      mastername='tryserver.chromium.perf',
+      mainname='tryserver.chromium.perf',
       buildername='linux_perf_bisect')
   + api.properties(requester='commit-bot@chromium.org')
   + api.override_step_data(
@@ -179,7 +179,7 @@ results-without_patch
 
   yield (api.test('perf_cq_no_benchmark_to_run')
   + api.properties.tryserver(
-      mastername='tryserver.chromium.perf',
+      mainname='tryserver.chromium.perf',
       buildername='linux_perf_bisect')
   + api.properties(requester='commit-bot@chromium.org')
   + api.override_step_data(
@@ -199,12 +199,12 @@ results-without_patch
       'truncate_percent': '25',
       'bug_id': '425582',
       'gs_bucket': 'chrome-perf',
-      'builder_host': 'master4.golo.chromium.org',
+      'builder_host': 'main4.golo.chromium.org',
       'builder_port': '8341',
   }
   yield (api.test('basic_linux_bisect_tester_recipe')
   + api.properties.tryserver(
-      mastername='tryserver.chromium.perf',
+      mainname='tryserver.chromium.perf',
       buildername='linux_perf_bisect')
   + api.step_data('saving url to temp file',
                   stdout=api.raw_io.output('/tmp/dummy1'))
@@ -229,12 +229,12 @@ results-without_patch
       'truncate_percent': '25',
       'bug_id': '425582',
       'gs_bucket': 'chrome-perf',
-      'builder_host': 'master4.golo.chromium.org',
+      'builder_host': 'main4.golo.chromium.org',
       'builder_port': '8341',
   }
   yield (api.test('basic_linux_bisect_tester_recipe_ret_code')
   + api.properties.tryserver(
-      mastername='tryserver.chromium.perf',
+      mainname='tryserver.chromium.perf',
       buildername='linux_perf_bisect')
   + api.step_data('saving url to temp file',
                   stdout=api.raw_io.output('/tmp/dummy1'))

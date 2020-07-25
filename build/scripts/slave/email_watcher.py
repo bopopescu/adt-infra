@@ -34,7 +34,7 @@ from recipe_engine import recipe_api
 DEFAULT_SMTP_HOST = 'smtp.gmail.com'
 # adtinfrastructure@gmail.com is the default chromeos lab gmail account
 DEFAULT_SENDER = 'adtinfrastructure@gmail.com'
-# The below addresses are what legacy 'master_mail_notifications' used.
+# The below addresses are what legacy 'main_mail_notifications' used.
 DEFAULT_RECIPIENTS = ['adtinfrastructure@gmail.com']
 
 # The below is a addition made from the base email_watchers.py file located in the studio-infra
@@ -99,7 +99,7 @@ EMAIL_BODY_TEMPLATE = """
 <b>Build number:</b> {build_number}<br/>
 <b>Recipe:</b> {recipe_name}<br/>
 <br/>
-<b>Build slave used for this build:</b> {slave_name}<br/>
+<b>Build subordinate used for this build:</b> {subordinate_name}<br/>
 <br/>
 See the full build results at {full_build_url}<br/>
 <br/>
@@ -349,20 +349,20 @@ class EmailRecipeWatcher:
     # Typical populated properties set in the API object is below.
     # Revise from time to time to see what can be used in the email directly
     #
-    # {u'workdir': u'/usr/local/google/home/studio-infra/adt_infra_internal/build/slave/studio_master-dev',
+    # {u'workdir': u'/usr/local/google/home/studio-infra/adt_infra_internal/build/subordinate/studio_main-dev',
     # u'repository': u'https://googleplex-android.googlesource.com/platform',
-    # u'buildername': u'studio_master-dev',
+    # u'buildername': u'studio_main-dev',
     # u'recipe': 'studio/studio',
-    # u'mastername': u'client.studio',
-    # u'manifest_branch': u'studio-master-dev',
+    # u'mainname': u'client.studio',
+    # u'manifest_branch': u'studio-main-dev',
     # u'scheduler': u'studio_post_commit_scheduler',
     # u'manifest_url': u'https://googleplex-android.googlesource.com/platform/manifest',
     # u'buildbotURL': u'http://wpie20.hot.corp.google.com:8200/',
     # u'project': u'all repo projects',
     # u'buildnumber': 4020,
-    # u'slavename': u'studiobot1.eem.corp.google.com',
+    # u'subordinatename': u'studiobot1.eem.corp.google.com',
     # u'blamelist': [u'gavra@google.com'],
-    # u'branch': u'studio-master-dev',
+    # u'branch': u'studio-main-dev',
     # u'requestedAt': 1472122227,
     # u'revision': u'becfafa68c2b26c26eaed84555bb8286780693a1'}
 
@@ -393,7 +393,7 @@ class EmailRecipeWatcher:
       builder_name=builder_name,
       build_number=api.properties.get('buildnumber'),
       recipe_name=api.properties.get('recipe'),
-      slave_name=api.properties.get('slavename'),
+      subordinate_name=api.properties.get('subordinatename'),
       full_build_url=self.construct_full_build_url(api),
       properties_dump=api.properties.thaw(),
       report_time=str(datetime.datetime.utcnow()),
@@ -469,10 +469,10 @@ if __name__ == "__main__":
 
   class TestApi:
     properties = PropertiesApi({
-      'buildername': 'optimus-prime_master-dev',
+      'buildername': 'optimus-prime_main-dev',
       'buildnumber': 9000,
       'recipe': 'lorem/ipsum',
-      'slavename': 'gear-4218902.big-corporation.com',
+      'subordinatename': 'gear-4218902.big-corporation.com',
       'blamelist': [u'adehtiarov@google.com', u'droid@android.com',
                     u'opensource@example.com', u'etranger@google.com']
     })

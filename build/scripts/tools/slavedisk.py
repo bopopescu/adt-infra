@@ -14,11 +14,11 @@ import time
 
 from stat import S_ISDIR
 
-DIR = "/b/build/slave"
+DIR = "/b/build/subordinate"
 WIN_PREFIX = "/cygdrive/c"
 FULLNESS_LIMIT = 90   # Proceed if the disk is at least this percent full.
 AGE_LIMIT = 86400  # Dirs can be deleted if they've been unchanged this long.
-RE_SLAVE = re.compile(r"^[a-z_]+$")  # Matches the slave subdirectory names,
+RE_SLAVE = re.compile(r"^[a-z_]+$")  # Matches the subordinate subdirectory names,
                                      # which are made only of a-z or _ chars.
 
 
@@ -77,11 +77,11 @@ def main(stat=os.stat, print=print):
     print("But there's nothing to delete!")
     return 1
 
-  for slave, age in sorted(eligible.items(), key=lambda x: (-x[1],x[0])):
+  for subordinate, age in sorted(eligible.items(), key=lambda x: (-x[1],x[0])):
     days_old = age / 86400
-    pad_len = max_len - len(slave)
-    slave += " " * pad_len
-    print("rm -rf %s/%s # %d days old" % (DIR, slave, days_old))
+    pad_len = max_len - len(subordinate)
+    subordinate += " " * pad_len
+    print("rm -rf %s/%s # %d days old" % (DIR, subordinate, days_old))
 
   print()
   print()

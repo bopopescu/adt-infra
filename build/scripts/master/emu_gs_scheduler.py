@@ -33,7 +33,7 @@ class EmulatorSingleBranchScheduler(SingleBranchScheduler):
         log.msg("%s: no builder interested, skip this change" % self.name)
         return
       self.properties.setProperty('got_revision', change['revision'], 'Scheduler')
-      self.properties.setProperty('logs_dir', os.path.join(os.getcwd(), 'slave_logs', ''), 'Scheduler')
+      self.properties.setProperty('logs_dir', os.path.join(os.getcwd(), 'subordinate_logs', ''), 'Scheduler')
       self.properties.setProperty(change['project'], change['revision'], 'Scheduler')
       kwargs['changeids'] = [change['changeid']]
       return SingleBranchScheduler.addBuildsetForChanges(
@@ -44,7 +44,7 @@ class EmulatorSingleBranchScheduler(SingleBranchScheduler):
 
     for cid in kwargs["changeids"]:
       try:
-        d = self.master.db.changes.getChange(cid)
+        d = self.main.db.changes.getChange(cid)
         d.addCallback(addBuildset)
         yield d
       except Exception as e:

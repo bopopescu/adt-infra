@@ -95,10 +95,10 @@ BUILDERS = freeze({
 
 
 def _GetBotConfig(api):
-  mastername = api.properties.get('mastername')
+  mainname = api.properties.get('mainname')
   buildername = api.properties.get('buildername')
-  master_dict = BUILDERS.get(mastername, {})
-  bot_config = master_dict.get('builders', {}).get(buildername, {})
+  main_dict = BUILDERS.get(mainname, {})
+  bot_config = main_dict.get('builders', {}).get(buildername, {})
   return bot_config
 
 
@@ -175,7 +175,7 @@ def RunSteps(api):
 
   api.chromium.runhooks()
 
-  api.chromium.run_mb(api.properties.get('mastername'),
+  api.chromium.run_mb(api.properties.get('mainname'),
                       api.properties.get('buildername'),
                       use_goma=True)
 

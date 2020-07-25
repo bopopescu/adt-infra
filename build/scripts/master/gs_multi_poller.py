@@ -4,7 +4,7 @@
 
 """This PollingChangeSource polls multiple Storage URL for change revisions.
 
-Each change is submitted to change master which triggers build steps.
+Each change is submitted to change main which triggers build steps.
 
 Notice that the gsutil configuration (.boto file) must be setup in either the
 default location (home dir) or by using the environment variables
@@ -12,7 +12,7 @@ AWS_CREDENTIAL_FILE and BOTO_CONFIG.
 
 Example:
 To poll a change from buckets path1 and path2, use -
-from master import gs_multi_poller
+from main import gs_multi_poller
 gs_bucket = "bucket_name"
 gs_path_list = ['path/to/path1', 'path/to/path2']
 poller = gs_multi_poller.GSMultiPoller("poller", gs_bucket, gs_path_list, pollInterval=10800)
@@ -32,7 +32,7 @@ from boto import boto
 from twisted.python import log
 
 class GSMultiPoller(base.PollingChangeSource):
-  """Poll a Google Storage URL for change number and submit to change master."""
+  """Poll a Google Storage URL for change number and submit to change main."""
 
   compare_attrs = ['changeurl', 'pollInterval']
 
@@ -143,7 +143,7 @@ class GSMultiPoller(base.PollingChangeSource):
 
       props={'file_list': ','.join(dst_file_list),
              'prev_build': self.prev_build}
-      self.master.addChange(who=self.name,
+      self.main.addChange(who=self.name,
                             revision=parsed_revision,
                             files=dst_file_list,
                             project=self.project,
